@@ -91,26 +91,9 @@
       box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.25);
     }
 
-    .login-card h1 {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
-    }
-
-    .login-card p {
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      max-width: 290px;
-    }
-
-    .login-status {
-      font-size: 12px;
-      font-weight: 600;
-      color: #dc2626;
-      min-height: 18px;
-    }
+    .login-card h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+    .login-card p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; max-width: 290px; }
+    .login-status { font-size: 12px; font-weight: 600; color: #dc2626; min-height: 18px; }
 
     /* ================= STICKY APP HEADER ================= */
     .app-header {
@@ -135,11 +118,7 @@
       justify-content: space-between;
     }
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .header-left { display: flex; align-items: center; gap: 12px; }
 
     .icon-btn {
       width: 38px;
@@ -155,27 +134,10 @@
     }
     .icon-btn:active { transform: scale(0.95); background: var(--surface-muted); }
 
-    .header-title-group {
-      display: flex;
-      flex-direction: column;
-    }
+    .header-title-group { display: flex; flex-direction: column; }
+    .header-title { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
+    .header-subtitle { font-size: 11.5px; font-weight: 600; color: var(--accent); line-height: 1.2; }
 
-    .header-title {
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
-      line-height: 1.2;
-    }
-
-    .header-subtitle {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--accent);
-      line-height: 1.2;
-    }
-
-    /* Profile Avatar Trigger */
     .avatar-trigger {
       width: 38px;
       height: 38px;
@@ -190,13 +152,10 @@
       cursor: pointer;
       overflow: hidden;
       padding: 0;
-      transition: border-color 0.15s ease, transform 0.1s ease;
     }
-    .avatar-trigger:hover { border-color: var(--accent); }
-    .avatar-trigger:active { transform: scale(0.95); }
     .avatar-trigger img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ================= PROFILE POPOVER (PROPERLY ANCHORED BELOW HEADER) ================= */
+    /* ================= PROFILE POPOVER ================= */
     .menu-backdrop {
       position: fixed;
       inset: 0;
@@ -208,7 +167,7 @@
       position: fixed;
       top: 66px;
       right: max(16px, calc(50vw - 214px));
-      width: 268px;
+      width: 274px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 18px;
@@ -217,7 +176,7 @@
       z-index: 50;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       animation: popIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -230,7 +189,7 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
-      padding-bottom: 12px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--border);
     }
     .user-meta-name { font-size: 14px; font-weight: 700; color: var(--text-main); }
@@ -239,10 +198,10 @@
     .usage-card {
       background: var(--surface-muted);
       border-radius: 12px;
-      padding: 12px;
+      padding: 11px 12px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
     }
     .usage-top {
       display: flex;
@@ -253,21 +212,22 @@
       color: var(--text-secondary);
     }
     .usage-count { color: var(--text-main); font-weight: 800; }
+    .usage-track { width: 100%; height: 7px; background: #cbd5e1; border-radius: 99px; overflow: hidden; }
+    .usage-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 99px; transition: width 0.35s ease; }
 
-    .usage-track {
+    .menu-action-btn {
       width: 100%;
-      height: 7px;
-      background: #cbd5e1;
-      border-radius: 99px;
-      overflow: hidden;
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
     }
-    .usage-fill {
-      height: 100%;
-      width: 0%;
-      background: var(--accent);
-      border-radius: 99px;
-      transition: width 0.35s ease;
-    }
+    .menu-action-btn:hover { background: var(--surface-muted); }
 
     .logout-btn {
       width: 100%;
@@ -280,9 +240,7 @@
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
-      transition: background 0.15s ease;
     }
-    .logout-btn:hover { background: #fee2e2; }
 
     /* ================= LEFT MODEL DRAWER ================= */
     .drawer-overlay {
@@ -318,14 +276,8 @@
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
     }
-    .drawer-title { font-size: 15px; font-weight: 800; color: var(--text-main); }
-
-    .model-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      overflow-y: auto;
-    }
+    .drawer-title { font-size: 15px; font-weight: 800; }
+    .model-list { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
 
     .model-card {
       width: 100%;
@@ -336,32 +288,16 @@
       background: var(--surface);
       cursor: pointer;
       font-family: inherit;
-      transition: all 0.15s ease;
     }
-    .model-card:hover { border-color: #cbd5e1; background: var(--surface-muted); }
-    .model-card.active {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-    }
-    .model-tag {
-      display: inline-block;
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 3px;
-    }
-    .model-title {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-main);
-    }
+    .model-card.active { border-color: var(--accent); background: var(--accent-soft); }
+    .model-tag { display: inline-block; font-size: 10.5px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
+    .model-title { display: block; font-size: 14px; font-weight: 700; color: var(--text-main); }
 
     /* ================= MAIN WORKSPACE ================= */
     .workspace {
       width: 100%;
       max-width: 460px;
-      padding: 14px 16px 36px;
+      padding: 14px 16px 40px;
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -373,7 +309,90 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Segmented Day Switcher */
+    /* Compact Brand Identity Strip (Editable on Homepage) */
+    .brand-strip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .brand-info { display: flex; flex-direction: column; min-width: 0; }
+    .brand-name-display {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brand-role-display {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .edit-pill-btn {
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      color: var(--text-main);
+      border-radius: 9px;
+      padding: 6px 11px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      flex-shrink: 0;
+    }
+
+    /* Inline Brand Editor Drawer */
+    .brand-editor {
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: fadeUp 0.2s ease;
+    }
+    .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .field-group { display: flex; flex-direction: column; gap: 4px; }
+    .field-group label { font-size: 11px; font-weight: 700; color: var(--text-secondary); }
+    .clean-input {
+      width: 100%;
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0 11px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      background: var(--bg);
+      font-family: inherit;
+      outline: none;
+    }
+    .clean-input:focus { border-color: var(--accent); background: #fff; }
+    .save-brand-btn {
+      height: 38px;
+      border-radius: 10px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* Day Switcher */
     .day-switcher {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -392,15 +411,10 @@
       color: var(--text-secondary);
       cursor: pointer;
       font-family: inherit;
-      transition: all 0.18s ease;
     }
-    .day-tab.active {
-      background: var(--surface);
-      color: var(--text-main);
-      box-shadow: var(--shadow-sm);
-    }
+    .day-tab.active { background: var(--surface); color: var(--text-main); box-shadow: var(--shadow-sm); }
 
-    /* Poster Frame */
+    /* Poster Canvas */
     .canvas-card {
       position: relative;
       width: 100%;
@@ -438,101 +452,213 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* Primary AI Generate Button */
+    /* Generate AI Image + Save HD Row */
+    .studio-controls {
+      display: grid;
+      grid-template-columns: 1.7fr 1fr;
+      gap: 10px;
+    }
     .generate-btn {
-      width: 100%;
       height: 48px;
       border-radius: 14px;
       border: none;
       background: var(--primary);
       color: #ffffff;
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
       box-shadow: var(--shadow-sm);
-      transition: background 0.15s ease, transform 0.1s ease;
     }
-    .generate-btn:hover { background: var(--primary-hover); }
-    .generate-btn:active { transform: scale(0.985); }
+    .generate-btn:active { transform: scale(0.98); }
 
-    /* Clean Caption Card (No Scrollbar) */
-    .caption-card {
+    .btn-dl {
+      height: 48px;
+      border-radius: 14px;
       background: var(--surface);
+      color: var(--text-main);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 16px;
-      box-shadow: var(--shadow-sm);
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       gap: 6px;
+      box-shadow: var(--shadow-sm);
     }
-    .caption-header {
+
+    /* ================= MULTI-BOX BROADCAST MESSAGE SECTION ================= */
+    .boxes-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 11.5px;
+      padding: 2px 2px 0;
+    }
+    .boxes-title { font-size: 13px; font-weight: 800; color: var(--text-main); }
+    .add-box-btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--accent);
+      border-radius: 10px;
+      padding: 6px 11px;
+      font-size: 12px;
       font-weight: 700;
-      color: var(--text-secondary);
+      cursor: pointer;
+      font-family: inherit;
+      box-shadow: var(--shadow-sm);
     }
-    .saved-pill {
-      color: var(--whatsapp);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .saved-pill.visible { opacity: 1; }
 
-    .caption-input {
+    .msg-boxes-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .msg-box-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 13px 14px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      animation: fadeUp 0.22s ease;
+    }
+
+    .box-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .box-label-input {
+      border: none;
+      background: transparent;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: inherit;
+      outline: none;
+      width: 100%;
+    }
+
+    .box-tools {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .mode-pill {
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      color: var(--text-secondary);
+      border-radius: 8px;
+      padding: 3px 7px;
+      font-size: 10.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .mode-pill.ai {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: rgba(234, 88, 12, 0.25);
+    }
+
+    .ai-refresh-mini {
+      border: 1px solid rgba(234, 88, 12, 0.25);
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 8px;
+      padding: 3px 8px;
+      font-size: 10.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .del-box-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+    .del-box-btn:hover { color: #dc2626; }
+
+    .ai-rule-bar {
+      background: var(--bg);
+      border: 1px dashed #cbd5e1;
+      border-radius: 9px;
+      padding: 6px 9px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ai-rule-input {
       width: 100%;
       border: none;
       background: transparent;
-      font-size: 14px;
+      font-size: 11.5px;
       font-weight: 500;
-      line-height: 1.55;
+      color: var(--text-secondary);
+      font-family: inherit;
+      outline: none;
+    }
+
+    .box-textarea {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 13.5px;
+      font-weight: 500;
+      line-height: 1.5;
       color: var(--text-main);
       font-family: inherit;
       resize: none;
       overflow: hidden;
       outline: none;
-      min-height: 44px;
+      min-height: 42px;
     }
 
-    /* Bottom Action Row */
-    .action-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.65fr;
-      gap: 10px;
-    }
-    .btn-action {
-      height: 50px;
-      border-radius: 14px;
-      font-size: 14.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
+    .box-footer-row {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: inherit;
-      transition: transform 0.1s ease, opacity 0.15s ease;
+      justify-content: space-between;
+      padding-top: 6px;
+      border-top: 1px solid var(--surface-muted);
     }
-    .btn-action:active { transform: scale(0.97); }
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text-main);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-    .btn-whatsapp {
+
+    .sync-hint { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+
+    .wa-send-btn {
+      height: 38px;
+      padding: 0 16px;
+      border-radius: 11px;
+      border: none;
       background: var(--whatsapp);
       color: #ffffff;
-      border: none;
-      box-shadow: 0 8px 18px -4px rgba(22, 163, 74, 0.35);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
     }
+    .wa-send-btn:active { transform: scale(0.96); }
 
     .status-note {
       text-align: center;
@@ -593,6 +719,7 @@
           <div class="usage-fill" id="pmUsageFill"></div>
         </div>
       </div>
+      <button type="button" class="menu-action-btn" onclick="openBrandEditorFromMenu()">✏️ Brand & Tagline बदलें</button>
       <button type="button" class="logout-btn" onclick="handleLogout()">Log out</button>
     </div>
 
@@ -608,11 +735,37 @@
 
     <!-- Main Workspace -->
     <main class="workspace" style="margin: 0 auto;">
+      <!-- Organized Brand & Tagline Bar on Homepage -->
+      <div class="brand-strip">
+        <div class="brand-info">
+          <span class="brand-name-display" id="dispBrandName">Mahendra Kumar Maurya</span>
+          <span class="brand-role-display" id="dispBrandRole">Wellness Coordinator</span>
+        </div>
+        <button type="button" class="edit-pill-btn" onclick="toggleBrandEditor()">✏️ Edit Brand</button>
+      </div>
+
+      <!-- Collapsible Brand & Tagline Editor -->
+      <div class="brand-editor hidden" id="brandEditorPanel">
+        <div class="editor-grid">
+          <div class="field-group">
+            <label>नाम / ब्रांड (Brand Name)</label>
+            <input type="text" id="inputBrandName" class="clean-input" placeholder="आपका नाम या ब्रांड" oninput="livePreviewBrand()" />
+          </div>
+          <div class="field-group">
+            <label>टैगलाइन / पद (Tagline)</label>
+            <input type="text" id="inputBrandRole" class="clean-input" placeholder="आपका पद या टैगलाइन" oninput="livePreviewBrand()" />
+          </div>
+        </div>
+        <button type="button" class="save-brand-btn" onclick="saveBrandIdentity()">✓ नाम और टैगलाइन सेव करें</button>
+      </div>
+
+      <!-- Day Switcher -->
       <div class="day-switcher">
         <button type="button" class="day-tab active" id="tabToday" onclick="switchDay(0)">आज का पोस्टर</button>
         <button type="button" class="day-tab" id="tabTomorrow" onclick="switchDay(1)">कल का पोस्टर</button>
       </div>
 
+      <!-- Poster Frame -->
       <section class="canvas-card">
         <canvas id="posterCanvas" width="1080" height="1350"></canvas>
         <div class="loader-overlay hidden" id="loader">
@@ -622,35 +775,27 @@
         </div>
       </section>
 
-      <button type="button" class="generate-btn" onclick="generateNewAIImage()">
-        <span>✨ नई इमेज जनरेट करें</span>
-      </button>
-
-      <section class="caption-card">
-        <div class="caption-header">
-          <span>साथ भेजने वाला संदेश</span>
-          <span class="saved-pill" id="savedPill">✓ सेव हो गया</span>
-        </div>
-        <textarea
-          id="captionInput"
-          class="caption-input"
-          rows="2"
-          placeholder="यहाँ अपना संदेश लिखें..."
-          oninput="handleCaptionInput(this)"
-        ></textarea>
-      </section>
-
-      <div class="action-grid">
-        <button type="button" class="btn-action btn-secondary" onclick="downloadPoster()">⬇️ Save HD</button>
-        <button type="button" class="btn-action btn-whatsapp" onclick="shareWhatsApp()">📲 WhatsApp पर भेजें</button>
+      <!-- Generate AI Image + Save HD -->
+      <div class="studio-controls">
+        <button type="button" class="generate-btn" onclick="generateNewAIImage()">
+          <span>✨ नई इमेज जनरेट करें</span>
+        </button>
+        <button type="button" class="btn-dl" onclick="downloadPoster()">⬇️ Save HD</button>
       </div>
+
+      <!-- Multi-Box WhatsApp Broadcast Messages -->
+      <div class="boxes-header">
+        <span class="boxes-title">मैसेज बॉक्स (WhatsApp Broadcast)</span>
+        <button type="button" class="add-box-btn" id="addBoxBtn" onclick="addNewMessageBox()">+ नया बॉक्स जोड़ें</button>
+      </div>
+
+      <div class="msg-boxes-stack" id="msgBoxesStack"></div>
 
       <div class="status-note" id="statusNote"></div>
     </main>
   </div>
 
   <script>
-    // Connected Google Apps Script Backend URL
     var GAS_API_URL = "https://script.google.com/macros/s/AKfycbx6zoZnGG48_mdAcC-AEw3RFaEZYApaXxwChFd6t1_vYJbSYLFvrh5MbTZliPvRF_5Y/exec";
 
     var idToken = localStorage.getItem("mysrijan_id_token") || "";
@@ -658,12 +803,13 @@
     var activeModel = null;
     var dayOffset = 0;
     var currentBgDataUrl = null;
-    var saveTimer = null;
+    var messageBoxes = [];
+    var boxSaveTimers = {};
 
     var DAYS_EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    // 1. Dynamic PWA Manifest ("MySrijan")
+    // 1. Dynamic PWA Manifest
     (function setupManifest() {
       var manifest = {
         name: "MySrijan",
@@ -788,14 +934,18 @@
 
     function setupProfileUI() {
       var u = userSession.user;
-      document.getElementById("pmName").textContent = u.name;
+      document.getElementById("pmName").textContent = u.brandName;
       document.getElementById("pmEmail").textContent = u.email;
+      document.getElementById("dispBrandName").textContent = u.brandName;
+      document.getElementById("dispBrandRole").textContent = u.taglineRole;
+      document.getElementById("inputBrandName").value = u.brandName;
+      document.getElementById("inputBrandRole").value = u.taglineRole;
 
       var avatarBtn = document.getElementById("avatarBtn");
       if (u.picture) {
         avatarBtn.innerHTML = '<img src="' + u.picture + '" alt="Profile" />';
       } else {
-        avatarBtn.textContent = u.name.charAt(0).toUpperCase();
+        avatarBtn.textContent = u.brandName.charAt(0).toUpperCase();
       }
       updateUsageMeter(u.usedToday, u.dailyLimit);
     }
@@ -809,8 +959,7 @@
     function toggleProfileMenu() {
       var pop = document.getElementById("profilePopover");
       var back = document.getElementById("menuBackdrop");
-      var isClosed = pop.classList.contains("hidden");
-      if (isClosed) {
+      if (pop.classList.contains("hidden")) {
         pop.classList.remove("hidden");
         back.classList.remove("hidden");
       } else {
@@ -821,6 +970,53 @@
     function closeProfileMenu() {
       document.getElementById("profilePopover").classList.add("hidden");
       document.getElementById("menuBackdrop").classList.add("hidden");
+    }
+
+    function openBrandEditorFromMenu() {
+      closeProfileMenu();
+      document.getElementById("brandEditorPanel").classList.remove("hidden");
+    }
+
+    function toggleBrandEditor() {
+      document.getElementById("brandEditorPanel").classList.toggle("hidden");
+    }
+
+    function livePreviewBrand() {
+      if (!userSession) return;
+      userSession.user.brandName = document.getElementById("inputBrandName").value;
+      userSession.user.taglineRole = document.getElementById("inputBrandRole").value;
+      document.getElementById("dispBrandName").textContent = userSession.user.brandName || "Your Name";
+      document.getElementById("dispBrandRole").textContent = userSession.user.taglineRole || "Tagline";
+      renderCanvas();
+    }
+
+    async function saveBrandIdentity() {
+      var bName = document.getElementById("inputBrandName").value.trim();
+      var bRole = document.getElementById("inputBrandRole").value.trim();
+      if (!bName) return;
+
+      document.getElementById("brandEditorPanel").classList.add("hidden");
+      setNote("ब्रांड और टैगलाइन सेव हो रहा है...");
+
+      try {
+        var res = await fetch(GAS_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            action: "update_brand",
+            idToken: idToken,
+            brandName: bName,
+            taglineRole: bRole
+          })
+        });
+        var data = await res.json();
+        if (data.ok) {
+          document.getElementById("pmName").textContent = bName;
+          setNote("✓ ब्रांड नाम और टैगलाइन Google Sheet में सेव हो गया");
+        }
+      } catch (e) {
+        setNote("⚠️ सेव करने में त्रुटि हुई");
+      }
     }
 
     function toggleSidebar(open) {
@@ -862,11 +1058,20 @@
       document.getElementById("activeModelTitle").textContent = model.name;
       renderModelList();
 
-      var msgKey = "mysrijan_msg_" + userSession.user.email + "_" + model.id;
-      var savedMsg = localStorage.getItem(msgKey);
-      var ta = document.getElementById("captionInput");
-      ta.value = savedMsg !== null ? savedMsg : model.defaultMessage;
-      autoGrow(ta);
+      // Filter boxes belonging to this model (or show default 1 box)
+      var allBoxes = userSession.messageBoxes || [];
+      messageBoxes = allBoxes.filter(function (b) { return b.modelId === model.id; });
+      if (messageBoxes.length === 0) {
+        messageBoxes = [{
+          boxId: "B_" + Date.now(),
+          modelId: model.id,
+          label: "ब्रॉडकास्ट 1 (मुख्य संदेश)",
+          mode: model.autoAiCaptions ? "AI_RULE" : "FIXED",
+          text: "सुप्रभात! ☀️ आज का दिन आपके और आपके परिवार के लिए सुख, शांति और उत्तम स्वास्थ्य लेकर आए। — " + userSession.user.brandName,
+          aiRule: "Warm respectful Hindi morning wish with 2-3 balanced emojis"
+        }];
+      }
+      renderMessageBoxes();
 
       var posterKey = "mysrijan_img_" + userSession.user.email + "_" + model.id;
       currentBgDataUrl = await getPoster24h(posterKey);
@@ -874,21 +1079,215 @@
       setNote(currentBgDataUrl ? "24-घंटे की सेव इमेज लोड हुई" : "डिफ़ॉल्ट दृश्य तैयार है");
     }
 
+    /* ================= MULTI-BOX BROADCAST SYSTEM ================= */
+    function renderMessageBoxes() {
+      var container = document.getElementById("msgBoxesStack");
+      container.innerHTML = "";
+
+      var maxAllowed = (userSession && userSession.user && userSession.user.maxMsgBoxes) || 5;
+      var addBtn = document.getElementById("addBoxBtn");
+      addBtn.style.display = messageBoxes.length >= maxAllowed ? "none" : "inline-block";
+
+      messageBoxes.forEach(function (box, idx) {
+        var card = document.createElement("div");
+        card.className = "msg-box-card";
+
+        var isAI = box.mode === "AI_RULE";
+
+        var topBar = document.createElement("div");
+        topBar.className = "box-top-bar";
+
+        var labelInput = document.createElement("input");
+        labelInput.type = "text";
+        labelInput.className = "box-label-input";
+        labelInput.value = box.label;
+        labelInput.placeholder = "ब्रॉडकास्ट का नाम...";
+        labelInput.oninput = function () {
+          box.label = labelInput.value;
+          scheduleBoxSync(box);
+        };
+
+        var tools = document.createElement("div");
+        tools.className = "box-tools";
+
+        var modeBtn = document.createElement("button");
+        modeBtn.type = "button";
+        modeBtn.className = "mode-pill" + (isAI ? " ai" : "");
+        modeBtn.textContent = isAI ? "✨ AI Mode" : "📌 Fixed";
+        modeBtn.onclick = function () {
+          box.mode = isAI ? "FIXED" : "AI_RULE";
+          renderMessageBoxes();
+          scheduleBoxSync(box);
+        };
+        tools.appendChild(modeBtn);
+
+        if (isAI) {
+          var regenBtn = document.createElement("button");
+          regenBtn.type = "button";
+          regenBtn.className = "ai-refresh-mini";
+          regenBtn.textContent = "↻ नया टेक्स्ट";
+          regenBtn.onclick = function () { regenerateSingleBoxAI(box); };
+          tools.appendChild(regenBtn);
+        }
+
+        if (messageBoxes.length > 1) {
+          var delBtn = document.createElement("button");
+          delBtn.type = "button";
+          delBtn.className = "del-box-btn";
+          delBtn.textContent = "✕";
+          delBtn.onclick = function () { deleteMessageBox(box.boxId); };
+          tools.appendChild(delBtn);
+        }
+
+        topBar.appendChild(labelInput);
+        topBar.appendChild(tools);
+        card.appendChild(topBar);
+
+        if (isAI) {
+          var ruleBar = document.createElement("div");
+          ruleBar.className = "ai-rule-bar";
+          var ruleInput = document.createElement("input");
+          ruleInput.type = "text";
+          ruleInput.className = "ai-rule-input";
+          ruleInput.value = box.aiRule || "";
+          ruleInput.placeholder = "AI नियम लिखें (जैसे: परिवार के लिए भावनात्मक सुप्रभात संदेश)...";
+          ruleInput.oninput = function () {
+            box.aiRule = ruleInput.value;
+            scheduleBoxSync(box);
+          };
+          ruleBar.appendChild(ruleInput);
+          card.appendChild(ruleBar);
+        }
+
+        var ta = document.createElement("textarea");
+        ta.className = "box-textarea";
+        ta.rows = 2;
+        ta.value = box.text || "";
+        ta.placeholder = "यहाँ संदेश लिखें...";
+        ta.oninput = function () {
+          box.text = ta.value;
+          autoGrow(ta);
+          if (idx === 0) renderCanvas();
+          scheduleBoxSync(box);
+        };
+        card.appendChild(ta);
+
+        var footer = document.createElement("div");
+        footer.className = "box-footer-row";
+
+        var syncStatus = document.createElement("span");
+        syncStatus.className = "sync-hint";
+        syncStatus.id = "sync_" + box.boxId;
+        syncStatus.textContent = isAI ? "AI नियम सक्रिय" : "स्थायी संदेश सेव";
+
+        var waBtn = document.createElement("button");
+        waBtn.type = "button";
+        waBtn.className = "wa-send-btn";
+        waBtn.innerHTML = "📲 WhatsApp पर भेजें";
+        waBtn.onclick = function () { shareBoxWhatsApp(box); };
+
+        footer.appendChild(syncStatus);
+        footer.appendChild(waBtn);
+        card.appendChild(footer);
+
+        container.appendChild(card);
+        setTimeout(function () { autoGrow(ta); }, 0);
+      });
+    }
+
     function autoGrow(el) {
       el.style.height = "auto";
       el.style.height = el.scrollHeight + "px";
     }
 
-    function handleCaptionInput(el) {
-      autoGrow(el);
-      if (userSession && activeModel) {
-        var msgKey = "mysrijan_msg_" + userSession.user.email + "_" + activeModel.id;
-        localStorage.setItem(msgKey, el.value);
+    function addNewMessageBox() {
+      var maxAllowed = (userSession && userSession.user && userSession.user.maxMsgBoxes) || 5;
+      if (messageBoxes.length >= maxAllowed) {
+        setNote("⚠️ अधिकतम " + maxAllowed + " मैसेज बॉक्स जोड़े जा सकते हैं।");
+        return;
       }
-      var pill = document.getElementById("savedPill");
-      pill.classList.add("visible");
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(function () { pill.classList.remove("visible"); }, 1400);
+      var nextNum = messageBoxes.length + 1;
+      var newBox = {
+        boxId: "B_" + Date.now(),
+        modelId: activeModel.id,
+        label: "ब्रॉडकास्ट " + nextNum,
+        mode: "FIXED",
+        text: "सुप्रभात! ☀️ आपका दिन शुभ एवं मंगलमय हो। — " + userSession.user.brandName,
+        aiRule: "Short warm morning wish in Hindi with balanced emojis"
+      };
+      messageBoxes.push(newBox);
+      if (!userSession.messageBoxes) userSession.messageBoxes = [];
+      userSession.messageBoxes.push(newBox);
+      renderMessageBoxes();
+      scheduleBoxSync(newBox);
+      setNote("✓ नया मैसेज बॉक्स जुड़ गया");
+    }
+
+    async function deleteMessageBox(boxId) {
+      messageBoxes = messageBoxes.filter(function (b) { return b.boxId !== boxId; });
+      if (userSession.messageBoxes) {
+        userSession.messageBoxes = userSession.messageBoxes.filter(function (b) { return b.boxId !== boxId; });
+      }
+      renderMessageBoxes();
+      renderCanvas();
+      setNote("मैसेज बॉक्स हटा दिया गया");
+
+      try {
+        await fetch(GAS_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ action: "delete_box", idToken: idToken, boxId: boxId })
+        });
+      } catch (e) {}
+    }
+
+    function scheduleBoxSync(box) {
+      var hint = document.getElementById("sync_" + box.boxId);
+      if (hint) hint.textContent = "सेव हो रहा है...";
+      clearTimeout(boxSaveTimers[box.boxId]);
+      boxSaveTimers[box.boxId] = setTimeout(async function () {
+        try {
+          await fetch(GAS_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({
+              action: "save_box",
+              idToken: idToken,
+              box: box
+            })
+          });
+          if (hint) hint.textContent = "✓ क्लाउड में सेव";
+        } catch (e) {
+          if (hint) hint.textContent = "लोकल सेव";
+        }
+      }, 900);
+    }
+
+    async function regenerateSingleBoxAI(box) {
+      var hint = document.getElementById("sync_" + box.boxId);
+      if (hint) hint.textContent = "✨ AI लिख रहा है...";
+      try {
+        var res = await fetch(GAS_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            action: "generate_caption",
+            idToken: idToken,
+            aiRule: box.aiRule,
+            brandName: userSession.user.brandName,
+            modelName: activeModel.name
+          })
+        });
+        var data = await res.json();
+        if (data.ok && data.caption) {
+          box.text = data.caption;
+          renderMessageBoxes();
+          renderCanvas();
+          scheduleBoxSync(box);
+        }
+      } catch (e) {
+        if (hint) hint.textContent = "त्रुटि हुई";
+      }
     }
 
     function switchDay(offset) {
@@ -919,7 +1318,7 @@
       }
 
       var dateInfo = getTargetDate(dayOffset);
-      var quoteText = document.getElementById("captionInput").value.trim() || activeModel.defaultMessage;
+      var primaryQuote = (messageBoxes[0] && messageBoxes[0].text) || "";
       var loader = document.getElementById("loader");
       loader.classList.remove("hidden");
 
@@ -930,11 +1329,12 @@
           body: JSON.stringify({
             action: "generate",
             idToken: idToken,
+            modelId: activeModel.id,
             basePrompt: activeModel.prompt,
             modelName: activeModel.name,
             dateStr: dateInfo.formattedDate,
             dayStr: dateInfo.dayName,
-            quote: quoteText
+            quote: primaryQuote
           })
         });
         var data = await res.json();
@@ -949,6 +1349,15 @@
         userSession.user.usedToday = data.usedToday;
         userSession.user.remainingCredits = data.remainingCredits;
         updateUsageMeter(data.usedToday, data.dailyLimit);
+
+        // If any boxes are in AI_RULE mode and backend returned updated captions, apply them
+        if (data.updatedBoxes && data.updatedBoxes.length > 0) {
+          data.updatedBoxes.forEach(function (ub) {
+            var target = messageBoxes.find(function (b) { return b.boxId === ub.boxId; });
+            if (target) target.text = ub.text;
+          });
+          renderMessageBoxes();
+        }
 
         var posterKey = "mysrijan_img_" + userSession.user.email + "_" + activeModel.id;
         await savePoster24h(posterKey, currentBgDataUrl);
@@ -1025,7 +1434,7 @@
       var W = canvas.width;
       var H = canvas.height;
       var dateInfo = getTargetDate(dayOffset);
-      var quoteText = document.getElementById("captionInput").value.trim() || activeModel.defaultMessage;
+      var quoteText = (messageBoxes[0] && messageBoxes[0].text.trim()) || "सुप्रभात! आपका दिन शुभ हो।";
 
       var drawOverlays = function () {
         var topGrad = ctx.createLinearGradient(0, 0, 0, 320);
@@ -1088,11 +1497,11 @@
 
         ctx.fillStyle = "#facc15";
         ctx.font = "800 42px 'Inter', sans-serif";
-        ctx.fillText(activeModel.footerName, W / 2, H - 92);
+        ctx.fillText(userSession.user.brandName || "MySrijan Creator", W / 2, H - 92);
 
         ctx.fillStyle = "#f1f5f9";
         ctx.font = "600 27px 'Inter', sans-serif";
-        ctx.fillText(activeModel.footerRole, W / 2, H - 48);
+        ctx.fillText(userSession.user.taglineRole || "", W / 2, H - 48);
       };
 
       if (currentBgDataUrl) {
@@ -1116,10 +1525,10 @@
       setNote("⬇️ HD पोस्टर सेव हो गया");
     }
 
-    function shareWhatsApp() {
+    function shareBoxWhatsApp(box) {
       var canvas = document.getElementById("posterCanvas");
       var dateInfo = getTargetDate(dayOffset);
-      var customMsg = document.getElementById("captionInput").value.trim();
+      var customMsg = (box.text || "").trim();
 
       if (navigator.canShare && navigator.share) {
         canvas.toBlob(function (blob) {
