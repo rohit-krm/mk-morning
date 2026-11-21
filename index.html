@@ -5,31 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#ea580c" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="सुप्रभात जौनपुर" />
-  <title>सुप्रभात जौनपुर • Daily Good Morning</title>
+  <meta name="apple-mobile-web-app-title" content="सृजन" />
+  <title>सृजन • AI Creative Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
     :root {
       --bg: #faf7f2;
       --surface: #ffffff;
-      --surface-soft: #f4ede3;
+      --surface-soft: #f3ece1;
       --accent: #ea580c;
+      --accent-soft: #fff7ed;
       --whatsapp: #16a34a;
       --text-main: #18181b;
       --text-sub: #71717a;
       --border: rgba(24, 24, 27, 0.08);
       --shadow-sm: 0 2px 10px rgba(24, 24, 27, 0.04);
-      --shadow-lg: 0 22px 44px -14px rgba(24, 24, 27, 0.18);
+      --shadow-lg: 0 24px 48px -14px rgba(24, 24, 27, 0.18);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
       font-family: 'Noto Sans Devanagari', 'Plus Jakarta Sans', -apple-system, sans-serif;
-      background: radial-gradient(circle at top center, #fff7ed 0%, var(--bg) 60%);
+      background: radial-gradient(circle at top center, #fff7ed 0%, var(--bg) 65%);
       color: var(--text-main);
       min-height: 100dvh;
       display: flex;
@@ -38,417 +39,594 @@
       padding: env(safe-area-inset-top, 12px) 14px env(safe-area-inset-bottom, 32px);
     }
 
-    .container {
+    /* Login Screen */
+    .login-screen {
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 36px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      animation: fadeUp 0.4s ease;
+    }
+
+    .login-logo {
+      width: 68px; height: 68px; border-radius: 20px;
+      background: linear-gradient(135deg, #fb923c, #ea580c);
+      display: grid; place-items: center; color: #fff; font-size: 32px;
+      box-shadow: 0 12px 24px rgba(234, 88, 12, 0.3);
+    }
+
+    .login-screen h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+    .login-screen p { font-size: 13.5px; color: var(--text-sub); line-height: 1.5; }
+
+    .hidden { display: none !important; }
+
+    /* Main App Shell */
+    .app-shell {
       width: 100%;
       max-width: 440px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      animation: fadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: fadeUp 0.4s ease;
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .header { display: flex; align-items: center; justify-content: space-between; padding: 4px 2px; }
-    .brand { display: flex; align-items: center; gap: 10px; }
-    .brand-icon {
-      width: 40px; height: 40px; border-radius: 13px;
-      background: linear-gradient(135deg, #fb923c, #ea580c);
-      display: grid; place-items: center; color: #fff; font-size: 19px;
-      box-shadow: 0 6px 16px rgba(234, 88, 12, 0.28); flex-shrink: 0;
-      animation: gentlePulse 3.5s ease-in-out infinite;
-    }
-    @keyframes gentlePulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
+    /* Top App Bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 2px;
+      position: relative;
     }
 
-    .brand-text h1 { font-size: 18px; font-weight: 800; line-height: 1.2; }
-    .brand-text p { font-size: 11.5px; font-weight: 600; color: var(--text-sub); font-family: 'Plus Jakarta Sans', sans-serif; }
+    .left-group { display: flex; align-items: center; gap: 10px; }
 
-    .live-pill {
-      display: inline-flex; align-items: center; gap: 6px;
+    .menu-btn {
+      width: 40px; height: 40px; border-radius: 12px;
       background: var(--surface); border: 1px solid var(--border);
-      padding: 6px 11px; border-radius: 999px; font-size: 11px; font-weight: 700;
-      color: var(--text-sub); box-shadow: var(--shadow-sm); font-family: 'Plus Jakarta Sans', sans-serif;
+      display: grid; place-items: center; cursor: pointer;
+      box-shadow: var(--shadow-sm); color: var(--text-main);
     }
-    .live-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+    .menu-btn:active { transform: scale(0.95); }
+
+    .app-title h2 { font-size: 19px; font-weight: 800; line-height: 1.15; }
+    .app-title span { font-size: 11.5px; font-weight: 600; color: var(--accent); display: block; }
+
+    /* Profile Avatar & Dropdown */
+    .profile-wrap { position: relative; }
+    .avatar-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 2px solid #fb923c; padding: 0; overflow: hidden;
+      background: #fff7ed; cursor: pointer; display: grid; place-items: center;
+      font-weight: 800; color: var(--accent); font-size: 15px;
+      box-shadow: var(--shadow-sm);
+    }
+    .avatar-btn img { width: 100%; height: 100%; object-fit: cover; }
+
+    .profile-menu {
+      position: absolute; right: 0; top: 48px; width: 250px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 14px; box-shadow: var(--shadow-lg);
+      z-index: 50; display: flex; flex-direction: column; gap: 10px;
+      animation: fadeUp 0.18s ease;
     }
 
-    .activity-bar {
-      display: flex; align-items: center; justify-content: center; gap: 7px;
-      background: #fffbeb; border: 1px solid #fde68a; color: #92400e;
-      font-size: 12px; font-weight: 700; padding: 7px 12px; border-radius: 12px;
-      transition: all 0.25s ease;
-    }
-    .activity-bar.success { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
-    .activity-bar.error { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+    .pm-user { border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    .pm-name { font-size: 14px; font-weight: 800; color: var(--text-main); }
+    .pm-email { font-size: 11.5px; color: var(--text-sub); word-break: break-all; font-family: 'Plus Jakarta Sans', sans-serif; }
 
+    .credit-box {
+      background: var(--accent-soft); border: 1px solid rgba(234, 88, 12, 0.18);
+      border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 6px;
+    }
+    .credit-row { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; }
+    .credit-bar-bg { height: 6px; background: #fed7aa; border-radius: 99px; overflow: hidden; }
+    .credit-bar-fill { height: 100%; background: var(--accent); border-radius: 99px; transition: width 0.3s ease; }
+
+    .logout-btn {
+      width: 100%; padding: 9px; border-radius: 11px; border: 1px solid #fecaca;
+      background: #fef2f2; color: #b91c1c; font-size: 12.5px; font-weight: 700;
+      cursor: pointer; font-family: inherit;
+    }
+
+    /* Sidebar Drawer */
+    .drawer-backdrop {
+      position: fixed; inset: 0; background: rgba(24, 24, 27, 0.45);
+      backdrop-filter: blur(3px); z-index: 60;
+    }
+    .sidebar {
+      position: fixed; top: 0; left: 0; bottom: 0; width: 280px; max-width: 82vw;
+      background: var(--surface); z-index: 70; padding: 20px 16px;
+      display: flex; flex-direction: column; gap: 14px;
+      box-shadow: 12px 0 36px rgba(0, 0, 0, 0.15);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sidebar.closed { transform: translateX(-105%); }
+
+    .sb-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+    .sb-title { font-size: 17px; font-weight: 800; }
+    .sb-close {
+      border: none; background: var(--surface-soft); width: 32px; height: 32px;
+      border-radius: 9px; font-size: 16px; cursor: pointer;
+    }
+
+    .model-list { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+    .model-item {
+      text-align: left; padding: 12px 13px; border-radius: 14px;
+      border: 1px solid var(--border); background: #fcfaf7;
+      cursor: pointer; transition: all 0.18s ease; font-family: inherit;
+    }
+    .model-item.active {
+      background: var(--accent-soft); border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.12);
+    }
+    .mi-badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      color: var(--accent); background: #ffedd5; padding: 2px 7px; border-radius: 99px;
+      margin-bottom: 4px; font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .mi-name { font-size: 14px; font-weight: 800; color: var(--text-main); display: block; }
+
+    /* Status Pill */
+    .status-strip {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 8px 12px; border-radius: 13px; font-size: 12px; font-weight: 700;
+      box-shadow: var(--shadow-sm);
+    }
+    .credit-chip {
+      background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0;
+      padding: 3px 9px; border-radius: 99px; font-size: 11px; font-weight: 800;
+    }
+
+    /* Segmented Tabs */
     .segmented-control {
       display: grid; grid-template-columns: 1fr 1fr;
       background: var(--surface-soft); padding: 4px; border-radius: 14px; border: 1px solid var(--border);
     }
     .seg-btn {
-      border: none; background: transparent; padding: 9px 12px; border-radius: 10px;
-      font-size: 13.5px; font-weight: 700; color: var(--text-sub); cursor: pointer; font-family: inherit;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none; background: transparent; padding: 8px 12px; border-radius: 10px;
+      font-size: 13px; font-weight: 700; color: var(--text-sub); cursor: pointer; font-family: inherit;
     }
-    .seg-btn.active {
-      background: var(--surface); color: var(--text-main);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-    }
+    .seg-btn.active { background: var(--surface); color: var(--text-main); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); }
 
-    .meta-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-      padding: 8px 10px 8px 13px; box-shadow: var(--shadow-sm); gap: 8px;
-    }
-    .weather-info { font-size: 12.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .ai-btn {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: linear-gradient(135deg, #fb923c, #ea580c);
-      color: #fff; border: none; padding: 8px 13px; border-radius: 11px;
-      font-size: 12.5px; font-weight: 700; cursor: pointer; font-family: inherit; flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.28);
-      transition: transform 0.15s ease;
-    }
-    .ai-btn:active { transform: scale(0.95); }
-
+    /* Poster Canvas Card */
     .poster-frame {
       position: relative; width: 100%; aspect-ratio: 4 / 5; border-radius: 24px;
       overflow: hidden; background: #18181b; box-shadow: var(--shadow-lg);
       border: 1px solid rgba(255, 255, 255, 0.7);
     }
-    .poster-frame.pop { animation: canvasPop 0.38s cubic-bezier(0.16, 1, 0.3, 1); }
-    @keyframes canvasPop {
-      0% { transform: scale(0.985); opacity: 0.85; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
     canvas { width: 100%; height: 100%; display: block; }
 
     .loader {
-      position: absolute; inset: 0; background: rgba(24, 24, 27, 0.84);
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      color: #fff; text-align: center; padding: 24px; z-index: 10;
+      position: absolute; inset: 0; background: rgba(24, 24, 27, 0.85);
+      backdrop-filter: blur(8px); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; color: #fff; text-align: center; padding: 24px; z-index: 10;
     }
-    .loader.hidden { display: none; }
     .ring {
-      width: 44px; height: 44px; border: 3.5px solid rgba(255, 255, 255, 0.18);
+      width: 42px; height: 42px; border: 3.5px solid rgba(255, 255, 255, 0.18);
       border-top-color: #fb923c; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 14px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .share-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
-      padding: 13px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 10px;
-    }
-    .field-header {
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 12px; font-weight: 700; color: var(--text-sub);
-    }
-    .saved-badge { font-size: 11px; color: #16a34a; font-weight: 700; opacity: 0; transition: opacity 0.25s; }
-    .saved-badge.visible { opacity: 1; }
-
-    .msg-box {
-      width: 100%; min-height: 66px; border: 1px solid rgba(24, 24, 27, 0.14);
-      border-radius: 12px; padding: 10px 12px; font-size: 13.5px; font-weight: 600;
-      font-family: inherit; color: var(--text-main); background: #fcfaf7; resize: vertical; line-height: 1.45; outline: none;
-    }
-    .msg-box:focus, .phone-input:focus { border-color: var(--accent); background: #fff; }
-
-    .phone-row { display: flex; align-items: center; gap: 8px; }
-    .phone-wrap {
-      flex: 1; display: flex; align-items: center; border: 1px solid rgba(24, 24, 27, 0.14);
-      border-radius: 12px; background: #fcfaf7; padding: 0 10px; height: 42px;
-    }
-    .country-prefix {
-      font-size: 13px; font-weight: 700; color: var(--text-sub);
-      padding-right: 6px; border-right: 1px solid var(--border); margin-right: 8px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    .phone-input {
-      border: none; background: transparent; width: 100%; font-size: 13.5px; font-weight: 700;
-      color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; outline: none;
-    }
-    .add-num-btn {
-      border: none; background: #18181b; color: #fff; border-radius: 11px;
-      height: 42px; padding: 0 14px; font-size: 12.5px; font-weight: 700; cursor: pointer; font-family: inherit;
-    }
-
-    .chip-list { display: flex; flex-wrap: wrap; gap: 6px; }
-    .num-chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534;
-      padding: 5px 9px; border-radius: 999px; font-size: 12px; font-weight: 700;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    .chip-send {
-      background: #16a34a; color: #fff; border: none; border-radius: 999px;
-      padding: 3px 8px; font-size: 10.5px; font-weight: 700; cursor: pointer;
-    }
-    .chip-del {
-      background: transparent; border: none; color: #991b1b; font-weight: 800;
-      cursor: pointer; font-size: 14px; padding: 0 3px;
-    }
-
-    .helper-hint {
-      font-size: 11px; color: var(--text-sub); line-height: 1.4;
-      background: #f8fafc; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border);
-    }
-
-    .actions { display: grid; grid-template-columns: 1fr 1.55fr; gap: 10px; }
-    .action-btn {
-      height: 52px; border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer;
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit;
+    /* Generate New AI Image Button */
+    .gen-ai-btn {
+      width: 100%; height: 46px; border-radius: 14px; border: none;
+      background: linear-gradient(135deg, #fb923c, #ea580c);
+      color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; font-family: inherit;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 8px 18px -4px rgba(234, 88, 12, 0.35);
       transition: transform 0.15s ease;
     }
-    .action-btn:active { transform: scale(0.96); }
-    .btn-save { background: var(--surface); color: var(--text-main); border: 1px solid rgba(24, 24, 27, 0.14); box-shadow: var(--shadow-sm); }
-    .btn-wa { background: linear-gradient(135deg, #22c55e, var(--whatsapp)); color: #fff; border: none; box-shadow: 0 8px 20px -4px rgba(22, 163, 74, 0.42); }
+    .gen-ai-btn:active { transform: scale(0.98); }
+
+    /* Clean Auto-Expanding Message Box (No Scrollbar) */
+    .msg-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 13px 14px; box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .msg-header {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11.5px; font-weight: 700; color: var(--text-sub);
+    }
+    .msg-saved { color: #16a34a; opacity: 0; transition: opacity 0.25s; }
+    .msg-saved.show { opacity: 1; }
+
+    .clean-textarea {
+      width: 100%; border: none; background: transparent;
+      font-size: 14px; font-weight: 600; line-height: 1.5;
+      color: var(--text-main); font-family: inherit;
+      resize: none; overflow: hidden; outline: none; min-height: 44px;
+    }
+
+    /* Modern Bottom Action Dock */
+    .bottom-actions {
+      display: grid; grid-template-columns: 1fr 1.6fr; gap: 10px;
+    }
+    .btn-modern {
+      height: 52px; border-radius: 16px; font-size: 15px; font-weight: 800;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; font-family: inherit; transition: transform 0.15s ease;
+    }
+    .btn-modern:active { transform: scale(0.97); }
+    .btn-dl {
+      background: var(--surface); color: var(--text-main);
+      border: 1px solid rgba(24, 24, 27, 0.14); box-shadow: var(--shadow-sm);
+    }
+    .btn-wa {
+      background: linear-gradient(135deg, #22c55e, var(--whatsapp));
+      color: #fff; border: none; box-shadow: 0 10px 22px -6px rgba(22, 163, 74, 0.45);
+    }
+
+    .toast-bar {
+      text-align: center; font-size: 12px; font-weight: 700; color: var(--text-sub);
+      min-height: 18px;
+    }
   </style>
 </head>
 <body>
-  <main class="container">
-    <header class="header">
-      <div class="brand">
-        <div class="brand-icon">☀️</div>
-        <div class="brand-text">
-          <h1>सुप्रभात जौनपुर</h1>
-          <p>Daily Good Morning</p>
+
+  <!-- 1. Gmail Sign-In Screen -->
+  <section class="login-screen" id="loginScreen">
+    <div class="login-logo">✨</div>
+    <h1 id="loginAppTitle">सृजन</h1>
+    <p>अपने व्यक्तिगत AI पोस्टर स्टूडियो में प्रवेश करने के लिए अपने Gmail खाते से लॉगिन करें।</p>
+    <div id="googleBtnContainer" style="margin-top: 6px;"></div>
+    <div id="loginError" style="color: #b91c1c; font-size: 12px; font-weight: 700;"></div>
+  </section>
+
+  <!-- 2. Sidebar Drawer for User Models -->
+  <div class="drawer-backdrop hidden" id="drawerBackdrop" onclick="toggleSidebar(false)"></div>
+  <aside class="sidebar closed" id="sidebarDrawer">
+    <div class="sb-header">
+      <span class="sb-title">🎨 आपके मॉडल्स</span>
+      <button type="button" class="sb-close" onclick="toggleSidebar(false)">✕</button>
+    </div>
+    <div class="model-list" id="sidebarModelList"></div>
+  </aside>
+
+  <!-- 3. Main Authenticated Studio -->
+  <main class="app-shell hidden" id="mainApp">
+    <header class="topbar">
+      <div class="left-group">
+        <button type="button" class="menu-btn" onclick="toggleSidebar(true)" aria-label="Models Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <div class="app-title">
+          <h2 id="headerAppName">सृजन</h2>
+          <span id="activeModelBadge">सुप्रभात जौनपुर</span>
         </div>
       </div>
-      <div class="live-pill">
-        <span class="live-dot" id="statusDot"></span>
-        <span id="modeBadge">Quota Safe</span>
+
+      <!-- Right Corner Google Profile Icon + Dropdown -->
+      <div class="profile-wrap">
+        <button type="button" class="avatar-btn" id="avatarBtn" onclick="toggleProfileMenu()">U</button>
+        <div class="profile-menu hidden" id="profileMenu">
+          <div class="pm-user">
+            <div class="pm-name" id="pmName">User</div>
+            <div class="pm-email" id="pmEmail">user@gmail.com</div>
+          </div>
+          <div class="credit-box">
+            <div class="credit-row">
+              <span>दैनिक क्रेडिट</span>
+              <span id="pmCreditText">3 / 3 शेष</span>
+            </div>
+            <div class="credit-bar-bg">
+              <div class="credit-bar-fill" id="pmCreditFill" style="width: 100%;"></div>
+            </div>
+          </div>
+          <button type="button" class="logout-btn" onclick="handleLogout()">लॉग आउट (Log out)</button>
+        </div>
       </div>
     </header>
 
-    <div class="activity-bar success" id="activityBar">
-      <span>✅</span>
-      <span id="activityText">डिफ़ॉल्ट पोस्टर तैयार है (0 AI Neurons खर्च)</span>
+    <div class="status-strip">
+      <span id="weatherLabel">📍 जौनपुर: 25°C</span>
+      <span class="credit-chip" id="topCreditChip">⚡ 3 क्रेडिट शेष</span>
     </div>
 
     <nav class="segmented-control">
-      <button type="button" class="seg-btn active" id="tabToday" onclick="handleSwitchDay(0)">आज का पोस्टर</button>
-      <button type="button" class="seg-btn" id="tabTomorrow" onclick="handleSwitchDay(1)">कल का तैयार करें</button>
+      <button type="button" class="seg-btn active" id="tabToday" onclick="switchDay(0)">आज का पोस्टर</button>
+      <button type="button" class="seg-btn" id="tabTomorrow" onclick="switchDay(1)">कल का पोस्टर</button>
     </nav>
 
-    <div class="meta-bar">
-      <div class="weather-info" id="weatherLabel">📍 जौनपुर: 25°C • सुहावना मौसम</div>
-      <button type="button" class="ai-btn" id="btnGenerateAI" onclick="handleGenerateAI()">✨ AI से नया दृश्य</button>
-    </div>
-
-    <section class="poster-frame" id="posterFrame">
+    <section class="poster-frame">
       <canvas id="posterCanvas" width="1080" height="1350"></canvas>
       <div class="loader hidden" id="loader">
         <div class="ring"></div>
-        <div style="font-size: 16px; font-weight: 800;">Cloudflare AI से दृश्य बन रहा है...</div>
-        <div id="loaderSub" style="font-size: 12.5px; color: #d4d4d8; margin-top: 4px;">कृपया 3-4 सेकंड प्रतीक्षा करें</div>
+        <div style="font-size: 16px; font-weight: 800;">नई AI इमेज बन रही है...</div>
+        <div style="font-size: 12.5px; color: #d4d4d8; margin-top: 4px;">यह अगले 24 घंटे तक सुरक्षित रहेगी</div>
       </div>
     </section>
 
-    <section class="share-card">
-      <div class="field-header">
-        <span>✍️ Daily Morning Message (हमेशा सेव रहेगा)</span>
-        <span class="saved-badge" id="savedBadge">✓ सेव हो गया</span>
+    <button type="button" class="gen-ai-btn" onclick="generateNewAIImage()">
+      <span>✨ नई AI इमेज जनरेट करें (1 क्रेडिट)</span>
+    </button>
+
+    <!-- Clean Auto-Growing Message Card (No Scrollbar) -->
+    <section class="msg-card">
+      <div class="msg-header">
+        <span>✍️ साथ भेजने वाला संदेश</span>
+        <span class="msg-saved" id="msgSavedBadge">✓ सेव</span>
       </div>
       <textarea
-        id="dailyMessageInput"
-        class="msg-box"
-        placeholder="यहाँ अपना रोज़ का शुभ प्रभात संदेश लिखें..."
-        oninput="handleSaveMessage()"
+        id="messageTextarea"
+        class="clean-textarea"
+        rows="2"
+        placeholder="यहाँ अपना संदेश लिखें..."
+        oninput="autoGrowAndSaveMessage(this)"
       ></textarea>
-
-      <div class="field-header" style="margin-top: 2px;">
-        <span>📞 सेव किए गए WhatsApp नंबर (अधिकतम 5)</span>
-      </div>
-      <div class="phone-row">
-        <div class="phone-wrap">
-          <span class="country-prefix">+91</span>
-          <input type="tel" id="phoneInput" class="phone-input" maxlength="10" placeholder="10 अंकों का नंबर जोड़ें" />
-        </div>
-        <button type="button" class="add-num-btn" onclick="handleAddNumber()">+ जोड़ें</button>
-      </div>
-      <div class="chip-list" id="savedNumbersList"></div>
-      <div class="helper-hint">
-        💡 <b>टिप:</b> मोबाइल पर <b>WhatsApp पर भेजें</b> दबाने से फोटो + मैसेज एक साथ अटैच होकर खुलता है जहाँ आप <b>5 लोगों</b> तक सेलेक्ट करके भेज सकते हैं (या WhatsApp में <b>Broadcast List</b> बनाकर 256 लोगों को 1 क्लिक में भेजें)।
-      </div>
     </section>
 
-    <div class="actions">
-      <button type="button" class="action-btn btn-save" onclick="handleDownload()">⬇️ Save HD</button>
-      <button type="button" class="action-btn btn-wa" onclick="handleShareWA()">📲 WhatsApp पर भेजें</button>
+    <div class="bottom-actions">
+      <button type="button" class="btn-modern btn-dl" onclick="downloadPoster()">⬇️ Save HD</button>
+      <button type="button" class="btn-modern btn-wa" onclick="shareWhatsApp()">📲 WhatsApp पर भेजें</button>
     </div>
+
+    <div class="toast-bar" id="toastBar"></div>
   </main>
 
   <script>
-    // Your Connected Google Apps Script Backend URL
     var GAS_API_URL = "https://script.google.com/macros/s/AKfycbx6zoZnGG48_mdAcC-AEw3RFaEZYApaXxwChFd6t1_vYJbSYLFvrh5MbTZliPvRF_5Y/exec";
 
-    var DEFAULT_DAILY_MSG = "सुप्रभात! ☀️ आज का दिन आपके और आपके परिवार के लिए उत्तम स्वास्थ्य, सुख और समृद्धि लेकर आए। — Mahendra Kumar Maurya (Wellness Coordinator)";
+    var idToken = localStorage.getItem("srijan_id_token") || "";
+    var userSession = null;
+    var activeModel = null;
     var dayOffset = 0;
-    var sceneCycleIndex = 0;
-    var currentAiImageUrl = null;
-    var saveTimer = null;
-
-    var appData = {
-      brandName: "Mahendra Kumar Maurya",
-      brandRole: "Wellness Coordinator",
-      weatherText: "जौनपुर: 25°C • सुहावना मौसम, धूप खिली हुई",
-      scenes: [
-        { id: "1", name: "सरसों के खेत", prompt: "Golden sunrise over blooming yellow mustard fields in rural Jaunpur India" },
-        { id: "2", name: "गोमती नदी घाट", prompt: "Serene golden sunrise beside calm Gomti river ghat in Jaunpur India" },
-        { id: "3", name: "कुल्हड़ चाय", prompt: "Steaming hot Indian masala chai in traditional clay kulhad in morning sunrise" },
-        { id: "4", name: "ताज़े फूल और ओस", prompt: "Fresh vibrant marigold and lotus flowers glistening with morning dew drops" }
-      ],
-      festivals: {
-        "11-21": {
-          name: "तुलसी विवाह",
-          quote: "तुलसी विवाह के इस पावन अवसर पर आपके घर में सुख, सौभाग्य और आरोग्यता का वास हो। शुभ प्रभात!"
-        }
-      },
-      quotes: [
-        "सुबह की पहली किरण के साथ एक नई ऊर्जा और मुस्कान अपनाएं, स्वस्थ शरीर ही सबसे बड़ा धन है। शुभ प्रभात!",
-        "हर सुबह एक नया अवसर है खुद को बेहतर और स्वस्थ बनाने का। प्रकृति से जुड़ें, खुश रहें। सुप्रभात!"
-      ]
-    };
+    var currentBgDataUrl = null;
+    var msgTimer = null;
 
     var DAYS_EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    // Setup PWA Manifest dynamically so mobile browser allows "Install App"
-    (function setupPWA() {
-      try {
-        var manifest = {
-          name: "सुप्रभात जौनपुर - Daily Good Morning",
-          short_name: "सुप्रभात जौनपुर",
-          start_url: ".",
-          display: "standalone",
-          background_color: "#faf7f2",
-          theme_color: "#ea580c",
-          icons: [{
-            src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23ea580c'/><text x='50' y='66' font-size='52' text-anchor='middle'>☀️</text></svg>",
-            sizes: "192x192",
-            type: "image/svg+xml"
-          }]
-        };
-        var link = document.createElement("link");
-        link.rel = "manifest";
-        link.href = "data:application/manifest+json," + encodeURIComponent(JSON.stringify(manifest));
-        document.head.appendChild(link);
-      } catch (e) {}
+    // 1. Dynamic PWA Manifest ("सृजन")
+    (function registerManifest() {
+      var manifest = {
+        name: "सृजन - AI Creative Studio",
+        short_name: "सृजन",
+        start_url: ".",
+        display: "standalone",
+        background_color: "#faf7f2",
+        theme_color: "#ea580c",
+        icons: [{
+          src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23ea580c'/><text x='50' y='66' font-size='52' text-anchor='middle'>✨</text></svg>",
+          sizes: "512x512",
+          type: "image/svg+xml"
+        }]
+      };
+      var link = document.createElement("link");
+      link.rel = "manifest";
+      link.href = "data:application/manifest+json," + encodeURIComponent(JSON.stringify(manifest));
+      document.head.appendChild(link);
     })();
 
-    function setActivity(type, icon, msg) {
-      var bar = document.getElementById("activityBar");
-      if (!bar) return;
-      bar.className = "activity-bar " + (type || "");
-      bar.innerHTML = "<span>" + icon + "</span><span>" + msg + "</span>";
-    }
-
-    function drawRoundRect(ctx, x, y, w, h, r) {
-      if (w < 2 * r) r = w / 2;
-      if (h < 2 * r) r = h / 2;
-      ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.arcTo(x + w, y, x + w, y + h, r);
-      ctx.arcTo(x + w, y + h, x, y + h, r);
-      ctx.arcTo(x, y + h, x, y, r);
-      ctx.arcTo(x, y, x + w, y, r);
-      ctx.closePath();
-    }
-
-    function initCustomFields() {
-      try {
-        var savedMsg = localStorage.getItem("gm_custom_message");
-        document.getElementById("dailyMessageInput").value = savedMsg !== null ? savedMsg : DEFAULT_DAILY_MSG;
-      } catch (e) {
-        document.getElementById("dailyMessageInput").value = DEFAULT_DAILY_MSG;
-      }
-      renderSavedNumbers();
-    }
-
-    function handleSaveMessage() {
-      try {
-        localStorage.setItem("gm_custom_message", document.getElementById("dailyMessageInput").value);
-      } catch (e) {}
-      var badge = document.getElementById("savedBadge");
-      badge.classList.add("visible");
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(function () { badge.classList.remove("visible"); }, 1400);
-    }
-
-    function getSavedNumbers() {
-      try {
-        return JSON.parse(localStorage.getItem("gm_saved_phones") || "[]");
-      } catch (e) {
-        return [];
-      }
-    }
-
-    function handleAddNumber() {
-      var input = document.getElementById("phoneInput");
-      var num = (input.value || "").replace(/[^\d]/g, "");
-      if (num.length !== 10) {
-        setActivity("error", "⚠️", "कृपया 10 अंकों का सही मोबाइल नंबर डालें");
-        return;
-      }
-      var list = getSavedNumbers();
-      if (list.length >= 5) {
-        setActivity("error", "⚠️", "अधिकतम 5 नंबर सेव हो सकते हैं—पहले एक हटाएं");
-        return;
-      }
-      if (list.indexOf(num) === -1) {
-        list.push(num);
-        try { localStorage.setItem("gm_saved_phones", JSON.stringify(list)); } catch (e) {}
-      }
-      input.value = "";
-      renderSavedNumbers();
-      setActivity("success", "✅", "+91 " + num + " सेव हो गया");
-    }
-
-    function handleRemoveNumber(num) {
-      var list = getSavedNumbers().filter(function (n) { return n !== num; });
-      try { localStorage.setItem("gm_saved_phones", JSON.stringify(list)); } catch (e) {}
-      renderSavedNumbers();
-      setActivity("", "🗑️", "नंबर हटा दिया गया");
-    }
-
-    function renderSavedNumbers() {
-      var container = document.getElementById("savedNumbersList");
-      var list = getSavedNumbers();
-      container.innerHTML = "";
-      list.forEach(function (num) {
-        var chip = document.createElement("div");
-        chip.className = "num-chip";
-
-        var label = document.createElement("span");
-        label.textContent = "+91 " + num;
-
-        var sendBtn = document.createElement("button");
-        sendBtn.type = "button";
-        sendBtn.className = "chip-send";
-        sendBtn.textContent = "Send ➔";
-        sendBtn.onclick = function () { handleSendDirect(num); };
-
-        var delBtn = document.createElement("button");
-        delBtn.type = "button";
-        delBtn.className = "chip-del";
-        delBtn.textContent = "×";
-        delBtn.onclick = function () { handleRemoveNumber(num); };
-
-        chip.appendChild(label);
-        chip.appendChild(sendBtn);
-        chip.appendChild(delBtn);
-        container.appendChild(chip);
+    // 2. IndexedDB Helper for 24-Hour Image Persistence
+    function openImageDB() {
+      return new Promise(function (resolve, reject) {
+        var req = indexedDB.open("SrijanPosterDB", 1);
+        req.onupgradeneeded = function (e) {
+          e.target.result.createObjectStore("posters", { keyPath: "key" });
+        };
+        req.onsuccess = function (e) { resolve(e.target.result); };
+        req.onerror = function (e) { reject(e); };
       });
+    }
+
+    async function savePersistedPoster(key, dataUrl) {
+      try {
+        var db = await openImageDB();
+        var tx = db.transaction("posters", "readwrite");
+        tx.objectStore("posters").put({ key: key, dataUrl: dataUrl, savedAt: Date.now() });
+      } catch (e) {}
+    }
+
+    async function loadPersistedPoster(key) {
+      try {
+        var db = await openImageDB();
+        return await new Promise(function (resolve) {
+          var tx = db.transaction("posters", "readonly");
+          var req = tx.objectStore("posters").get(key);
+          req.onsuccess = function () {
+            var item = req.result;
+            // Valid for 24 hours (86400000 ms)
+            if (item && (Date.now() - item.savedAt) < 86400000) {
+              resolve(item.dataUrl);
+            } else {
+              resolve(null);
+            }
+          };
+          req.onerror = function () { resolve(null); };
+        });
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // 3. Google Sign-In Initialization
+    window.onload = async function () {
+      try {
+        var cfgRes = await fetch(GAS_API_URL + "?action=public_config");
+        var cfg = await cfgRes.json();
+        if (cfg.appName) {
+          document.getElementById("loginAppTitle").textContent = cfg.appName;
+          document.getElementById("headerAppName").textContent = cfg.appName;
+        }
+        if (cfg.googleClientId && cfg.googleClientId !== "PASTE_YOUR_GOOGLE_OAUTH_CLIENT_ID_HERE" && window.google) {
+          google.accounts.id.initialize({
+            client_id: cfg.googleClientId,
+            callback: onGoogleSignIn
+          });
+          google.accounts.id.renderButton(document.getElementById("googleBtnContainer"), {
+            theme: "outline",
+            size: "large",
+            shape: "pill",
+            text: "signin_with"
+          });
+        } else {
+          document.getElementById("loginError").textContent = "कृपया Google Sheet की Config टैब में GOOGLE_CLIENT_ID सेट करें।";
+        }
+      } catch (e) {
+        document.getElementById("loginError").textContent = "सर्वर से जुड़ने में समस्या आ रही है।";
+      }
+
+      if (idToken) {
+        authenticateWithBackend(idToken);
+      }
+    };
+
+    function onGoogleSignIn(response) {
+      idToken = response.credential;
+      localStorage.setItem("srijan_id_token", idToken);
+      authenticateWithBackend(idToken);
+    }
+
+    async function authenticateWithBackend(token) {
+      document.getElementById("loginError").textContent = "खाता सत्यापित हो रहा है...";
+      try {
+        var res = await fetch(GAS_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ action: "login", idToken: token })
+        });
+        var data = await res.json();
+        if (!data.ok) {
+          localStorage.removeItem("srijan_id_token");
+          document.getElementById("loginError").textContent = data.error || "लॉगिन विफल रहा";
+          return;
+        }
+
+        userSession = data;
+        document.getElementById("loginScreen").classList.add("hidden");
+        document.getElementById("mainApp").classList.remove("hidden");
+
+        setupUserUI();
+        renderSidebarModels();
+        selectModel(data.models[0]);
+      } catch (err) {
+        document.getElementById("loginError").textContent = "कनेक्शन त्रुटि: " + err.message;
+      }
+    }
+
+    function setupUserUI() {
+      var u = userSession.user;
+      document.getElementById("weatherLabel").textContent = "📍 " + userSession.weatherText;
+      document.getElementById("pmName").textContent = u.name;
+      document.getElementById("pmEmail").textContent = u.email;
+
+      var avatarBtn = document.getElementById("avatarBtn");
+      if (u.picture) {
+        avatarBtn.innerHTML = '<img src="' + u.picture + '" alt="Profile" />';
+      } else {
+        avatarBtn.textContent = u.name.charAt(0).toUpperCase();
+      }
+      updateCreditDisplay(u.remainingCredits, u.dailyLimit);
+    }
+
+    function updateCreditDisplay(remaining, limit) {
+      document.getElementById("topCreditChip").textContent = "⚡ " + remaining + " क्रेडिट शेष";
+      document.getElementById("pmCreditText").textContent = remaining + " / " + limit + " शेष";
+      var pct = Math.min(100, Math.round((remaining / Math.max(1, limit)) * 100));
+      document.getElementById("pmCreditFill").style.width = pct + "%";
+    }
+
+    function toggleProfileMenu() {
+      document.getElementById("profileMenu").classList.toggle("hidden");
+    }
+
+    function toggleSidebar(open) {
+      var drawer = document.getElementById("sidebarDrawer");
+      var backdrop = document.getElementById("drawerBackdrop");
+      if (open) {
+        drawer.classList.remove("closed");
+        backdrop.classList.remove("hidden");
+      } else {
+        drawer.classList.add("closed");
+        backdrop.classList.add("hidden");
+      }
+    }
+
+    function handleLogout() {
+      localStorage.removeItem("srijan_id_token");
+      location.reload();
+    }
+
+    function renderSidebarModels() {
+      var listEl = document.getElementById("sidebarModelList");
+      listEl.innerHTML = "";
+      userSession.models.forEach(function (m) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "model-item" + (activeModel && activeModel.id === m.id ? " active" : "");
+        btn.innerHTML = '<span class="mi-badge">' + m.badge + '</span><span class="mi-name">' + m.name + '</span>';
+        btn.onclick = function () {
+          selectModel(m);
+          toggleSidebar(false);
+        };
+        listEl.appendChild(btn);
+      });
+    }
+
+    async function selectModel(model) {
+      activeModel = model;
+      document.getElementById("activeModelBadge").textContent = model.name;
+      renderSidebarModels();
+
+      // Load saved message for this model or default message
+      var msgKey = "srijan_msg_" + userSession.user.email + "_" + model.id;
+      var savedMsg = localStorage.getItem(msgKey);
+      var ta = document.getElementById("messageTextarea");
+      ta.value = savedMsg !== null ? savedMsg : model.defaultMessage;
+      autoGrowTextarea(ta);
+
+      // Load 24-hour persisted AI image for this user + model
+      var posterKey = "srijan_img_" + userSession.user.email + "_" + model.id;
+      currentBgDataUrl = await loadPersistedPoster(posterKey);
+      renderPosterCanvas();
+      setToast(currentBgDataUrl ? "24-घंटे की सेव इमेज लोड हुई" : "डिफ़ॉल्ट दृश्य तैयार — नई इमेज के लिए नीचे बटन दबाएं");
+    }
+
+    function autoGrowTextarea(el) {
+      el.style.height = "auto";
+      el.style.height = el.scrollHeight + "px";
+    }
+
+    function autoGrowAndSaveMessage(el) {
+      autoGrowTextarea(el);
+      if (userSession && activeModel) {
+        var msgKey = "srijan_msg_" + userSession.user.email + "_" + activeModel.id;
+        localStorage.setItem(msgKey, el.value);
+      }
+      var badge = document.getElementById("msgSavedBadge");
+      badge.classList.add("show");
+      clearTimeout(msgTimer);
+      msgTimer = setTimeout(function () { badge.classList.remove("show"); }, 1400);
+    }
+
+    function switchDay(offset) {
+      dayOffset = offset;
+      document.getElementById("tabToday").classList.toggle("active", offset === 0);
+      document.getElementById("tabTomorrow").classList.toggle("active", offset === 1);
+      renderPosterCanvas();
     }
 
     function getTargetDateObj(offset) {
@@ -459,121 +637,88 @@
       var yyyy = d.getFullYear();
       return {
         isoKey: yyyy + "-" + mm + "-" + dd,
-        mmdd: mm + "-" + dd,
         formattedDate: d.getDate() + " " + MONTHS_EN[d.getMonth()] + " " + yyyy,
-        dayName: DAYS_EN[d.getDay()],
-        dayOfYear: Math.floor((d - new Date(yyyy, 0, 0)) / 86400000)
+        dayName: DAYS_EN[d.getDay()]
       };
     }
 
-    function triggerPopAnimation() {
-      var frame = document.getElementById("posterFrame");
-      frame.classList.remove("pop");
-      void frame.offsetWidth;
-      frame.classList.add("pop");
-    }
+    async function generateNewAIImage() {
+      if (!userSession || !activeModel) return;
+      if (userSession.user.remainingCredits <= 0) {
+        setToast("⚠️ आज के सभी क्रेडिट समाप्त हो गए हैं। कल पुनः प्रयास करें।");
+        return;
+      }
 
-    function handleSwitchDay(offset) {
-      dayOffset = offset;
-      document.getElementById("tabToday").classList.toggle("active", offset === 0);
-      document.getElementById("tabTomorrow").classList.toggle("active", offset === 1);
-      renderDefaultPoster();
-      triggerPopAnimation();
-      setActivity("success", "📅", offset === 0 ? "आज का पोस्टर दिख रहा है" : "कल का पोस्टर तैयार है");
-    }
-
-    function renderDefaultPoster() {
       var dateInfo = getTargetDateObj(dayOffset);
-      var fest = appData.festivals[dateInfo.mmdd];
-      var quotesList = (appData.quotes && appData.quotes.length > 0) ? appData.quotes : ["सुप्रभात! आपका दिन शुभ और मंगलमय हो।"];
-      var quote = fest ? fest.quote : quotesList[dateInfo.dayOfYear % quotesList.length];
-      drawPosterCanvas(currentAiImageUrl, dateInfo, fest, quote);
-    }
-
-    async function handleGenerateAI() {
-      var dateInfo = getTargetDateObj(dayOffset);
-      var fest = appData.festivals[dateInfo.mmdd];
-      var quotesList = (appData.quotes && appData.quotes.length > 0) ? appData.quotes : ["सुप्रभात!"];
-      var quote = fest ? fest.quote : quotesList[dateInfo.dayOfYear % quotesList.length];
-      var scenesList = (appData.scenes && appData.scenes.length > 0) ? appData.scenes : [{ name: "सुबह का दृश्य", prompt: "Golden sunrise in rural India" }];
-      var scene = scenesList[sceneCycleIndex % scenesList.length];
-      sceneCycleIndex++;
-
-      var activePrompt = (fest && fest.customScenePrompt && sceneCycleIndex === 1) ? fest.customScenePrompt : scene.prompt;
-      var activeThemeName = (fest && fest.customScenePrompt && sceneCycleIndex === 1) ? (fest.name + " विशेष") : scene.name;
-
+      var quoteText = document.getElementById("messageTextarea").value.trim() || activeModel.defaultMessage;
       var loader = document.getElementById("loader");
       loader.classList.remove("hidden");
-      document.getElementById("loaderSub").textContent = activeThemeName + " बन रहा है...";
-      setActivity("", "⏳", "Cloudflare AI से " + activeThemeName + " बन रहा है...");
 
       try {
-        var response = await fetch(GAS_API_URL, {
+        var res = await fetch(GAS_API_URL, {
           method: "POST",
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({
-            basePrompt: activePrompt,
+            action: "generate",
+            idToken: idToken,
+            basePrompt: activeModel.prompt,
+            modelName: activeModel.name,
             dateStr: dateInfo.formattedDate,
             dayStr: dateInfo.dayName,
-            festival: fest ? fest.name : "Normal Day",
-            quote: quote,
-            themeName: activeThemeName
+            quote: quoteText
           })
         });
-
-        var res = await response.json();
+        var data = await res.json();
         loader.classList.add("hidden");
 
-        if (res && res.ok && res.dataUrl) {
-          currentAiImageUrl = res.dataUrl;
-          document.getElementById("modeBadge").textContent = "Flux AI Active";
-          drawPosterCanvas(currentAiImageUrl, dateInfo, fest, quote);
-          triggerPopAnimation();
-          setActivity("success", "✨", activeThemeName + " • Cloudflare AI से तैयार");
-        } else {
-          setActivity("error", "⚠️", res ? (res.error || res.engine) : "API Error");
+        if (!data.ok) {
+          setToast("⚠️ " + (data.error || "इमेज जनरेट नहीं हो सकी"));
+          return;
         }
+
+        currentBgDataUrl = data.dataUrl;
+        userSession.user.remainingCredits = data.remainingCredits;
+        updateCreditDisplay(data.remainingCredits, data.dailyLimit);
+
+        // Persist for 24 hours
+        var posterKey = "srijan_img_" + userSession.user.email + "_" + activeModel.id;
+        await savePersistedPoster(posterKey, currentBgDataUrl);
+
+        renderPosterCanvas();
+        setToast("✨ नई AI इमेज तैयार और अगले 24 घंटे के लिए सेव हो गई!");
       } catch (err) {
         loader.classList.add("hidden");
-        setActivity("error", "⚠️", "कनेक्शन एरर: " + err.message);
+        setToast("⚠️ नेटवर्क त्रुटि: " + err.message);
       }
     }
 
-    function drawBuiltInSunriseArtwork(ctx, W, H) {
+    function drawRoundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function drawDefaultSunrise(ctx, W, H) {
       var skyGrad = ctx.createLinearGradient(0, 0, 0, H * 0.65);
       skyGrad.addColorStop(0, "#1e1b4b");
-      skyGrad.addColorStop(0.35, "#9a3412");
-      skyGrad.addColorStop(0.72, "#f59e0b");
+      skyGrad.addColorStop(0.4, "#9a3412");
+      skyGrad.addColorStop(0.75, "#f59e0b");
       skyGrad.addColorStop(1, "#fef08a");
       ctx.fillStyle = skyGrad;
       ctx.fillRect(0, 0, W, H);
 
-      var sunX = W * 0.5;
-      var sunY = H * 0.44;
-      var halo = ctx.createRadialGradient(sunX, sunY, 20, sunX, sunY, 360);
+      var halo = ctx.createRadialGradient(W * 0.5, H * 0.44, 20, W * 0.5, H * 0.44, 340);
       halo.addColorStop(0, "rgba(255, 251, 235, 0.95)");
-      halo.addColorStop(0.3, "rgba(253, 224, 71, 0.45)");
       halo.addColorStop(1, "rgba(251, 146, 60, 0)");
       ctx.fillStyle = halo;
       ctx.fillRect(0, 0, W, H);
 
-      ctx.fillStyle = "#fffbeb";
-      ctx.beginPath();
-      ctx.arc(sunX, sunY, 72, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = "rgba(120, 53, 15, 0.42)";
-      ctx.beginPath();
-      ctx.moveTo(0, H * 0.54);
-      ctx.quadraticCurveTo(W * 0.28, H * 0.43, W * 0.58, H * 0.52);
-      ctx.quadraticCurveTo(W * 0.82, H * 0.45, W, H * 0.53);
-      ctx.lineTo(W, H);
-      ctx.lineTo(0, H);
-      ctx.fill();
-
       var fieldGrad = ctx.createLinearGradient(0, H * 0.52, 0, H);
       fieldGrad.addColorStop(0, "#3f6212");
-      fieldGrad.addColorStop(0.5, "#14532d");
       fieldGrad.addColorStop(1, "#052e16");
       ctx.fillStyle = fieldGrad;
       ctx.beginPath();
@@ -582,19 +727,6 @@
       ctx.lineTo(W, H);
       ctx.lineTo(0, H);
       ctx.fill();
-
-      ctx.strokeStyle = "rgba(30, 27, 75, 0.65)";
-      ctx.lineWidth = 3.5;
-      var birds = [[340, 390], [385, 372], [425, 398], [690, 360], [735, 378]];
-      for (var i = 0; i < birds.length; i++) {
-        var bx = birds[i][0];
-        var by = birds[i][1];
-        ctx.beginPath();
-        ctx.moveTo(bx - 16, by + 6);
-        ctx.quadraticCurveTo(bx - 8, by - 8, bx, by + 2);
-        ctx.quadraticCurveTo(bx + 8, by - 8, bx + 16, by + 6);
-        ctx.stroke();
-      }
     }
 
     function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
@@ -617,18 +749,21 @@
       }
     }
 
-    function drawPosterCanvas(bgDataUrl, dateInfo, fest, quote) {
+    function renderPosterCanvas() {
+      if (!activeModel || !userSession) return;
       var canvas = document.getElementById("posterCanvas");
       var ctx = canvas.getContext("2d");
       var W = canvas.width;
       var H = canvas.height;
+      var dateInfo = getTargetDateObj(dayOffset);
+      var quoteText = document.getElementById("messageTextarea").value.trim() || activeModel.defaultMessage;
 
-      var renderOverlays = function () {
-        var topGrad = ctx.createLinearGradient(0, 0, 0, 340);
+      var drawOverlays = function () {
+        var topGrad = ctx.createLinearGradient(0, 0, 0, 320);
         topGrad.addColorStop(0, "rgba(15, 23, 42, 0.68)");
         topGrad.addColorStop(1, "rgba(15, 23, 42, 0)");
         ctx.fillStyle = topGrad;
-        ctx.fillRect(0, 0, W, 340);
+        ctx.fillRect(0, 0, W, 320);
 
         var botGrad = ctx.createLinearGradient(0, H - 560, 0, H);
         botGrad.addColorStop(0, "rgba(15, 23, 42, 0)");
@@ -656,29 +791,11 @@
         ctx.shadowColor = "rgba(0, 0, 0, 0.65)";
         ctx.shadowBlur = 24;
         ctx.fillStyle = goldGrad;
-        ctx.font = "800 126px 'Noto Sans Devanagari', sans-serif";
-        ctx.fillText("सुप्रभात", W / 2, 232);
+        ctx.font = "800 120px 'Noto Sans Devanagari', sans-serif";
+        ctx.fillText(activeModel.headerTitle, W / 2, 230);
         ctx.shadowBlur = 0;
 
-        if (fest) {
-          var festGrad = ctx.createLinearGradient(W / 2 - 250, 0, W / 2 + 250, 0);
-          festGrad.addColorStop(0, "rgba(234, 88, 12, 0)");
-          festGrad.addColorStop(0.2, "rgba(234, 88, 12, 0.92)");
-          festGrad.addColorStop(0.8, "rgba(234, 88, 12, 0.92)");
-          festGrad.addColorStop(1, "rgba(234, 88, 12, 0)");
-          ctx.fillStyle = festGrad;
-          ctx.fillRect(W / 2 - 250, 266, 500, 54);
-
-          ctx.fillStyle = "#ffffff";
-          ctx.font = "700 32px 'Noto Sans Devanagari', sans-serif";
-          ctx.fillText("✨ शुभ " + fest.name + " ✨", W / 2, 304);
-        }
-
-        var boxX = 68;
-        var boxY = H - 512;
-        var boxW = W - 136;
-        var boxH = 338;
-
+        var boxX = 68, boxY = H - 512, boxW = W - 136, boxH = 338;
         ctx.fillStyle = "rgba(15, 23, 42, 0.66)";
         ctx.strokeStyle = "rgba(255, 255, 255, 0.24)";
         ctx.lineWidth = 2;
@@ -688,7 +805,7 @@
 
         ctx.fillStyle = "#fde68a";
         ctx.font = "700 28px 'Noto Sans Devanagari', sans-serif";
-        ctx.fillText("📍 " + appData.weatherText, W / 2, boxY + 54);
+        ctx.fillText("📍 " + userSession.weatherText, W / 2, boxY + 54);
 
         ctx.strokeStyle = "rgba(255, 255, 255, 0.16)";
         ctx.beginPath();
@@ -697,116 +814,68 @@
         ctx.stroke();
 
         ctx.fillStyle = "#ffffff";
-        ctx.font = "700 41px 'Noto Sans Devanagari', sans-serif";
-        wrapText(ctx, "“" + quote + "”", W / 2, boxY + 206, boxW - 68, 58);
-
-        var lineGrad = ctx.createLinearGradient(250, 0, W - 250, 0);
-        lineGrad.addColorStop(0, "rgba(250, 204, 21, 0)");
-        lineGrad.addColorStop(0.5, "rgba(250, 204, 21, 0.95)");
-        lineGrad.addColorStop(1, "rgba(250, 204, 21, 0)");
-        ctx.fillStyle = lineGrad;
-        ctx.fillRect(250, H - 152, W - 500, 4);
+        ctx.font = "700 39px 'Noto Sans Devanagari', sans-serif";
+        wrapText(ctx, "“" + quoteText + "”", W / 2, boxY + 206, boxW - 68, 56);
 
         ctx.fillStyle = "#facc15";
         ctx.font = "800 42px 'Plus Jakarta Sans', sans-serif";
-        ctx.fillText(appData.brandName, W / 2, H - 92);
+        ctx.fillText(activeModel.footerName, W / 2, H - 92);
 
         ctx.fillStyle = "#f4f4f5";
         ctx.font = "600 27px 'Plus Jakarta Sans', sans-serif";
-        ctx.fillText(appData.brandRole, W / 2, H - 48);
+        ctx.fillText(activeModel.footerRole, W / 2, H - 48);
       };
 
-      if (bgDataUrl) {
+      if (currentBgDataUrl) {
         var img = new Image();
-        img.onload = function () { ctx.drawImage(img, 0, 0, W, H); renderOverlays(); };
-        img.onerror = function () { drawBuiltInSunriseArtwork(ctx, W, H); renderOverlays(); };
-        img.src = bgDataUrl;
+        img.onload = function () { ctx.drawImage(img, 0, 0, W, H); drawOverlays(); };
+        img.onerror = function () { drawDefaultSunrise(ctx, W, H); drawOverlays(); };
+        img.src = currentBgDataUrl;
       } else {
-        drawBuiltInSunriseArtwork(ctx, W, H);
-        renderOverlays();
+        drawDefaultSunrise(ctx, W, H);
+        drawOverlays();
       }
     }
 
-    function handleDownload() {
+    function downloadPoster() {
       var canvas = document.getElementById("posterCanvas");
       var dateInfo = getTargetDateObj(dayOffset);
       var link = document.createElement("a");
-      link.download = "Suprabhat_Jaunpur_" + dateInfo.isoKey + ".png";
+      link.download = "Srijan_" + dateInfo.isoKey + ".png";
       link.href = canvas.toDataURL("image/png");
-      document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);
-      setActivity("success", "⬇️", "HD पोस्टर फोन में डाउनलोड हो गया");
+      setToast("⬇️ HD पोस्टर सेव हो गया");
     }
 
-    function handleSendDirect(num10) {
-      var customMsg = document.getElementById("dailyMessageInput").value.trim();
-      handleDownload();
-      var encodedText = encodeURIComponent(customMsg);
-      setActivity("success", "📲", "+91 " + num10 + " की WhatsApp चैट खुल रही है...");
-      setTimeout(function () {
-        window.open("https://wa.me/91" + num10 + "?text=" + encodedText, "_blank");
-      }, 450);
-    }
-
-    function handleShareWA() {
+    function shareWhatsApp() {
       var canvas = document.getElementById("posterCanvas");
       var dateInfo = getTargetDateObj(dayOffset);
-      var fileName = "Suprabhat_Jaunpur_" + dateInfo.isoKey + ".png";
-      var customMsg = document.getElementById("dailyMessageInput").value.trim();
+      var customMsg = document.getElementById("messageTextarea").value.trim();
 
       if (navigator.canShare && navigator.share) {
         canvas.toBlob(function (blob) {
-          if (!blob) return;
-          var file = new File([blob], fileName, { type: "image/png" });
+          var file = new File([blob], "Srijan_" + dateInfo.isoKey + ".png", { type: "image/png" });
           if (navigator.canShare({ files: [file] })) {
             navigator.share({ files: [file], text: customMsg }).catch(function () {});
-            setActivity("success", "📲", "WhatsApp शेयर शीट खुल गई है");
             return;
           }
-          fallbackWA(customMsg);
+          fallbackShare(customMsg);
         }, "image/png");
         return;
       }
-      fallbackWA(customMsg);
+      fallbackShare(customMsg);
     }
 
-    function fallbackWA(customMsg) {
-      handleDownload();
-      var encodedText = encodeURIComponent(customMsg);
-      setActivity("success", "📲", "फोटो सेव हो गई है—WhatsApp में कॉन्टैक्ट चुनकर भेजें");
+    function fallbackShare(msg) {
+      downloadPoster();
       setTimeout(function () {
-        window.open("https://wa.me/?text=" + encodedText, "_blank");
-      }, 450);
+        window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+      }, 400);
     }
 
-    // Boot App & Fetch Live Weather + Sheet Config from Apps Script JSON API
-    initCustomFields();
-    renderDefaultPoster();
-
-    fetch(GAS_API_URL + "?action=init")
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data && data.ok) {
-          appData = data;
-          document.getElementById("weatherLabel").textContent = "📍 " + data.weatherText;
-          renderDefaultPoster();
-          setActivity("success", "✅", "लाइव मौसम और Google Sheet डेटा लोड हो गया");
-        }
-      })
-      .catch(function () {
-        // Fallback to direct Open-Meteo weather if GAS init is cold-starting
-        fetch("https://api.open-meteo.com/v1/forecast?latitude=25.7464&longitude=82.6837&current_weather=true")
-          .then(function (r) { return r.json(); })
-          .then(function (w) {
-            if (w && w.current_weather) {
-              var t = Math.round(w.current_weather.temperature);
-              appData.weatherText = "जौनपुर: " + t + "°C • सुहावना मौसम, धूप खिली हुई";
-              document.getElementById("weatherLabel").textContent = "📍 " + appData.weatherText;
-              renderDefaultPoster();
-            }
-          });
-      });
+    function setToast(txt) {
+      document.getElementById("toastBar").textContent = txt;
+    }
   </script>
 </body>
 </html>
