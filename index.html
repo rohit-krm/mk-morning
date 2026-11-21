@@ -51,7 +51,7 @@
 
     .hidden { display: none !important; }
 
-    /* ================= LOGIN SCREEN ================= */
+    /* ================= LOGIN SCREEN & SMOOTH VERIFICATION LOADER ================= */
     .login-wrapper {
       width: 100%;
       min-height: 100dvh;
@@ -93,7 +93,84 @@
 
     .login-card h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
     .login-card p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; max-width: 290px; }
-    .login-status { font-size: 12px; font-weight: 600; color: #dc2626; min-height: 18px; }
+
+    .verifying-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 0 4px;
+      animation: fadeUp 0.25s ease;
+    }
+
+    .login-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--surface-muted);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+
+    .verifying-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .login-error {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #dc2626;
+      line-height: 1.45;
+    }
+
+    /* ================= APPROVAL / STATUS MODAL POPUP ================= */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .modal-card {
+      width: 100%;
+      max-width: 380px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 26px 22px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: popIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .status-icon-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      margin: 0 auto;
+    }
+    .status-icon-circle.banned { background: #fef2f2; color: #dc2626; }
+
+    .modal-title { font-size: 18px; font-weight: 800; text-align: center; color: var(--text-main); }
+    .modal-desc { font-size: 13.5px; color: var(--text-secondary); text-align: center; line-height: 1.55; }
 
     /* ================= STICKY APP HEADER ================= */
     .app-header {
@@ -155,7 +232,7 @@
     }
     .avatar-trigger img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ================= PROFILE POPOVER ================= */
+    /* ================= PROFILE POPOVER (SHOWS GOOGLE ACCOUNT NAME & EMAIL) ================= */
     .menu-backdrop {
       position: fixed;
       inset: 0;
@@ -192,7 +269,7 @@
       padding-bottom: 10px;
       border-bottom: 1px solid var(--border);
     }
-    .user-meta-name { font-size: 14px; font-weight: 700; color: var(--text-main); }
+    .user-meta-name { font-size: 14.5px; font-weight: 800; color: var(--text-main); }
     .user-meta-email { font-size: 12px; color: var(--text-secondary); word-break: break-all; }
 
     .usage-card {
@@ -215,20 +292,6 @@
     .usage-track { width: 100%; height: 7px; background: #cbd5e1; border-radius: 99px; overflow: hidden; }
     .usage-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 99px; transition: width 0.35s ease; }
 
-    .menu-action-btn {
-      width: 100%;
-      height: 38px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text-main);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-    }
-    .menu-action-btn:hover { background: var(--surface-muted); }
-
     .logout-btn {
       width: 100%;
       height: 38px;
@@ -242,7 +305,7 @@
       font-family: inherit;
     }
 
-    /* ================= LEFT MODEL DRAWER ================= */
+    /* ================= LEFT MODEL DRAWER + BOTTOM REQUEST/SUPPORT BUTTON ================= */
     .drawer-overlay {
       position: fixed;
       inset: 0;
@@ -256,18 +319,20 @@
       top: 0;
       left: 0;
       bottom: 0;
-      width: 280px;
-      max-width: 82vw;
+      width: 284px;
+      max-width: 84vw;
       background: var(--surface);
       z-index: 70;
       padding: 20px 16px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      justify-content: space-between;
       box-shadow: 16px 0 40px rgba(15, 23, 42, 0.15);
       transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .sidebar-drawer.closed { transform: translateX(-105%); }
+
+    .drawer-top { display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
 
     .drawer-header {
       display: flex;
@@ -277,7 +342,7 @@
       border-bottom: 1px solid var(--border);
     }
     .drawer-title { font-size: 15px; font-weight: 800; }
-    .model-list { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+    .model-list { display: flex; flex-direction: column; gap: 8px; }
 
     .model-card {
       width: 100%;
@@ -292,6 +357,29 @@
     .model-card.active { border-color: var(--accent); background: var(--accent-soft); }
     .model-tag { display: inline-block; font-size: 10.5px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
     .model-title { display: block; font-size: 14px; font-weight: 700; color: var(--text-main); }
+
+    .drawer-footer {
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .support-trigger-btn {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.15s ease;
+    }
+    .support-trigger-btn:hover { background: #e2e8f0; }
 
     /* ================= MAIN WORKSPACE ================= */
     .workspace {
@@ -309,7 +397,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Compact Brand Identity Strip (Editable on Homepage) */
+    /* Compact Brand Identity Strip */
     .brand-strip {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -351,7 +439,7 @@
       flex-shrink: 0;
     }
 
-    /* Inline Brand Editor Drawer */
+    /* Inline Brand Editor */
     .brand-editor {
       background: var(--surface);
       border: 1px solid var(--accent);
@@ -365,13 +453,12 @@
     }
     .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .field-group { display: flex; flex-direction: column; gap: 4px; }
-    .field-group label { font-size: 11px; font-weight: 700; color: var(--text-secondary); }
-    .clean-input {
+    .field-group label { font-size: 11.5px; font-weight: 700; color: var(--text-secondary); }
+    .clean-input, .clean-select, .clean-textarea-box {
       width: 100%;
-      height: 38px;
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 0 11px;
+      padding: 9px 11px;
       font-size: 13px;
       font-weight: 600;
       color: var(--text-main);
@@ -379,14 +466,18 @@
       font-family: inherit;
       outline: none;
     }
-    .clean-input:focus { border-color: var(--accent); background: #fff; }
-    .save-brand-btn {
-      height: 38px;
+    .clean-input:focus, .clean-select:focus, .clean-textarea-box:focus {
+      border-color: var(--accent);
+      background: #ffffff;
+    }
+
+    .primary-dark-btn {
+      height: 40px;
       border-radius: 10px;
       border: none;
       background: var(--primary);
-      color: #fff;
-      font-size: 12.5px;
+      color: #ffffff;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
@@ -452,213 +543,99 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* Generate AI Image + Save HD Row */
-    .studio-controls {
-      display: grid;
-      grid-template-columns: 1.7fr 1fr;
-      gap: 10px;
-    }
+    /* Generate AI Image Button */
     .generate-btn {
+      width: 100%;
       height: 48px;
       border-radius: 14px;
       border: none;
       background: var(--primary);
       color: #ffffff;
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
+      gap: 8px;
       box-shadow: var(--shadow-sm);
     }
-    .generate-btn:active { transform: scale(0.98); }
+    .generate-btn:active { transform: scale(0.985); }
 
-    .btn-dl {
-      height: 48px;
-      border-radius: 14px;
-      background: var(--surface);
-      color: var(--text-main);
-      border: 1px solid var(--border);
-      font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    /* ================= MULTI-BOX BROADCAST MESSAGE SECTION ================= */
-    .boxes-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2px 2px 0;
-    }
-    .boxes-title { font-size: 13px; font-weight: 800; color: var(--text-main); }
-    .add-box-btn {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--accent);
-      border-radius: 10px;
-      padding: 6px 11px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .msg-boxes-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .msg-box-card {
+    /* Single Effective Message Inbox (No Scrollbar) */
+    .inbox-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 13px 14px;
+      padding: 14px 16px;
       box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      animation: fadeUp 0.22s ease;
+      gap: 6px;
     }
-
-    .box-top-bar {
+    .inbox-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-    }
-
-    .box-label-input {
-      border: none;
-      background: transparent;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--accent);
-      font-family: inherit;
-      outline: none;
-      width: 100%;
-    }
-
-    .box-tools {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
-    .mode-pill {
-      border: 1px solid var(--border);
-      background: var(--surface-muted);
-      color: var(--text-secondary);
-      border-radius: 8px;
-      padding: 3px 7px;
-      font-size: 10.5px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-    }
-    .mode-pill.ai {
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-color: rgba(234, 88, 12, 0.25);
-    }
-
-    .ai-refresh-mini {
-      border: 1px solid rgba(234, 88, 12, 0.25);
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-radius: 8px;
-      padding: 3px 8px;
-      font-size: 10.5px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .del-box-btn {
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      padding: 0 4px;
-    }
-    .del-box-btn:hover { color: #dc2626; }
-
-    .ai-rule-bar {
-      background: var(--bg);
-      border: 1px dashed #cbd5e1;
-      border-radius: 9px;
-      padding: 6px 9px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .ai-rule-input {
-      width: 100%;
-      border: none;
-      background: transparent;
       font-size: 11.5px;
-      font-weight: 500;
+      font-weight: 700;
       color: var(--text-secondary);
-      font-family: inherit;
-      outline: none;
     }
+    .saved-badge {
+      color: var(--whatsapp);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .saved-badge.visible { opacity: 1; }
 
-    .box-textarea {
+    .inbox-textarea {
       width: 100%;
       border: none;
       background: transparent;
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 500;
-      line-height: 1.5;
+      line-height: 1.55;
       color: var(--text-main);
       font-family: inherit;
       resize: none;
       overflow: hidden;
       outline: none;
-      min-height: 42px;
+      min-height: 44px;
     }
 
-    .box-footer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 6px;
-      border-top: 1px solid var(--surface-muted);
+    /* Bottom Action Buttons (Save HD + Send WhatsApp) */
+    .action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.65fr;
+      gap: 10px;
     }
-
-    .sync-hint { font-size: 11px; color: var(--text-muted); font-weight: 600; }
-
-    .wa-send-btn {
-      height: 38px;
-      padding: 0 16px;
-      border-radius: 11px;
-      border: none;
-      background: var(--whatsapp);
-      color: #ffffff;
-      font-size: 13px;
+    .btn-action {
+      height: 50px;
+      border-radius: 14px;
+      font-size: 14.5px;
       font-weight: 700;
       cursor: pointer;
-      font-family: inherit;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      transition: transform 0.1s ease;
     }
-    .wa-send-btn:active { transform: scale(0.96); }
+    .btn-action:active { transform: scale(0.97); }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-whatsapp {
+      background: var(--whatsapp);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 8px 18px -4px rgba(22, 163, 74, 0.35);
+    }
 
     .status-note {
       text-align: center;
@@ -671,18 +648,65 @@
 </head>
 <body>
 
-  <!-- 1. Google Sign-In Screen -->
+  <!-- 1. Google Sign-In Screen (With Non-Freezing Verification Animation) -->
   <div class="login-wrapper" id="loginScreen">
     <div class="login-card">
       <div class="brand-mark">सृ</div>
       <h1>MySrijan</h1>
       <p>अपने व्यक्तिगत AI क्रिएटिव स्टूडियो में प्रवेश करने के लिए अपने Gmail खाते से लॉगिन करें।</p>
+
       <div id="googleBtnContainer" style="margin-top: 4px;"></div>
-      <div class="login-status" id="loginError"></div>
+
+      <!-- Smooth Animated Loader During Account Verification -->
+      <div class="verifying-box hidden" id="verifyingLoader">
+        <div class="login-spinner"></div>
+        <span class="verifying-text" id="verifyingMsg">खाता सत्यापित हो रहा है, कृपया प्रतीक्षा करें...</span>
+      </div>
+
+      <div class="login-error" id="loginError"></div>
     </div>
   </div>
 
-  <!-- 2. Authenticated Studio Shell -->
+  <!-- 2. Pending / Banned Approval Popup Modal -->
+  <div class="modal-backdrop hidden" id="approvalModal">
+    <div class="modal-card">
+      <div class="status-icon-circle" id="approvalIcon">⏳</div>
+      <div class="modal-title" id="approvalTitle">एडमिन अप्रूवल की प्रतीक्षा है</div>
+      <div class="modal-desc" id="approvalDesc">
+        आपका खाता सफलतापूर्वक पंजीकृत हो गया है। कृपया एडमिन के अप्रूवल का इंतज़ार करें—अप्रूव होते ही आपको पूरा एक्सेस मिल जाएगा।
+      </div>
+      <button type="button" class="primary-dark-btn" onclick="handleLogout()">दूसरे खाते से लॉगिन करें / बंद करें</button>
+    </div>
+  </div>
+
+  <!-- 3. User Model Request & Support Modal -->
+  <div class="modal-backdrop hidden" id="supportModal">
+    <div class="modal-card">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <span style="font-size:16px; font-weight:800;">✨ नया मॉडल / सहायता अनुरोध</span>
+        <button type="button" class="icon-btn" style="width:30px;height:30px;" onclick="closeSupportModal()">✕</button>
+      </div>
+      <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.45;">
+        आपको किस प्रकार का नया पोस्टर मॉडल या सहायता चाहिए, नीचे लिखें। आपकी रिक्वेस्ट सीधे एडमिन तक पहुँच जाएगी।
+      </p>
+      <div class="field-group">
+        <label>अनुरोध का प्रकार (Request Type)</label>
+        <select id="reqTypeSelect" class="clean-select">
+          <option value="NEW_MODEL">नया कस्टम मॉडल बनवाना है (New Model Request)</option>
+          <option value="CREDIT_INCREASE">दैनिक क्रेडिट सीमा बढ़वानी है (Credit Limit)</option>
+          <option value="SUPPORT">तकनीकी सहायता / सुझाव (Support)</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>विवरण लिखें (Details)</label>
+        <textarea id="reqDetailsInput" class="clean-textarea-box" rows="3" placeholder="जैसे: मुझे अपनी दुकान/क्लिनिक के लिए दैनिक ऑफर या स्वास्थ्य सुझाव वाला मॉडल चाहिए..."></textarea>
+      </div>
+      <button type="button" class="primary-dark-btn" id="submitSupportBtn" onclick="submitSupportRequest()">अनुरोध भेजें (Submit)</button>
+      <div id="supportStatusMsg" style="font-size:12px; font-weight:700; text-align:center; color:var(--whatsapp);"></div>
+    </div>
+  </div>
+
+  <!-- 4. Authenticated Studio Shell -->
   <div id="appShell" class="hidden" style="width: 100%;">
     <!-- Sticky Header -->
     <header class="app-header">
@@ -703,12 +727,12 @@
       </div>
     </header>
 
-    <!-- Profile Dropdown Overlay -->
+    <!-- Profile Dropdown Overlay (Shows Google Account Name & Email) -->
     <div class="menu-backdrop hidden" id="menuBackdrop" onclick="closeProfileMenu()"></div>
     <div class="profile-popover hidden" id="profilePopover">
       <div class="user-meta">
-        <span class="user-meta-name" id="pmName">User</span>
-        <span class="user-meta-email" id="pmEmail">user@gmail.com</span>
+        <span class="user-meta-name" id="pmGoogleName">Google Account Name</span>
+        <span class="user-meta-email" id="pmGoogleEmail">user@gmail.com</span>
       </div>
       <div class="usage-card">
         <div class="usage-top">
@@ -719,44 +743,51 @@
           <div class="usage-fill" id="pmUsageFill"></div>
         </div>
       </div>
-      <button type="button" class="menu-action-btn" onclick="openBrandEditorFromMenu()">✏️ Brand & Tagline बदलें</button>
       <button type="button" class="logout-btn" onclick="handleLogout()">Log out</button>
     </div>
 
-    <!-- Left Model Drawer -->
+    <!-- Left Model Drawer + Bottom Request/Support Option -->
     <div class="drawer-overlay hidden" id="drawerOverlay" onclick="toggleSidebar(false)"></div>
     <aside class="sidebar-drawer closed" id="sidebarDrawer">
-      <div class="drawer-header">
-        <span class="drawer-title">आपके मॉडल्स</span>
-        <button type="button" class="icon-btn" style="width:32px;height:32px;" onclick="toggleSidebar(false)">✕</button>
+      <div class="drawer-top">
+        <div class="drawer-header">
+          <span class="drawer-title">आपके मॉडल्स</span>
+          <button type="button" class="icon-btn" style="width:32px;height:32px;" onclick="toggleSidebar(false)">✕</button>
+        </div>
+        <div class="model-list" id="sidebarModelList"></div>
       </div>
-      <div class="model-list" id="sidebarModelList"></div>
+
+      <div class="drawer-footer">
+        <button type="button" class="support-trigger-btn" onclick="openSupportModal()">
+          <span>💬 नया मॉडल अनुरोध / सहायता</span>
+        </button>
+      </div>
     </aside>
 
     <!-- Main Workspace -->
     <main class="workspace" style="margin: 0 auto;">
-      <!-- Organized Brand & Tagline Bar on Homepage -->
+      <!-- Organized Brand & Tagline Strip -->
       <div class="brand-strip">
         <div class="brand-info">
-          <span class="brand-name-display" id="dispBrandName">Mahendra Kumar Maurya</span>
-          <span class="brand-role-display" id="dispBrandRole">Wellness Coordinator</span>
+          <span class="brand-name-display" id="dispBrandName">Brand Name</span>
+          <span class="brand-role-display" id="dispBrandRole">Tagline / Role</span>
         </div>
         <button type="button" class="edit-pill-btn" onclick="toggleBrandEditor()">✏️ Edit Brand</button>
       </div>
 
-      <!-- Collapsible Brand & Tagline Editor -->
+      <!-- Inline Brand Editor -->
       <div class="brand-editor hidden" id="brandEditorPanel">
         <div class="editor-grid">
           <div class="field-group">
-            <label>नाम / ब्रांड (Brand Name)</label>
+            <label>नाम / ब्रांड</label>
             <input type="text" id="inputBrandName" class="clean-input" placeholder="आपका नाम या ब्रांड" oninput="livePreviewBrand()" />
           </div>
           <div class="field-group">
-            <label>टैगलाइन / पद (Tagline)</label>
+            <label>टैगलाइन / पद</label>
             <input type="text" id="inputBrandRole" class="clean-input" placeholder="आपका पद या टैगलाइन" oninput="livePreviewBrand()" />
           </div>
         </div>
-        <button type="button" class="save-brand-btn" onclick="saveBrandIdentity()">✓ नाम और टैगलाइन सेव करें</button>
+        <button type="button" class="primary-dark-btn" onclick="saveBrandIdentity()">✓ नाम और टैगलाइन सेव करें</button>
       </div>
 
       <!-- Day Switcher -->
@@ -770,26 +801,36 @@
         <canvas id="posterCanvas" width="1080" height="1350"></canvas>
         <div class="loader-overlay hidden" id="loader">
           <div class="spinner"></div>
-          <div style="font-size: 15px; font-weight: 700;">नई इमेज तैयार हो रही है...</div>
-          <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px;">यह अगले 24 घंटे तक सुरक्षित रहेगी</div>
+          <div style="font-size: 15px; font-weight: 700;">नई इमेज और संदेश तैयार हो रहे हैं...</div>
+          <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px;">यह अगले 24 घंटे तक सुरक्षित रहेगा</div>
         </div>
       </section>
 
-      <!-- Generate AI Image + Save HD -->
-      <div class="studio-controls">
-        <button type="button" class="generate-btn" onclick="generateNewAIImage()">
-          <span>✨ नई इमेज जनरेट करें</span>
-        </button>
-        <button type="button" class="btn-dl" onclick="downloadPoster()">⬇️ Save HD</button>
-      </div>
+      <!-- Single Primary Action: Generate New Image + AI Text -->
+      <button type="button" class="generate-btn" onclick="generateNewImageAndText()">
+        <span>✨ नई इमेज और संदेश जनरेट करें</span>
+      </button>
 
-      <!-- Multi-Box WhatsApp Broadcast Messages -->
-      <div class="boxes-header">
-        <span class="boxes-title">मैसेज बॉक्स (WhatsApp Broadcast)</span>
-        <button type="button" class="add-box-btn" id="addBoxBtn" onclick="addNewMessageBox()">+ नया बॉक्स जोड़ें</button>
-      </div>
+      <!-- Single Clean Effective Message Inbox -->
+      <section class="inbox-card">
+        <div class="inbox-header">
+          <span>साथ भेजने वाला संदेश</span>
+          <span class="saved-badge" id="savedBadge">✓ सेव हो गया</span>
+        </div>
+        <textarea
+          id="messageInbox"
+          class="inbox-textarea"
+          rows="2"
+          placeholder="यहाँ आपका संदेश दिखेगा..."
+          oninput="handleInboxInput(this)"
+        ></textarea>
+      </section>
 
-      <div class="msg-boxes-stack" id="msgBoxesStack"></div>
+      <!-- Save HD & Send WhatsApp Buttons -->
+      <div class="action-grid">
+        <button type="button" class="btn-action btn-secondary" onclick="downloadPoster()">⬇️ Save HD</button>
+        <button type="button" class="btn-action btn-whatsapp" onclick="shareWhatsApp()">📲 WhatsApp पर भेजें</button>
+      </div>
 
       <div class="status-note" id="statusNote"></div>
     </main>
@@ -803,8 +844,7 @@
     var activeModel = null;
     var dayOffset = 0;
     var currentBgDataUrl = null;
-    var messageBoxes = [];
-    var boxSaveTimers = {};
+    var saveTimer = null;
 
     var DAYS_EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -899,6 +939,21 @@
       }
     };
 
+    function setLoginVerifying(isLoading, errorText) {
+      var btnBox = document.getElementById("googleBtnContainer");
+      var loader = document.getElementById("verifyingLoader");
+      var errEl = document.getElementById("loginError");
+      if (isLoading) {
+        btnBox.classList.add("hidden");
+        loader.classList.remove("hidden");
+        errEl.textContent = "";
+      } else {
+        btnBox.classList.remove("hidden");
+        loader.classList.add("hidden");
+        errEl.textContent = errorText || "";
+      }
+    }
+
     function onGoogleSignIn(response) {
       idToken = response.credential;
       localStorage.setItem("mysrijan_id_token", idToken);
@@ -906,7 +961,7 @@
     }
 
     async function authenticateSession(token) {
-      document.getElementById("loginError").textContent = "खाता सत्यापित हो रहा है...";
+      setLoginVerifying(true, "");
       try {
         var res = await fetch(GAS_API_URL, {
           method: "POST",
@@ -914,9 +969,15 @@
           body: JSON.stringify({ action: "login", idToken: token })
         });
         var data = await res.json();
+        setLoginVerifying(false, "");
+
         if (!data.ok) {
+          if (data.status === "PENDING" || data.status === "BANNED") {
+            showApprovalPopup(data.status, data.error);
+            return;
+          }
           localStorage.removeItem("mysrijan_id_token");
-          document.getElementById("loginError").textContent = data.error || "लॉगिन विफल रहा।";
+          setLoginVerifying(false, data.error || "लॉगिन विफल रहा।");
           return;
         }
 
@@ -928,14 +989,37 @@
         renderModelList();
         selectModel(data.models[0]);
       } catch (err) {
-        document.getElementById("loginError").textContent = "कनेक्शन त्रुटि: " + err.message;
+        setLoginVerifying(false, "कनेक्शन त्रुटि: " + err.message);
       }
+    }
+
+    function showApprovalPopup(status, customMsg) {
+      var modal = document.getElementById("approvalModal");
+      var icon = document.getElementById("approvalIcon");
+      var title = document.getElementById("approvalTitle");
+      var desc = document.getElementById("approvalDesc");
+
+      if (status === "BANNED") {
+        icon.textContent = "🚫";
+        icon.classList.add("banned");
+        title.textContent = "खाता प्रतिबंधित (Banned)";
+        desc.textContent = customMsg || "आपका खाता एडमिन द्वारा प्रतिबंधित कर दिया गया है। अधिक जानकारी के लिए संपर्क करें।";
+      } else {
+        icon.textContent = "⏳";
+        icon.classList.remove("banned");
+        title.textContent = "एडमिन के अप्रूवल का इंतज़ार करें";
+        desc.textContent = customMsg || "आपका लॉगिन अनुरोध दर्ज हो गया है। कृपया एडमिन के अप्रूवल का इंतज़ार करें—अप्रूवल मिलते ही आपको पूरा एक्सेस मिल जाएगा।";
+      }
+      modal.classList.remove("hidden");
     }
 
     function setupProfileUI() {
       var u = userSession.user;
-      document.getElementById("pmName").textContent = u.brandName;
-      document.getElementById("pmEmail").textContent = u.email;
+      // DP click shows Google Account Name & Email
+      document.getElementById("pmGoogleName").textContent = u.googleName || u.brandName;
+      document.getElementById("pmGoogleEmail").textContent = u.email;
+
+      // Homepage Brand & Tagline Strip
       document.getElementById("dispBrandName").textContent = u.brandName;
       document.getElementById("dispBrandRole").textContent = u.taglineRole;
       document.getElementById("inputBrandName").value = u.brandName;
@@ -945,7 +1029,7 @@
       if (u.picture) {
         avatarBtn.innerHTML = '<img src="' + u.picture + '" alt="Profile" />';
       } else {
-        avatarBtn.textContent = u.brandName.charAt(0).toUpperCase();
+        avatarBtn.textContent = (u.googleName || u.brandName).charAt(0).toUpperCase();
       }
       updateUsageMeter(u.usedToday, u.dailyLimit);
     }
@@ -970,11 +1054,6 @@
     function closeProfileMenu() {
       document.getElementById("profilePopover").classList.add("hidden");
       document.getElementById("menuBackdrop").classList.add("hidden");
-    }
-
-    function openBrandEditorFromMenu() {
-      closeProfileMenu();
-      document.getElementById("brandEditorPanel").classList.remove("hidden");
     }
 
     function toggleBrandEditor() {
@@ -1011,8 +1090,7 @@
         });
         var data = await res.json();
         if (data.ok) {
-          document.getElementById("pmName").textContent = bName;
-          setNote("✓ ब्रांड नाम और टैगलाइन Google Sheet में सेव हो गया");
+          setNote("✓ नाम और टैगलाइन सेव हो गया");
         }
       } catch (e) {
         setNote("⚠️ सेव करने में त्रुटि हुई");
@@ -1029,6 +1107,63 @@
       } else {
         drawer.classList.add("closed");
         overlay.classList.add("hidden");
+      }
+    }
+
+    function openSupportModal() {
+      toggleSidebar(false);
+      document.getElementById("supportStatusMsg").textContent = "";
+      document.getElementById("reqDetailsInput").value = "";
+      document.getElementById("supportModal").classList.remove("hidden");
+    }
+
+    function closeSupportModal() {
+      document.getElementById("supportModal").classList.add("hidden");
+    }
+
+    async function submitSupportRequest() {
+      var reqType = document.getElementById("reqTypeSelect").value;
+      var details = document.getElementById("reqDetailsInput").value.trim();
+      var statusEl = document.getElementById("supportStatusMsg");
+      var btn = document.getElementById("submitSupportBtn");
+
+      if (!details) {
+        statusEl.style.color = "#dc2626";
+        statusEl.textContent = "कृपया अपना विवरण लिखें।";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "भेजा जा रहा है...";
+
+      try {
+        var res = await fetch(GAS_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            action: "submit_support",
+            idToken: idToken,
+            requestType: reqType,
+            details: details
+          })
+        });
+        var data = await res.json();
+        btn.disabled = false;
+        btn.textContent = "अनुरोध भेजें (Submit)";
+
+        if (data.ok) {
+          statusEl.style.color = "#16a34a";
+          statusEl.textContent = "✓ आपका अनुरोध सफलतापूर्वक दर्ज हो गया है!";
+          setTimeout(closeSupportModal, 1400);
+        } else {
+          statusEl.style.color = "#dc2626";
+          statusEl.textContent = data.error || "त्रुटि हुई।";
+        }
+      } catch (e) {
+        btn.disabled = false;
+        btn.textContent = "अनुरोध भेजें (Submit)";
+        statusEl.style.color = "#dc2626";
+        statusEl.textContent = "नेटवर्क त्रुटि: " + e.message;
       }
     }
 
@@ -1058,20 +1193,11 @@
       document.getElementById("activeModelTitle").textContent = model.name;
       renderModelList();
 
-      // Filter boxes belonging to this model (or show default 1 box)
-      var allBoxes = userSession.messageBoxes || [];
-      messageBoxes = allBoxes.filter(function (b) { return b.modelId === model.id; });
-      if (messageBoxes.length === 0) {
-        messageBoxes = [{
-          boxId: "B_" + Date.now(),
-          modelId: model.id,
-          label: "ब्रॉडकास्ट 1 (मुख्य संदेश)",
-          mode: model.autoAiCaptions ? "AI_RULE" : "FIXED",
-          text: "सुप्रभात! ☀️ आज का दिन आपके और आपके परिवार के लिए सुख, शांति और उत्तम स्वास्थ्य लेकर आए। — " + userSession.user.brandName,
-          aiRule: "Warm respectful Hindi morning wish with 2-3 balanced emojis"
-        }];
-      }
-      renderMessageBoxes();
+      var msgKey = "mysrijan_inbox_" + userSession.user.email + "_" + model.id;
+      var savedMsg = localStorage.getItem(msgKey);
+      var ta = document.getElementById("messageInbox");
+      ta.value = savedMsg !== null ? savedMsg : model.defaultMessage;
+      autoGrow(ta);
 
       var posterKey = "mysrijan_img_" + userSession.user.email + "_" + model.id;
       currentBgDataUrl = await getPoster24h(posterKey);
@@ -1079,215 +1205,22 @@
       setNote(currentBgDataUrl ? "24-घंटे की सेव इमेज लोड हुई" : "डिफ़ॉल्ट दृश्य तैयार है");
     }
 
-    /* ================= MULTI-BOX BROADCAST SYSTEM ================= */
-    function renderMessageBoxes() {
-      var container = document.getElementById("msgBoxesStack");
-      container.innerHTML = "";
-
-      var maxAllowed = (userSession && userSession.user && userSession.user.maxMsgBoxes) || 5;
-      var addBtn = document.getElementById("addBoxBtn");
-      addBtn.style.display = messageBoxes.length >= maxAllowed ? "none" : "inline-block";
-
-      messageBoxes.forEach(function (box, idx) {
-        var card = document.createElement("div");
-        card.className = "msg-box-card";
-
-        var isAI = box.mode === "AI_RULE";
-
-        var topBar = document.createElement("div");
-        topBar.className = "box-top-bar";
-
-        var labelInput = document.createElement("input");
-        labelInput.type = "text";
-        labelInput.className = "box-label-input";
-        labelInput.value = box.label;
-        labelInput.placeholder = "ब्रॉडकास्ट का नाम...";
-        labelInput.oninput = function () {
-          box.label = labelInput.value;
-          scheduleBoxSync(box);
-        };
-
-        var tools = document.createElement("div");
-        tools.className = "box-tools";
-
-        var modeBtn = document.createElement("button");
-        modeBtn.type = "button";
-        modeBtn.className = "mode-pill" + (isAI ? " ai" : "");
-        modeBtn.textContent = isAI ? "✨ AI Mode" : "📌 Fixed";
-        modeBtn.onclick = function () {
-          box.mode = isAI ? "FIXED" : "AI_RULE";
-          renderMessageBoxes();
-          scheduleBoxSync(box);
-        };
-        tools.appendChild(modeBtn);
-
-        if (isAI) {
-          var regenBtn = document.createElement("button");
-          regenBtn.type = "button";
-          regenBtn.className = "ai-refresh-mini";
-          regenBtn.textContent = "↻ नया टेक्स्ट";
-          regenBtn.onclick = function () { regenerateSingleBoxAI(box); };
-          tools.appendChild(regenBtn);
-        }
-
-        if (messageBoxes.length > 1) {
-          var delBtn = document.createElement("button");
-          delBtn.type = "button";
-          delBtn.className = "del-box-btn";
-          delBtn.textContent = "✕";
-          delBtn.onclick = function () { deleteMessageBox(box.boxId); };
-          tools.appendChild(delBtn);
-        }
-
-        topBar.appendChild(labelInput);
-        topBar.appendChild(tools);
-        card.appendChild(topBar);
-
-        if (isAI) {
-          var ruleBar = document.createElement("div");
-          ruleBar.className = "ai-rule-bar";
-          var ruleInput = document.createElement("input");
-          ruleInput.type = "text";
-          ruleInput.className = "ai-rule-input";
-          ruleInput.value = box.aiRule || "";
-          ruleInput.placeholder = "AI नियम लिखें (जैसे: परिवार के लिए भावनात्मक सुप्रभात संदेश)...";
-          ruleInput.oninput = function () {
-            box.aiRule = ruleInput.value;
-            scheduleBoxSync(box);
-          };
-          ruleBar.appendChild(ruleInput);
-          card.appendChild(ruleBar);
-        }
-
-        var ta = document.createElement("textarea");
-        ta.className = "box-textarea";
-        ta.rows = 2;
-        ta.value = box.text || "";
-        ta.placeholder = "यहाँ संदेश लिखें...";
-        ta.oninput = function () {
-          box.text = ta.value;
-          autoGrow(ta);
-          if (idx === 0) renderCanvas();
-          scheduleBoxSync(box);
-        };
-        card.appendChild(ta);
-
-        var footer = document.createElement("div");
-        footer.className = "box-footer-row";
-
-        var syncStatus = document.createElement("span");
-        syncStatus.className = "sync-hint";
-        syncStatus.id = "sync_" + box.boxId;
-        syncStatus.textContent = isAI ? "AI नियम सक्रिय" : "स्थायी संदेश सेव";
-
-        var waBtn = document.createElement("button");
-        waBtn.type = "button";
-        waBtn.className = "wa-send-btn";
-        waBtn.innerHTML = "📲 WhatsApp पर भेजें";
-        waBtn.onclick = function () { shareBoxWhatsApp(box); };
-
-        footer.appendChild(syncStatus);
-        footer.appendChild(waBtn);
-        card.appendChild(footer);
-
-        container.appendChild(card);
-        setTimeout(function () { autoGrow(ta); }, 0);
-      });
-    }
-
     function autoGrow(el) {
       el.style.height = "auto";
       el.style.height = el.scrollHeight + "px";
     }
 
-    function addNewMessageBox() {
-      var maxAllowed = (userSession && userSession.user && userSession.user.maxMsgBoxes) || 5;
-      if (messageBoxes.length >= maxAllowed) {
-        setNote("⚠️ अधिकतम " + maxAllowed + " मैसेज बॉक्स जोड़े जा सकते हैं।");
-        return;
+    function handleInboxInput(el) {
+      autoGrow(el);
+      if (userSession && activeModel) {
+        var msgKey = "mysrijan_inbox_" + userSession.user.email + "_" + activeModel.id;
+        localStorage.setItem(msgKey, el.value);
       }
-      var nextNum = messageBoxes.length + 1;
-      var newBox = {
-        boxId: "B_" + Date.now(),
-        modelId: activeModel.id,
-        label: "ब्रॉडकास्ट " + nextNum,
-        mode: "FIXED",
-        text: "सुप्रभात! ☀️ आपका दिन शुभ एवं मंगलमय हो। — " + userSession.user.brandName,
-        aiRule: "Short warm morning wish in Hindi with balanced emojis"
-      };
-      messageBoxes.push(newBox);
-      if (!userSession.messageBoxes) userSession.messageBoxes = [];
-      userSession.messageBoxes.push(newBox);
-      renderMessageBoxes();
-      scheduleBoxSync(newBox);
-      setNote("✓ नया मैसेज बॉक्स जुड़ गया");
-    }
-
-    async function deleteMessageBox(boxId) {
-      messageBoxes = messageBoxes.filter(function (b) { return b.boxId !== boxId; });
-      if (userSession.messageBoxes) {
-        userSession.messageBoxes = userSession.messageBoxes.filter(function (b) { return b.boxId !== boxId; });
-      }
-      renderMessageBoxes();
       renderCanvas();
-      setNote("मैसेज बॉक्स हटा दिया गया");
-
-      try {
-        await fetch(GAS_API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({ action: "delete_box", idToken: idToken, boxId: boxId })
-        });
-      } catch (e) {}
-    }
-
-    function scheduleBoxSync(box) {
-      var hint = document.getElementById("sync_" + box.boxId);
-      if (hint) hint.textContent = "सेव हो रहा है...";
-      clearTimeout(boxSaveTimers[box.boxId]);
-      boxSaveTimers[box.boxId] = setTimeout(async function () {
-        try {
-          await fetch(GAS_API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify({
-              action: "save_box",
-              idToken: idToken,
-              box: box
-            })
-          });
-          if (hint) hint.textContent = "✓ क्लाउड में सेव";
-        } catch (e) {
-          if (hint) hint.textContent = "लोकल सेव";
-        }
-      }, 900);
-    }
-
-    async function regenerateSingleBoxAI(box) {
-      var hint = document.getElementById("sync_" + box.boxId);
-      if (hint) hint.textContent = "✨ AI लिख रहा है...";
-      try {
-        var res = await fetch(GAS_API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({
-            action: "generate_caption",
-            idToken: idToken,
-            aiRule: box.aiRule,
-            brandName: userSession.user.brandName,
-            modelName: activeModel.name
-          })
-        });
-        var data = await res.json();
-        if (data.ok && data.caption) {
-          box.text = data.caption;
-          renderMessageBoxes();
-          renderCanvas();
-          scheduleBoxSync(box);
-        }
-      } catch (e) {
-        if (hint) hint.textContent = "त्रुटि हुई";
-      }
+      var badge = document.getElementById("savedBadge");
+      badge.classList.add("visible");
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function () { badge.classList.remove("visible"); }, 1400);
     }
 
     function switchDay(offset) {
@@ -1310,7 +1243,7 @@
       };
     }
 
-    async function generateNewAIImage() {
+    async function generateNewImageAndText() {
       if (!userSession || !activeModel) return;
       if (userSession.user.usedToday >= userSession.user.dailyLimit) {
         setNote("⚠️ आज की क्रेडिट सीमा (" + userSession.user.dailyLimit + "/" + userSession.user.dailyLimit + ") पूरी हो गई है।");
@@ -1318,7 +1251,7 @@
       }
 
       var dateInfo = getTargetDate(dayOffset);
-      var primaryQuote = (messageBoxes[0] && messageBoxes[0].text) || "";
+      var currentQuote = document.getElementById("messageInbox").value.trim() || activeModel.defaultMessage;
       var loader = document.getElementById("loader");
       loader.classList.remove("hidden");
 
@@ -1329,12 +1262,12 @@
           body: JSON.stringify({
             action: "generate",
             idToken: idToken,
-            modelId: activeModel.id,
             basePrompt: activeModel.prompt,
+            captionRule: activeModel.captionRule,
             modelName: activeModel.name,
             dateStr: dateInfo.formattedDate,
             dayStr: dateInfo.dayName,
-            quote: primaryQuote
+            quote: currentQuote
           })
         });
         var data = await res.json();
@@ -1350,20 +1283,20 @@
         userSession.user.remainingCredits = data.remainingCredits;
         updateUsageMeter(data.usedToday, data.dailyLimit);
 
-        // If any boxes are in AI_RULE mode and backend returned updated captions, apply them
-        if (data.updatedBoxes && data.updatedBoxes.length > 0) {
-          data.updatedBoxes.forEach(function (ub) {
-            var target = messageBoxes.find(function (b) { return b.boxId === ub.boxId; });
-            if (target) target.text = ub.text;
-          });
-          renderMessageBoxes();
+        // Update Inbox with newly generated AI text + emojis
+        if (data.aiCaption) {
+          var ta = document.getElementById("messageInbox");
+          ta.value = data.aiCaption;
+          autoGrow(ta);
+          var msgKey = "mysrijan_inbox_" + userSession.user.email + "_" + activeModel.id;
+          localStorage.setItem(msgKey, data.aiCaption);
         }
 
         var posterKey = "mysrijan_img_" + userSession.user.email + "_" + activeModel.id;
         await savePoster24h(posterKey, currentBgDataUrl);
 
         renderCanvas();
-        setNote("✨ नई इमेज तैयार और अगले 24 घंटे के लिए सेव हो गई");
+        setNote("✨ नई इमेज और इमोजी संदेश तैयार हो गया!");
       } catch (err) {
         loader.classList.add("hidden");
         setNote("⚠️ नेटवर्क त्रुटि: " + err.message);
@@ -1434,7 +1367,7 @@
       var W = canvas.width;
       var H = canvas.height;
       var dateInfo = getTargetDate(dayOffset);
-      var quoteText = (messageBoxes[0] && messageBoxes[0].text.trim()) || "सुप्रभात! आपका दिन शुभ हो।";
+      var quoteText = document.getElementById("messageInbox").value.trim() || activeModel.defaultMessage;
 
       var drawOverlays = function () {
         var topGrad = ctx.createLinearGradient(0, 0, 0, 320);
@@ -1525,10 +1458,10 @@
       setNote("⬇️ HD पोस्टर सेव हो गया");
     }
 
-    function shareBoxWhatsApp(box) {
+    function shareWhatsApp() {
       var canvas = document.getElementById("posterCanvas");
       var dateInfo = getTargetDate(dayOffset);
-      var customMsg = (box.text || "").trim();
+      var customMsg = document.getElementById("messageInbox").value.trim();
 
       if (navigator.canShare && navigator.share) {
         canvas.toBlob(function (blob) {
