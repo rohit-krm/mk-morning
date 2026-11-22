@@ -51,7 +51,7 @@
 
     .hidden { display: none !important; }
 
-    /* ================= LOGIN SCREEN & SMOOTH VERIFICATION LOADER ================= */
+    /* ================= LOGIN SCREEN ================= */
     .login-wrapper {
       width: 100%;
       min-height: 100dvh;
@@ -78,17 +78,15 @@
       animation: fadeUp 0.35s ease;
     }
 
-    .brand-mark {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: var(--primary);
+    .brand-icon-box {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #ffffff;
       display: grid;
       place-items: center;
-      font-size: 24px;
-      font-weight: 800;
-      box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.25);
+      box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.28);
     }
 
     .login-card h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
@@ -99,56 +97,46 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      padding: 12px 0 4px;
-      animation: fadeUp 0.25s ease;
+      padding: 10px 0 4px;
     }
 
     .login-spinner {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border: 3px solid var(--surface-muted);
       border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 0.75s linear infinite;
     }
 
-    .verifying-text {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
+    .verifying-text { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+    .login-error { font-size: 12.5px; font-weight: 600; color: #dc2626; line-height: 1.45; }
 
-    .login-error {
-      font-size: 12.5px;
-      font-weight: 600;
-      color: #dc2626;
-      line-height: 1.45;
-    }
-
-    /* ================= APPROVAL / STATUS MODAL POPUP ================= */
+    /* ================= MODALS & POPUPS ================= */
     .modal-backdrop {
       position: fixed;
       inset: 0;
       background: rgba(15, 23, 42, 0.55);
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
-      z-index: 90;
+      z-index: 95;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
       animation: fadeIn 0.2s ease;
     }
-
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     .modal-card {
       width: 100%;
-      max-width: 380px;
+      max-width: 400px;
+      max-height: 86dvh;
+      overflow-y: auto;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 22px;
-      padding: 26px 22px;
+      padding: 24px 20px;
       box-shadow: var(--shadow-lg);
       display: flex;
       flex-direction: column;
@@ -156,7 +144,7 @@
       animation: popIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .status-icon-circle {
+    .alert-icon-circle {
       width: 52px;
       height: 52px;
       border-radius: 16px;
@@ -167,10 +155,34 @@
       font-size: 24px;
       margin: 0 auto;
     }
-    .status-icon-circle.banned { background: #fef2f2; color: #dc2626; }
+    .alert-icon-circle.danger { background: #fef2f2; color: #dc2626; }
 
     .modal-title { font-size: 18px; font-weight: 800; text-align: center; color: var(--text-main); }
     .modal-desc { font-size: 13.5px; color: var(--text-secondary); text-align: center; line-height: 1.55; }
+
+    /* Terms Policy Cards inside Modal */
+    .policy-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .policy-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .policy-badge.not-expect { background: #fef2f2; color: #dc2626; }
+    .policy-heading { font-size: 14px; font-weight: 800; color: var(--text-main); }
+    .policy-body { font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; }
 
     /* ================= STICKY APP HEADER ================= */
     .app-header {
@@ -178,7 +190,7 @@
       top: 0;
       z-index: 40;
       width: 100%;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
@@ -195,7 +207,7 @@
       justify-content: space-between;
     }
 
-    .header-left { display: flex; align-items: center; gap: 12px; }
+    .header-left { display: flex; align-items: center; gap: 11px; }
 
     .icon-btn {
       width: 38px;
@@ -232,7 +244,7 @@
     }
     .avatar-trigger img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ================= PROFILE POPOVER (SHOWS GOOGLE ACCOUNT NAME & EMAIL) ================= */
+    /* ================= RIGHT PROFILE DROPDOWN (WITH TERMS & USAGE) ================= */
     .menu-backdrop {
       position: fixed;
       inset: 0;
@@ -253,7 +265,7 @@
       z-index: 50;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 11px;
       animation: popIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -292,6 +304,24 @@
     .usage-track { width: 100%; height: 7px; background: #cbd5e1; border-radius: 99px; overflow: hidden; }
     .usage-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 99px; transition: width 0.35s ease; }
 
+    .drawer-menu-btn {
+      width: 100%;
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .drawer-menu-btn:hover { background: var(--surface-muted); }
+
     .logout-btn {
       width: 100%;
       height: 38px;
@@ -305,7 +335,7 @@
       font-family: inherit;
     }
 
-    /* ================= LEFT MODEL DRAWER + BOTTOM REQUEST/SUPPORT BUTTON ================= */
+    /* ================= LEFT MODEL DRAWER ================= */
     .drawer-overlay {
       position: fixed;
       inset: 0;
@@ -319,7 +349,7 @@
       top: 0;
       left: 0;
       bottom: 0;
-      width: 284px;
+      width: 288px;
       max-width: 84vw;
       background: var(--surface);
       z-index: 70;
@@ -333,7 +363,6 @@
     .sidebar-drawer.closed { transform: translateX(-105%); }
 
     .drawer-top { display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
-
     .drawer-header {
       display: flex;
       align-items: center;
@@ -344,23 +373,43 @@
     .drawer-title { font-size: 15px; font-weight: 800; }
     .model-list { display: flex; flex-direction: column; gap: 8px; }
 
-    .model-card {
-      width: 100%;
-      text-align: left;
-      padding: 12px 14px;
+    .model-row-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 11px 12px;
       border-radius: 12px;
       border: 1px solid var(--border);
       background: var(--surface);
       cursor: pointer;
-      font-family: inherit;
+      transition: all 0.15s ease;
     }
-    .model-card.active { border-color: var(--accent); background: var(--accent-soft); }
-    .model-tag { display: inline-block; font-size: 10.5px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
-    .model-title { display: block; font-size: 14px; font-weight: 700; color: var(--text-main); }
+    .model-row-item.active { border-color: var(--accent); background: var(--accent-soft); }
+    .model-row-info { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+    .model-tag { font-size: 10px; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+    .model-title { font-size: 13.5px; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .model-gear-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .model-gear-btn:hover { color: var(--accent); border-color: var(--accent); }
 
     .drawer-footer {
       padding-top: 12px;
       border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     .support-trigger-btn {
       width: 100%;
@@ -377,11 +426,9 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: background 0.15s ease;
     }
-    .support-trigger-btn:hover { background: #e2e8f0; }
 
-    /* ================= MAIN WORKSPACE ================= */
+    /* ================= MAIN WORKSPACE (SUPER CLEAN TODAY VIEW) ================= */
     .workspace {
       width: 100%;
       max-width: 460px;
@@ -397,120 +444,12 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Compact Brand Identity Strip */
-    .brand-strip {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 10px 14px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .brand-info { display: flex; flex-direction: column; min-width: 0; }
-    .brand-name-display {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: var(--text-main);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .brand-role-display {
-      font-size: 11.5px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .edit-pill-btn {
-      border: 1px solid var(--border);
-      background: var(--surface-muted);
-      color: var(--text-main);
-      border-radius: 9px;
-      padding: 6px 11px;
-      font-size: 11.5px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      flex-shrink: 0;
-    }
-
-    /* Inline Brand Editor */
-    .brand-editor {
-      background: var(--surface);
-      border: 1px solid var(--accent);
-      border-radius: 16px;
-      padding: 14px;
-      box-shadow: var(--shadow-md);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      animation: fadeUp 0.2s ease;
-    }
-    .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .field-group { display: flex; flex-direction: column; gap: 4px; }
-    .field-group label { font-size: 11.5px; font-weight: 700; color: var(--text-secondary); }
-    .clean-input, .clean-select, .clean-textarea-box {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 9px 11px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-main);
-      background: var(--bg);
-      font-family: inherit;
-      outline: none;
-    }
-    .clean-input:focus, .clean-select:focus, .clean-textarea-box:focus {
-      border-color: var(--accent);
-      background: #ffffff;
-    }
-
-    .primary-dark-btn {
-      height: 40px;
-      border-radius: 10px;
-      border: none;
-      background: var(--primary);
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    /* Day Switcher */
-    .day-switcher {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: var(--surface-muted);
-      padding: 4px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-    .day-tab {
-      border: none;
-      background: transparent;
-      padding: 8px 12px;
-      border-radius: 9px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-secondary);
-      cursor: pointer;
-      font-family: inherit;
-    }
-    .day-tab.active { background: var(--surface); color: var(--text-main); box-shadow: var(--shadow-sm); }
-
-    /* Poster Canvas */
+    /* Poster Canvas Card + Top-Right Floating Download Button */
     .canvas-card {
       position: relative;
       width: 100%;
       aspect-ratio: 4 / 5;
-      border-radius: 20px;
+      border-radius: 22px;
       overflow: hidden;
       background: #0f172a;
       box-shadow: var(--shadow-md);
@@ -518,10 +457,30 @@
     }
     canvas { width: 100%; height: 100%; display: block; }
 
+    .floating-dl-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      z-index: 8;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .floating-dl-btn:active { transform: scale(0.92); background: rgba(15, 23, 42, 0.85); }
+
     .loader-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.86);
       backdrop-filter: blur(8px);
       display: flex;
       flex-direction: column;
@@ -533,9 +492,9 @@
       z-index: 10;
     }
     .spinner {
-      width: 38px;
-      height: 38px;
-      border: 3px solid rgba(255, 255, 255, 0.2);
+      width: 40px;
+      height: 40px;
+      border: 3.5px solid rgba(255, 255, 255, 0.2);
       border-top-color: #fb923c;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
@@ -543,172 +502,414 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* Generate AI Image Button */
+    /* Primary Generate + Single Customize Button Row */
+    .control-bar {
+      display: grid;
+      grid-template-columns: 1.75fr 1fr;
+      gap: 10px;
+    }
+
     .generate-btn {
-      width: 100%;
+      position: relative;
+      overflow: hidden;
       height: 48px;
       border-radius: 14px;
       border: none;
-      background: var(--primary);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #ffffff;
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
+      box-shadow: 0 8px 18px -6px rgba(15, 23, 42, 0.35);
+      transition: transform 0.12s ease;
+    }
+    .generate-btn::after {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+      animation: shimmerSweep 3.2s infinite;
+    }
+    @keyframes shimmerSweep {
+      0% { left: -100%; }
+      45%, 100% { left: 160%; }
+    }
+    .generate-btn:active { transform: scale(0.97); }
+
+    .customize-btn {
+      height: 48px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-main);
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
       box-shadow: var(--shadow-sm);
     }
-    .generate-btn:active { transform: scale(0.985); }
+    .customize-btn:active { transform: scale(0.97); background: var(--surface-muted); }
 
-    /* Single Effective Message Inbox (No Scrollbar) */
-    .inbox-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 16px;
-      box-shadow: var(--shadow-sm);
+    /* WhatsApp Preview Message Card */
+    .wa-preview-card {
+      background: #efeae2;
+      border: 1px solid #d5cfc4;
+      border-radius: 18px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
     }
-    .inbox-header {
+    .wa-preview-label {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      color: var(--text-secondary);
+      color: #54656f;
+      padding: 0 2px;
     }
-    .saved-badge {
-      color: var(--whatsapp);
-      opacity: 0;
-      transition: opacity 0.2s ease;
+    .wa-bubble {
+      background: #d9fdd3;
+      border-radius: 14px 14px 4px 14px;
+      padding: 11px 13px;
+      box-shadow: 0 1px 2px rgba(11, 20, 26, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
-    .saved-badge.visible { opacity: 1; }
-
-    .inbox-textarea {
+    .wa-textarea {
       width: 100%;
       border: none;
       background: transparent;
-      font-size: 14px;
+      font-size: 13.8px;
       font-weight: 500;
-      line-height: 1.55;
-      color: var(--text-main);
+      line-height: 1.5;
+      color: #111b21;
       font-family: inherit;
       resize: none;
       overflow: hidden;
       outline: none;
       min-height: 44px;
     }
+    .wa-time-stamp {
+      align-self: flex-end;
+      font-size: 10.5px;
+      color: #667781;
+      font-weight: 600;
+    }
 
-    /* Bottom Action Buttons (Save HD + Send WhatsApp) */
-    .action-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.65fr;
-      gap: 10px;
-    }
-    .btn-action {
-      height: 50px;
-      border-radius: 14px;
-      font-size: 14.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: inherit;
-      transition: transform 0.1s ease;
-    }
-    .btn-action:active { transform: scale(0.97); }
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text-main);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-    .btn-whatsapp {
+    /* Single Primary Send on WhatsApp Button */
+    .send-wa-btn {
+      width: 100%;
+      height: 52px;
+      border-radius: 16px;
+      border: none;
       background: var(--whatsapp);
       color: #ffffff;
-      border: none;
-      box-shadow: 0 8px 18px -4px rgba(22, 163, 74, 0.35);
+      font-size: 15.5px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      box-shadow: 0 10px 22px -6px rgba(22, 163, 74, 0.42);
+      transition: transform 0.12s ease;
+    }
+    .send-wa-btn:active { transform: scale(0.98); }
+
+    /* ================= LAST 7 DAYS LOCAL HISTORY STRIP ================= */
+    .history-section {
+      margin-top: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 13px 14px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .history-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .history-sub { font-size: 11px; font-weight: 600; color: var(--text-muted); }
+
+    .history-grid {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .history-thumb {
+      width: 64px;
+      height: 80px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      flex-shrink: 0;
+      cursor: pointer;
+      position: relative;
+      background: var(--surface-muted);
+    }
+    .history-thumb.active { border-color: var(--accent); }
+    .history-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .history-date-tag {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(15, 23, 42, 0.72);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      text-align: center;
+      padding: 2px 0;
     }
 
-    .status-note {
-      text-align: center;
-      font-size: 12px;
+    /* ================= CUSTOMIZE & MODEL EDITOR MODAL CONTROLS ================= */
+    .section-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .block-label { font-size: 12px; font-weight: 800; color: var(--text-main); }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
       font-weight: 600;
+      color: var(--text-main);
+    }
+    .check-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .mode-switch-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--surface);
+      padding: 3px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .mode-opt {
+      border: none;
+      background: transparent;
+      padding: 7px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
       color: var(--text-secondary);
-      min-height: 18px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .mode-opt.active { background: var(--primary); color: #ffffff; }
+
+    .field-group { display: flex; flex-direction: column; gap: 4px; }
+    .field-group label { font-size: 11.5px; font-weight: 700; color: var(--text-secondary); }
+    .clean-input, .clean-select, .clean-textarea-box {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px 11px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      background: var(--surface);
+      font-family: inherit;
+      outline: none;
+    }
+    .clean-input:focus, .clean-select:focus, .clean-textarea-box:focus { border-color: var(--accent); }
+
+    .primary-dark-btn {
+      height: 42px;
+      border-radius: 11px;
+      border: none;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* Dedicated Model Customization Page View */
+    .subpage-shell {
+      width: 100%;
+      max-width: 460px;
+      padding: 16px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: fadeUp 0.25s ease;
+    }
+    .subpage-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. Google Sign-In Screen (With Non-Freezing Verification Animation) -->
+  <!-- 1. Google Sign-In Screen -->
   <div class="login-wrapper" id="loginScreen">
     <div class="login-card">
-      <div class="brand-mark">सृ</div>
+      <div class="brand-icon-box" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3L12 3z"/>
+        </svg>
+      </div>
       <h1>MySrijan</h1>
       <p>अपने व्यक्तिगत AI क्रिएटिव स्टूडियो में प्रवेश करने के लिए अपने Gmail खाते से लॉगिन करें।</p>
 
       <div id="googleBtnContainer" style="margin-top: 4px;"></div>
 
-      <!-- Smooth Animated Loader During Account Verification -->
       <div class="verifying-box hidden" id="verifyingLoader">
         <div class="login-spinner"></div>
-        <span class="verifying-text" id="verifyingMsg">खाता सत्यापित हो रहा है, कृपया प्रतीक्षा करें...</span>
+        <span class="verifying-text">खाता सत्यापित हो रहा है, कृपया प्रतीक्षा करें...</span>
       </div>
 
       <div class="login-error" id="loginError"></div>
     </div>
   </div>
 
-  <!-- 2. Pending / Banned Approval Popup Modal -->
-  <div class="modal-backdrop hidden" id="approvalModal">
+  <!-- 2. Center Popup Modal (No Credits / Pending / Banned Alerts) -->
+  <div class="modal-backdrop hidden" id="centerAlertModal">
     <div class="modal-card">
-      <div class="status-icon-circle" id="approvalIcon">⏳</div>
-      <div class="modal-title" id="approvalTitle">एडमिन अप्रूवल की प्रतीक्षा है</div>
-      <div class="modal-desc" id="approvalDesc">
-        आपका खाता सफलतापूर्वक पंजीकृत हो गया है। कृपया एडमिन के अप्रूवल का इंतज़ार करें—अप्रूव होते ही आपको पूरा एक्सेस मिल जाएगा।
-      </div>
-      <button type="button" class="primary-dark-btn" onclick="handleLogout()">दूसरे खाते से लॉगिन करें / बंद करें</button>
+      <div class="alert-icon-circle" id="alertIcon">⚡</div>
+      <div class="modal-title" id="alertTitle">सूचना</div>
+      <div class="modal-desc" id="alertDesc">संदेश</div>
+      <button type="button" class="primary-dark-btn" id="alertActionBtn" onclick="closeCenterAlert()">ठीक है (OK)</button>
     </div>
   </div>
 
-  <!-- 3. User Model Request & Support Modal -->
+  <!-- 3. Terms & Expected Usage Policy Modal (Loaded from Google Sheet) -->
+  <div class="modal-backdrop hidden" id="termsModal">
+    <div class="modal-card">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <span style="font-size:16px; font-weight:800;">📜 नियम एवं अपेक्षाएं (Terms)</span>
+        <button type="button" class="icon-btn" style="width:30px;height:30px;" onclick="closeTermsModal()">✕</button>
+      </div>
+      <div id="termsListContainer" style="display:flex; flex-direction:column; gap:10px;"></div>
+      <button type="button" class="primary-dark-btn" onclick="closeTermsModal()">समझ गया</button>
+    </div>
+  </div>
+
+  <!-- 4. Single Unified "Customize" Modal (Branding + AI/Manual Mode + Poster Checkboxes) -->
+  <div class="modal-backdrop hidden" id="customizeModal">
+    <div class="modal-card">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <span style="font-size:16px; font-weight:800;">⚙️ Customize Studio</span>
+        <button type="button" class="icon-btn" style="width:30px;height:30px;" onclick="closeCustomizeModal()">✕</button>
+      </div>
+
+      <!-- Generation Mode: Image (AI Locked) + Text (AI vs Manual Toggle) -->
+      <div class="section-block">
+        <span class="block-label">1. जनरेशन मोड (Generation Mode)</span>
+        <div class="check-row">
+          <span>🖼️ Image Generation (AI)</span>
+          <input type="checkbox" checked disabled />
+        </div>
+        <div class="check-row" style="margin-top: 2px;">
+          <span>✍️ Message Text Mode</span>
+          <div class="mode-switch-group" style="width: 150px;">
+            <button type="button" class="mode-opt active" id="modeAiBtn" onclick="setTextMode('AI')">✨ AI</button>
+            <button type="button" class="mode-opt" id="modeManualBtn" onclick="setTextMode('MANUAL')">✏️ Manual</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Poster Visibility Checkboxes -->
+      <div class="section-block">
+        <span class="block-label">2. पोस्टर पर क्या दिखाना है?</span>
+        <label class="check-row">
+          <span>📅 तारीख और दिन (Date & Day)</span>
+          <input type="checkbox" id="chkShowDate" checked />
+        </label>
+        <label class="check-row">
+          <span>🌤️ लाइव मौसम (Weather)</span>
+          <input type="checkbox" id="chkShowWeather" checked />
+        </label>
+        <label class="check-row">
+          <span>🏷️ नाम और टैगलाइन (Branding)</span>
+          <input type="checkbox" id="chkShowBrand" checked />
+        </label>
+      </div>
+
+      <!-- Direct Branding & District Inputs (Synced to Google Sheet) -->
+      <div class="section-block">
+        <span class="block-label">3. आपकी ब्रांडिंग और जिला</span>
+        <div class="field-group">
+          <label>नाम / ब्रांड (Brand Name)</label>
+          <input type="text" id="custBrandName" class="clean-input" placeholder="आपका नाम या ब्रांड" />
+        </div>
+        <div class="field-group">
+          <label>टैगलाइन / पद (Tagline / Role)</label>
+          <input type="text" id="custTagline" class="clean-input" placeholder="आपका पद या टैगलाइन" />
+        </div>
+        <div class="field-group">
+          <label>जिला / शहर (District / City)</label>
+          <input type="text" id="custDistrict" class="clean-input" placeholder="जैसे: जौनपुर" />
+        </div>
+      </div>
+
+      <button type="button" class="primary-dark-btn" id="saveCustBtn" onclick="saveCustomizeSettings()">✓ सेव और अप्लाई करें</button>
+    </div>
+  </div>
+
+  <!-- 5. Model Request & Support Modal -->
   <div class="modal-backdrop hidden" id="supportModal">
     <div class="modal-card">
       <div style="display:flex; align-items:center; justify-content:space-between;">
-        <span style="font-size:16px; font-weight:800;">✨ नया मॉडल / सहायता अनुरोध</span>
+        <span style="font-size:16px; font-weight:800;">💬 नया मॉडल / सहायता अनुरोध</span>
         <button type="button" class="icon-btn" style="width:30px;height:30px;" onclick="closeSupportModal()">✕</button>
       </div>
-      <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.45;">
-        आपको किस प्रकार का नया पोस्टर मॉडल या सहायता चाहिए, नीचे लिखें। आपकी रिक्वेस्ट सीधे एडमिन तक पहुँच जाएगी।
-      </p>
       <div class="field-group">
-        <label>अनुरोध का प्रकार (Request Type)</label>
+        <label>अनुरोध का प्रकार</label>
         <select id="reqTypeSelect" class="clean-select">
-          <option value="NEW_MODEL">नया कस्टम मॉडल बनवाना है (New Model Request)</option>
-          <option value="CREDIT_INCREASE">दैनिक क्रेडिट सीमा बढ़वानी है (Credit Limit)</option>
+          <option value="NEW_MODEL">नया कस्टम मॉडल बनवाना है (New Model)</option>
+          <option value="CREDIT_INCREASE">दैनिक क्रेडिट सीमा बढ़वानी है (Credits)</option>
           <option value="SUPPORT">तकनीकी सहायता / सुझाव (Support)</option>
         </select>
       </div>
       <div class="field-group">
-        <label>विवरण लिखें (Details)</label>
-        <textarea id="reqDetailsInput" class="clean-textarea-box" rows="3" placeholder="जैसे: मुझे अपनी दुकान/क्लिनिक के लिए दैनिक ऑफर या स्वास्थ्य सुझाव वाला मॉडल चाहिए..."></textarea>
+        <label>विवरण लिखें</label>
+        <textarea id="reqDetailsInput" class="clean-textarea-box" rows="3" placeholder="अपनी आवश्यकता विस्तार से लिखें..."></textarea>
       </div>
       <button type="button" class="primary-dark-btn" id="submitSupportBtn" onclick="submitSupportRequest()">अनुरोध भेजें (Submit)</button>
-      <div id="supportStatusMsg" style="font-size:12px; font-weight:700; text-align:center; color:var(--whatsapp);"></div>
+      <div id="supportStatusMsg" style="font-size:12px; font-weight:700; text-align:center;"></div>
     </div>
   </div>
 
-  <!-- 4. Authenticated Studio Shell -->
+  <!-- 6. Authenticated Studio Shell -->
   <div id="appShell" class="hidden" style="width: 100%;">
-    <!-- Sticky Header -->
+    <!-- Sticky Clean Header -->
     <header class="app-header">
       <div class="header-inner">
         <div class="header-left">
@@ -727,11 +928,11 @@
       </div>
     </header>
 
-    <!-- Profile Dropdown Overlay (Shows Google Account Name & Email) -->
+    <!-- Right Profile Dropdown (Google Account Name, Email, Credit Usage, Terms, Logout) -->
     <div class="menu-backdrop hidden" id="menuBackdrop" onclick="closeProfileMenu()"></div>
     <div class="profile-popover hidden" id="profilePopover">
       <div class="user-meta">
-        <span class="user-meta-name" id="pmGoogleName">Google Account Name</span>
+        <span class="user-meta-name" id="pmGoogleName">Google Name</span>
         <span class="user-meta-email" id="pmGoogleEmail">user@gmail.com</span>
       </div>
       <div class="usage-card">
@@ -743,10 +944,11 @@
           <div class="usage-fill" id="pmUsageFill"></div>
         </div>
       </div>
+      <button type="button" class="drawer-menu-btn" onclick="openTermsModal()">📜 Terms & Policy</button>
       <button type="button" class="logout-btn" onclick="handleLogout()">Log out</button>
     </div>
 
-    <!-- Left Model Drawer + Bottom Request/Support Option -->
+    <!-- Left Model Drawer -->
     <div class="drawer-overlay hidden" id="drawerOverlay" onclick="toggleSidebar(false)"></div>
     <aside class="sidebar-drawer closed" id="sidebarDrawer">
       <div class="drawer-top">
@@ -758,93 +960,126 @@
       </div>
 
       <div class="drawer-footer">
+        <button type="button" class="support-trigger-btn" onclick="openModelCustomPage(activeModel)">
+          <span>🎛️ Customize Your Model</span>
+        </button>
         <button type="button" class="support-trigger-btn" onclick="openSupportModal()">
           <span>💬 नया मॉडल अनुरोध / सहायता</span>
         </button>
       </div>
     </aside>
 
-    <!-- Main Workspace -->
-    <main class="workspace" style="margin: 0 auto;">
-      <!-- Organized Brand & Tagline Strip -->
-      <div class="brand-strip">
-        <div class="brand-info">
-          <span class="brand-name-display" id="dispBrandName">Brand Name</span>
-          <span class="brand-role-display" id="dispBrandRole">Tagline / Role</span>
-        </div>
-        <button type="button" class="edit-pill-btn" onclick="toggleBrandEditor()">✏️ Edit Brand</button>
-      </div>
-
-      <!-- Inline Brand Editor -->
-      <div class="brand-editor hidden" id="brandEditorPanel">
-        <div class="editor-grid">
-          <div class="field-group">
-            <label>नाम / ब्रांड</label>
-            <input type="text" id="inputBrandName" class="clean-input" placeholder="आपका नाम या ब्रांड" oninput="livePreviewBrand()" />
-          </div>
-          <div class="field-group">
-            <label>टैगलाइन / पद</label>
-            <input type="text" id="inputBrandRole" class="clean-input" placeholder="आपका पद या टैगलाइन" oninput="livePreviewBrand()" />
-          </div>
-        </div>
-        <button type="button" class="primary-dark-btn" onclick="saveBrandIdentity()">✓ नाम और टैगलाइन सेव करें</button>
-      </div>
-
-      <!-- Day Switcher -->
-      <div class="day-switcher">
-        <button type="button" class="day-tab active" id="tabToday" onclick="switchDay(0)">आज का पोस्टर</button>
-        <button type="button" class="day-tab" id="tabTomorrow" onclick="switchDay(1)">कल का पोस्टर</button>
-      </div>
-
-      <!-- Poster Frame -->
+    <!-- VIEW A: Super Clean Today Poster Studio -->
+    <main class="workspace" id="mainStudioView" style="margin: 0 auto;">
+      <!-- 4:5 Poster Frame with Top-Right Download Icon -->
       <section class="canvas-card">
         <canvas id="posterCanvas" width="1080" height="1350"></canvas>
+        <button type="button" class="floating-dl-btn" onclick="downloadPoster()" title="Download HD" aria-label="Download HD">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </button>
         <div class="loader-overlay hidden" id="loader">
           <div class="spinner"></div>
-          <div style="font-size: 15px; font-weight: 700;">नई इमेज और संदेश तैयार हो रहे हैं...</div>
-          <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px;">यह अगले 24 घंटे तक सुरक्षित रहेगा</div>
+          <div style="font-size: 15px; font-weight: 700;">नया पोस्टर तैयार हो रहा है...</div>
+          <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px;">कृपया कुछ सेकंड प्रतीक्षा करें</div>
         </div>
       </section>
 
-      <!-- Single Primary Action: Generate New Image + AI Text -->
-      <button type="button" class="generate-btn" onclick="generateNewImageAndText()">
-        <span>✨ नई इमेज और संदेश जनरेट करें</span>
-      </button>
-
-      <!-- Single Clean Effective Message Inbox -->
-      <section class="inbox-card">
-        <div class="inbox-header">
-          <span>साथ भेजने वाला संदेश</span>
-          <span class="saved-badge" id="savedBadge">✓ सेव हो गया</span>
-        </div>
-        <textarea
-          id="messageInbox"
-          class="inbox-textarea"
-          rows="2"
-          placeholder="यहाँ आपका संदेश दिखेगा..."
-          oninput="handleInboxInput(this)"
-        ></textarea>
-      </section>
-
-      <!-- Save HD & Send WhatsApp Buttons -->
-      <div class="action-grid">
-        <button type="button" class="btn-action btn-secondary" onclick="downloadPoster()">⬇️ Save HD</button>
-        <button type="button" class="btn-action btn-whatsapp" onclick="shareWhatsApp()">📲 WhatsApp पर भेजें</button>
+      <!-- Generate New Image + Single Customize Button -->
+      <div class="control-bar">
+        <button type="button" class="generate-btn" onclick="generateNewPoster()">
+          <span>✨ नई इमेज जनरेट करें</span>
+        </button>
+        <button type="button" class="customize-btn" onclick="openCustomizeModal()">
+          <span>⚙️ Customize</span>
+        </button>
       </div>
 
-      <div class="status-note" id="statusNote"></div>
+      <!-- WhatsApp Preview Message Box -->
+      <section class="wa-preview-card">
+        <div class="wa-preview-label">
+          <span>WhatsApp Message Preview</span>
+          <span id="textModeIndicator">✨ AI Text</span>
+        </div>
+        <div class="wa-bubble">
+          <textarea
+            id="messageInbox"
+            class="wa-textarea"
+            rows="2"
+            placeholder="यहाँ आपका संदेश दिखेगा..."
+            oninput="handleInboxInput(this)"
+          ></textarea>
+          <span class="wa-time-stamp" id="waPreviewTime">10:30 AM ✓✓</span>
+        </div>
+      </section>
+
+      <!-- Single Primary Action: Send on WhatsApp -->
+      <button type="button" class="send-wa-btn" onclick="shareWhatsApp()">
+        <span>📲 Send on WhatsApp</span>
+      </button>
+
+      <!-- Last 7 Days Local History Strip -->
+      <section class="history-section" id="historySection">
+        <div class="history-header">
+          <span>🕒 Last 7 Days History</span>
+          <span class="history-sub" id="historyCountLabel">0 saved</span>
+        </div>
+        <div class="history-grid" id="historyGrid"></div>
+      </section>
     </main>
+
+    <!-- VIEW B: Dedicated "Customize Your Model" Page -->
+    <section class="subpage-shell hidden" id="modelCustomizeView" style="margin: 0 auto;">
+      <div class="subpage-top">
+        <button type="button" class="icon-btn" onclick="closeModelCustomPage()">←</button>
+        <div>
+          <h2 style="font-size: 18px; font-weight: 800;">Customize Your Model</h2>
+          <p style="font-size: 12px; color: var(--text-secondary);">अपने मॉडल का शीर्षक, प्रॉम्प्ट और संदेश नियंत्रित करें</p>
+        </div>
+      </div>
+
+      <div class="section-block" style="background: var(--surface);">
+        <div class="field-group">
+          <label>मॉडल का नाम (Model Name)</label>
+          <input type="text" id="modEditName" class="clean-input" />
+        </div>
+        <div class="field-group">
+          <label>पोस्टर मुख्य शीर्षक (Poster Header Title)</label>
+          <input type="text" id="modEditHeader" class="clean-input" placeholder="जैसे: सुप्रभात / शुभ विचार" />
+        </div>
+        <div class="field-group">
+          <label>AI इमेज प्रॉम्प्ट (Visual Scene Prompt)</label>
+          <textarea id="modEditPrompt" class="clean-textarea-box" rows="3" placeholder="इमेज का दृश्य कैसा दिखे..."></textarea>
+        </div>
+        <div class="field-group">
+          <label>AI कैप्शन निर्देश (Caption AI Rule)</label>
+          <input type="text" id="modEditCaptionRule" class="clean-input" placeholder="संदेश किस शैली में लिखा जाए..." />
+        </div>
+        <div class="field-group">
+          <label>डिफ़ॉल्ट / मैनुअल संदेश (Default Message)</label>
+          <textarea id="modEditDefaultMsg" class="clean-textarea-box" rows="2"></textarea>
+        </div>
+        <button type="button" class="primary-dark-btn" id="saveModelBtn" onclick="saveModelCustomization()">✓ मॉडल सेटिंग्स सेव करें (Sync to Sheet)</button>
+      </div>
+    </section>
   </div>
 
   <script>
     var GAS_API_URL = "https://script.google.com/macros/s/AKfycbx6zoZnGG48_mdAcC-AEw3RFaEZYApaXxwChFd6t1_vYJbSYLFvrh5MbTZliPvRF_5Y/exec";
 
     var idToken = localStorage.getItem("mysrijan_id_token") || "";
-    var userSession = null;
+    var cachedSession = null;
     var activeModel = null;
-    var dayOffset = 0;
     var currentBgDataUrl = null;
     var saveTimer = null;
+
+    var userPrefs = {
+      showDate: true,
+      showWeather: true,
+      showBrand: true,
+      textMode: "AI"
+    };
 
     var DAYS_EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -859,7 +1094,7 @@
         background_color: "#f8fafc",
         theme_color: "#0f172a",
         icons: [{
-          src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230f172a'/><text x='50' y='65' font-size='48' fill='%23ffffff' font-family='sans-serif' font-weight='bold' text-anchor='middle'>सृ</text></svg>",
+          src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230f172a'/><path d='M50 22l6 18 18 6-18 6-6 18-6-18-18-6 18-6z' fill='%23ffffff'/></svg>",
           sizes: "512x512",
           type: "image/svg+xml"
         }]
@@ -870,49 +1105,110 @@
       document.head.appendChild(link);
     })();
 
-    // 2. IndexedDB for 24-Hour Image Persistence
-    function openPosterDB() {
+    // 2. IndexedDB for Active Poster Persistence (Until Replaced) + 7-Day Local History
+    function openStudioDB() {
       return new Promise(function (resolve, reject) {
-        var req = indexedDB.open("MySrijanDB", 1);
+        var req = indexedDB.open("MySrijanStudioDB_v2", 1);
         req.onupgradeneeded = function (e) {
-          e.target.result.createObjectStore("posters", { keyPath: "key" });
+          var db = e.target.result;
+          if (!db.objectStoreNames.contains("active_posters")) {
+            db.createObjectStore("active_posters", { keyPath: "key" });
+          }
+          if (!db.objectStoreNames.contains("history_7d")) {
+            db.createObjectStore("history_7d", { keyPath: "id" });
+          }
         };
         req.onsuccess = function (e) { resolve(e.target.result); };
         req.onerror = function (e) { reject(e); };
       });
     }
 
-    async function savePoster24h(key, dataUrl) {
+    async function setActivePosterLocal(key, dataUrl) {
       try {
-        var db = await openPosterDB();
-        var tx = db.transaction("posters", "readwrite");
-        tx.objectStore("posters").put({ key: key, dataUrl: dataUrl, savedAt: Date.now() });
+        var db = await openStudioDB();
+        var tx = db.transaction("active_posters", "readwrite");
+        tx.objectStore("active_posters").put({ key: key, dataUrl: dataUrl, updatedAt: Date.now() });
       } catch (e) {}
     }
 
-    async function getPoster24h(key) {
+    async function getActivePosterLocal(key) {
       try {
-        var db = await openPosterDB();
+        var db = await openStudioDB();
         return await new Promise(function (resolve) {
-          var tx = db.transaction("posters", "readonly");
-          var req = tx.objectStore("posters").get(key);
-          req.onsuccess = function () {
-            var item = req.result;
-            if (item && (Date.now() - item.savedAt) < 86400000) {
-              resolve(item.dataUrl);
-            } else {
-              resolve(null);
-            }
-          };
+          var tx = db.transaction("active_posters", "readonly");
+          var req = tx.objectStore("active_posters").get(key);
+          req.onsuccess = function () { resolve(req.result ? req.result.dataUrl : null); };
           req.onerror = function () { resolve(null); };
         });
-      } catch (e) {
-        return null;
-      }
+      } catch (e) { return null; }
     }
 
-    // 3. Google Sign-In Initialization
+    async function addTo7DayHistory(email, modelId, dataUrl, captionText) {
+      try {
+        var db = await openStudioDB();
+        var tx = db.transaction("history_7d", "readwrite");
+        var store = tx.objectStore("history_7d");
+        var now = Date.now();
+        var d = new Date();
+        var dateLabel = d.getDate() + " " + MONTHS_EN[d.getMonth()].slice(0, 3);
+        store.put({
+          id: "H_" + now,
+          email: email,
+          modelId: modelId,
+          dataUrl: dataUrl,
+          caption: captionText,
+          dateLabel: dateLabel,
+          createdAt: now
+        });
+      } catch (e) {}
+    }
+
+    async function load7DayHistory(email) {
+      try {
+        var db = await openStudioDB();
+        var sevenDaysMs = 7 * 86400000;
+        var now = Date.now();
+        return await new Promise(function (resolve) {
+          var tx = db.transaction("history_7d", "readwrite");
+          var store = tx.objectStore("history_7d");
+          var req = store.getAll();
+          req.onsuccess = function () {
+            var all = req.result || [];
+            var valid = [];
+            all.forEach(function (item) {
+              if ((now - item.createdAt) > sevenDaysMs) {
+                store.delete(item.id);
+              } else if (item.email === email) {
+                valid.push(item);
+              }
+            });
+            valid.sort(function (a, b) { return b.createdAt - a.createdAt; });
+            resolve(valid);
+          };
+          req.onerror = function () { resolve([]); };
+        });
+      } catch (e) { return []; }
+    }
+
+    // 3. Persistent Session Boot (Stays Logged In Until Explicit Logout)
     window.onload = async function () {
+      var savedProfileStr = localStorage.getItem("mysrijan_persistent_session");
+      if (savedProfileStr) {
+        try {
+          cachedSession = JSON.parse(savedProfileStr);
+          if (cachedSession && cachedSession.user && cachedSession.user.email) {
+            enterStudio(cachedSession);
+            // Silently refresh latest credits/models from Google Sheet in background
+            silentRefreshSession(cachedSession.user.email);
+            initGoogleButtonOnly();
+            return;
+          }
+        } catch (e) {}
+      }
+      initGoogleButtonOnly();
+    };
+
+    async function initGoogleButtonOnly() {
       try {
         var cfgRes = await fetch(GAS_API_URL + "?action=public_config");
         var cfg = await cfgRes.json();
@@ -933,35 +1229,19 @@
       } catch (e) {
         document.getElementById("loginError").textContent = "सर्वर से जुड़ने में समस्या आ रही है।";
       }
-
-      if (idToken) {
-        authenticateSession(idToken);
-      }
-    };
-
-    function setLoginVerifying(isLoading, errorText) {
-      var btnBox = document.getElementById("googleBtnContainer");
-      var loader = document.getElementById("verifyingLoader");
-      var errEl = document.getElementById("loginError");
-      if (isLoading) {
-        btnBox.classList.add("hidden");
-        loader.classList.remove("hidden");
-        errEl.textContent = "";
-      } else {
-        btnBox.classList.remove("hidden");
-        loader.classList.add("hidden");
-        errEl.textContent = errorText || "";
-      }
     }
 
     function onGoogleSignIn(response) {
       idToken = response.credential;
       localStorage.setItem("mysrijan_id_token", idToken);
-      authenticateSession(idToken);
+      authenticateWithToken(idToken);
     }
 
-    async function authenticateSession(token) {
-      setLoginVerifying(true, "");
+    async function authenticateWithToken(token) {
+      document.getElementById("googleBtnContainer").classList.add("hidden");
+      document.getElementById("verifyingLoader").classList.remove("hidden");
+      document.getElementById("loginError").textContent = "";
+
       try {
         var res = await fetch(GAS_API_URL, {
           method: "POST",
@@ -969,75 +1249,103 @@
           body: JSON.stringify({ action: "login", idToken: token })
         });
         var data = await res.json();
-        setLoginVerifying(false, "");
+        document.getElementById("googleBtnContainer").classList.remove("hidden");
+        document.getElementById("verifyingLoader").classList.add("hidden");
 
         if (!data.ok) {
           if (data.status === "PENDING" || data.status === "BANNED") {
-            showApprovalPopup(data.status, data.error);
+            showCenterAlert(
+              data.status === "BANNED" ? "🚫" : "⏳",
+              data.status === "BANNED" ? "खाता प्रतिबंधित (Banned)" : "एडमिन अप्रूवल की प्रतीक्षा है",
+              data.error,
+              data.status === "BANNED"
+            );
             return;
           }
-          localStorage.removeItem("mysrijan_id_token");
-          setLoginVerifying(false, data.error || "लॉगिन विफल रहा।");
+          document.getElementById("loginError").textContent = data.error || "लॉगिन विफल रहा।";
           return;
         }
 
-        userSession = data;
-        document.getElementById("loginScreen").classList.add("hidden");
-        document.getElementById("appShell").classList.remove("hidden");
-
-        setupProfileUI();
-        renderModelList();
-        selectModel(data.models[0]);
+        localStorage.setItem("mysrijan_persistent_session", JSON.stringify(data));
+        enterStudio(data);
       } catch (err) {
-        setLoginVerifying(false, "कनेक्शन त्रुटि: " + err.message);
+        document.getElementById("googleBtnContainer").classList.remove("hidden");
+        document.getElementById("verifyingLoader").classList.add("hidden");
+        document.getElementById("loginError").textContent = "कनेक्शन त्रुटि: " + err.message;
       }
     }
 
-    function showApprovalPopup(status, customMsg) {
-      var modal = document.getElementById("approvalModal");
-      var icon = document.getElementById("approvalIcon");
-      var title = document.getElementById("approvalTitle");
-      var desc = document.getElementById("approvalDesc");
-
-      if (status === "BANNED") {
-        icon.textContent = "🚫";
-        icon.classList.add("banned");
-        title.textContent = "खाता प्रतिबंधित (Banned)";
-        desc.textContent = customMsg || "आपका खाता एडमिन द्वारा प्रतिबंधित कर दिया गया है। अधिक जानकारी के लिए संपर्क करें।";
-      } else {
-        icon.textContent = "⏳";
-        icon.classList.remove("banned");
-        title.textContent = "एडमिन के अप्रूवल का इंतज़ार करें";
-        desc.textContent = customMsg || "आपका लॉगिन अनुरोध दर्ज हो गया है। कृपया एडमिन के अप्रूवल का इंतज़ार करें—अप्रूवल मिलते ही आपको पूरा एक्सेस मिल जाएगा।";
-      }
-      modal.classList.remove("hidden");
+    async function silentRefreshSession(email) {
+      try {
+        var res = await fetch(GAS_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ action: "refresh_session", email: email })
+        });
+        var data = await res.json();
+        if (data.ok) {
+          localStorage.setItem("mysrijan_persistent_session", JSON.stringify(data));
+          cachedSession = data;
+          applySessionData(data, false);
+        } else if (data.status === "BANNED" || data.status === "PENDING") {
+          localStorage.removeItem("mysrijan_persistent_session");
+          location.reload();
+        }
+      } catch (e) {}
     }
 
-    function setupProfileUI() {
-      var u = userSession.user;
-      // DP click shows Google Account Name & Email
+    function enterStudio(data) {
+      cachedSession = data;
+      document.getElementById("loginScreen").classList.add("hidden");
+      document.getElementById("appShell").classList.remove("hidden");
+      applySessionData(data, true);
+    }
+
+    function applySessionData(data, shouldSelectInitialModel) {
+      var u = data.user;
+      if (u.settings) {
+        userPrefs = Object.assign(userPrefs, u.settings);
+      }
       document.getElementById("pmGoogleName").textContent = u.googleName || u.brandName;
       document.getElementById("pmGoogleEmail").textContent = u.email;
-
-      // Homepage Brand & Tagline Strip
-      document.getElementById("dispBrandName").textContent = u.brandName;
-      document.getElementById("dispBrandRole").textContent = u.taglineRole;
-      document.getElementById("inputBrandName").value = u.brandName;
-      document.getElementById("inputBrandRole").value = u.taglineRole;
 
       var avatarBtn = document.getElementById("avatarBtn");
       if (u.picture) {
         avatarBtn.innerHTML = '<img src="' + u.picture + '" alt="Profile" />';
       } else {
-        avatarBtn.textContent = (u.googleName || u.brandName).charAt(0).toUpperCase();
+        avatarBtn.textContent = (u.googleName || u.brandName || "U").charAt(0).toUpperCase();
       }
+
       updateUsageMeter(u.usedToday, u.dailyLimit);
+      updateTextModeUI();
+      renderSidebarModels();
+
+      if (shouldSelectInitialModel && data.models && data.models.length > 0) {
+        selectModel(data.models[0]);
+      }
+      refreshHistoryUI();
     }
 
     function updateUsageMeter(used, limit) {
-      document.getElementById("pmUsageCount").textContent = used + " / " + limit;
-      var pct = Math.min(100, Math.round((used / Math.max(1, limit)) * 100));
+      var safeUsed = Math.max(0, Number(used) || 0);
+      var safeLimit = Math.max(1, Number(limit) || 3);
+      document.getElementById("pmUsageCount").textContent = safeUsed + " / " + safeLimit;
+      var pct = Math.min(100, Math.round((safeUsed / safeLimit) * 100));
       document.getElementById("pmUsageFill").style.width = pct + "%";
+    }
+
+    /* ================= POPUPS, PROFILE MENU & SIDEBAR ================= */
+    function showCenterAlert(icon, title, desc, isDanger) {
+      var iconEl = document.getElementById("alertIcon");
+      iconEl.textContent = icon;
+      iconEl.className = "alert-icon-circle" + (isDanger ? " danger" : "");
+      document.getElementById("alertTitle").textContent = title;
+      document.getElementById("alertDesc").textContent = desc;
+      document.getElementById("centerAlertModal").classList.remove("hidden");
+    }
+
+    function closeCenterAlert() {
+      document.getElementById("centerAlertModal").classList.add("hidden");
     }
 
     function toggleProfileMenu() {
@@ -1056,47 +1364,6 @@
       document.getElementById("menuBackdrop").classList.add("hidden");
     }
 
-    function toggleBrandEditor() {
-      document.getElementById("brandEditorPanel").classList.toggle("hidden");
-    }
-
-    function livePreviewBrand() {
-      if (!userSession) return;
-      userSession.user.brandName = document.getElementById("inputBrandName").value;
-      userSession.user.taglineRole = document.getElementById("inputBrandRole").value;
-      document.getElementById("dispBrandName").textContent = userSession.user.brandName || "Your Name";
-      document.getElementById("dispBrandRole").textContent = userSession.user.taglineRole || "Tagline";
-      renderCanvas();
-    }
-
-    async function saveBrandIdentity() {
-      var bName = document.getElementById("inputBrandName").value.trim();
-      var bRole = document.getElementById("inputBrandRole").value.trim();
-      if (!bName) return;
-
-      document.getElementById("brandEditorPanel").classList.add("hidden");
-      setNote("ब्रांड और टैगलाइन सेव हो रहा है...");
-
-      try {
-        var res = await fetch(GAS_API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({
-            action: "update_brand",
-            idToken: idToken,
-            brandName: bName,
-            taglineRole: bRole
-          })
-        });
-        var data = await res.json();
-        if (data.ok) {
-          setNote("✓ नाम और टैगलाइन सेव हो गया");
-        }
-      } catch (e) {
-        setNote("⚠️ सेव करने में त्रुटि हुई");
-      }
-    }
-
     function toggleSidebar(open) {
       closeProfileMenu();
       var drawer = document.getElementById("sidebarDrawer");
@@ -1110,99 +1377,209 @@
       }
     }
 
-    function openSupportModal() {
-      toggleSidebar(false);
-      document.getElementById("supportStatusMsg").textContent = "";
-      document.getElementById("reqDetailsInput").value = "";
-      document.getElementById("supportModal").classList.remove("hidden");
+    function handleLogout() {
+      localStorage.removeItem("mysrijan_id_token");
+      localStorage.removeItem("mysrijan_persistent_session");
+      location.reload();
     }
 
-    function closeSupportModal() {
-      document.getElementById("supportModal").classList.add("hidden");
-    }
-
-    async function submitSupportRequest() {
-      var reqType = document.getElementById("reqTypeSelect").value;
-      var details = document.getElementById("reqDetailsInput").value.trim();
-      var statusEl = document.getElementById("supportStatusMsg");
-      var btn = document.getElementById("submitSupportBtn");
-
-      if (!details) {
-        statusEl.style.color = "#dc2626";
-        statusEl.textContent = "कृपया अपना विवरण लिखें।";
-        return;
+    /* ================= TERMS & EXPECTED USAGE MODAL ================= */
+    function openTermsModal() {
+      closeProfileMenu();
+      var container = document.getElementById("termsListContainer");
+      container.innerHTML = "";
+      var terms = (cachedSession && cachedSession.terms) || [];
+      if (terms.length === 0) {
+        container.innerHTML = '<div class="policy-item"><span class="policy-heading">नियम लोड हो रहे हैं...</span></div>';
+      } else {
+        terms.forEach(function (t) {
+          var isNot = String(t.badge || "").indexOf("नहीं") !== -1 || String(t.badge || "").indexOf("NOT") !== -1;
+          var div = document.createElement("div");
+          div.className = "policy-item";
+          div.innerHTML =
+            '<span class="policy-badge' + (isNot ? " not-expect" : "") + '">' + t.badge + '</span>' +
+            '<span class="policy-heading">' + t.heading + '</span>' +
+            '<span class="policy-body">' + t.content + '</span>';
+          container.appendChild(div);
+        });
       }
+      document.getElementById("termsModal").classList.remove("hidden");
+    }
 
+    function closeTermsModal() {
+      document.getElementById("termsModal").classList.add("hidden");
+    }
+
+    /* ================= SINGLE "CUSTOMIZE" MODAL (BRANDING + AI/MANUAL + CHECKBOXES) ================= */
+    function openCustomizeModal() {
+      if (!cachedSession) return;
+      var u = cachedSession.user;
+      document.getElementById("custBrandName").value = u.brandName || "";
+      document.getElementById("custTagline").value = u.taglineRole || "";
+      document.getElementById("custDistrict").value = u.district || "जौनपुर";
+      document.getElementById("chkShowDate").checked = userPrefs.showDate !== false;
+      document.getElementById("chkShowWeather").checked = userPrefs.showWeather !== false;
+      document.getElementById("chkShowBrand").checked = userPrefs.showBrand !== false;
+      setTextMode(userPrefs.textMode || "AI");
+      document.getElementById("customizeModal").classList.remove("hidden");
+    }
+
+    function closeCustomizeModal() {
+      document.getElementById("customizeModal").classList.add("hidden");
+    }
+
+    function setTextMode(mode) {
+      userPrefs.textMode = mode;
+      document.getElementById("modeAiBtn").classList.toggle("active", mode === "AI");
+      document.getElementById("modeManualBtn").classList.toggle("active", mode === "MANUAL");
+      updateTextModeUI();
+    }
+
+    function updateTextModeUI() {
+      var isAI = (userPrefs.textMode || "AI") === "AI";
+      document.getElementById("textModeIndicator").textContent = isAI ? "✨ AI Auto Text" : "✏️ Manual Text";
+    }
+
+    async function saveCustomizeSettings() {
+      var u = cachedSession.user;
+      u.brandName = document.getElementById("custBrandName").value.trim() || u.googleName;
+      u.taglineRole = document.getElementById("custTagline").value.trim();
+      u.district = document.getElementById("custDistrict").value.trim() || "जौनपुर";
+
+      userPrefs.showDate = document.getElementById("chkShowDate").checked;
+      userPrefs.showWeather = document.getElementById("chkShowWeather").checked;
+      userPrefs.showBrand = document.getElementById("chkShowBrand").checked;
+      u.settings = userPrefs;
+
+      localStorage.setItem("mysrijan_persistent_session", JSON.stringify(cachedSession));
+      renderCanvas();
+      closeCustomizeModal();
+
+      try {
+        await fetch(GAS_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            action: "save_user_settings",
+            email: u.email,
+            brandName: u.brandName,
+            taglineRole: u.taglineRole,
+            district: u.district,
+            settingsJson: JSON.stringify(userPrefs)
+          })
+        });
+      } catch (e) {}
+    }
+
+    /* ================= SIDEBAR MODELS & DEDICATED "CUSTOMIZE YOUR MODEL" PAGE ================= */
+    function renderSidebarModels() {
+      var listEl = document.getElementById("sidebarModelList");
+      listEl.innerHTML = "";
+      (cachedSession.models || []).forEach(function (m) {
+        var row = document.createElement("div");
+        row.className = "model-row-item" + (activeModel && activeModel.id === m.id ? " active" : "");
+
+        var info = document.createElement("div");
+        info.className = "model-row-info";
+        info.innerHTML = '<span class="model-tag">' + m.badge + '</span><span class="model-title">' + m.name + '</span>';
+        info.onclick = function () {
+          selectModel(m);
+          toggleSidebar(false);
+        };
+
+        var gearBtn = document.createElement("button");
+        gearBtn.type = "button";
+        gearBtn.className = "model-gear-btn";
+        gearBtn.title = "Customize Model";
+        gearBtn.innerHTML = "⚙️";
+        gearBtn.onclick = function (e) {
+          e.stopPropagation();
+          toggleSidebar(false);
+          openModelCustomPage(m);
+        };
+
+        row.appendChild(info);
+        row.appendChild(gearBtn);
+        listEl.appendChild(row);
+      });
+    }
+
+    function openModelCustomPage(model) {
+      if (!model) return;
+      activeModel = model;
+      toggleSidebar(false);
+      document.getElementById("modEditName").value = model.name || "";
+      document.getElementById("modEditHeader").value = model.headerTitle || "";
+      document.getElementById("modEditPrompt").value = model.prompt || "";
+      document.getElementById("modEditCaptionRule").value = model.captionRule || "";
+      document.getElementById("modEditDefaultMsg").value = model.defaultMessage || "";
+
+      document.getElementById("mainStudioView").classList.add("hidden");
+      document.getElementById("modelCustomizeView").classList.remove("hidden");
+    }
+
+    function closeModelCustomPage() {
+      document.getElementById("modelCustomizeView").classList.add("hidden");
+      document.getElementById("mainStudioView").classList.remove("hidden");
+    }
+
+    async function saveModelCustomization() {
+      if (!activeModel || !cachedSession) return;
+      var btn = document.getElementById("saveModelBtn");
       btn.disabled = true;
-      btn.textContent = "भेजा जा रहा है...";
+      btn.textContent = "सेव हो रहा है...";
+
+      var updated = {
+        id: activeModel.id,
+        name: document.getElementById("modEditName").value.trim() || activeModel.name,
+        headerTitle: document.getElementById("modEditHeader").value.trim() || activeModel.headerTitle,
+        prompt: document.getElementById("modEditPrompt").value.trim() || activeModel.prompt,
+        captionRule: document.getElementById("modEditCaptionRule").value.trim(),
+        defaultMessage: document.getElementById("modEditDefaultMsg").value.trim()
+      };
 
       try {
         var res = await fetch(GAS_API_URL, {
           method: "POST",
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({
-            action: "submit_support",
-            idToken: idToken,
-            requestType: reqType,
-            details: details
+            action: "customize_model",
+            email: cachedSession.user.email,
+            model: updated
           })
         });
         var data = await res.json();
         btn.disabled = false;
-        btn.textContent = "अनुरोध भेजें (Submit)";
+        btn.textContent = "✓ मॉडल सेटिंग्स सेव करें (Sync to Sheet)";
 
-        if (data.ok) {
-          statusEl.style.color = "#16a34a";
-          statusEl.textContent = "✓ आपका अनुरोध सफलतापूर्वक दर्ज हो गया है!";
-          setTimeout(closeSupportModal, 1400);
-        } else {
-          statusEl.style.color = "#dc2626";
-          statusEl.textContent = data.error || "त्रुटि हुई।";
+        if (data.ok && data.models) {
+          cachedSession.models = data.models;
+          localStorage.setItem("mysrijan_persistent_session", JSON.stringify(cachedSession));
+          var refreshedModel = data.models.find(function (x) { return x.id === data.savedModelId; }) || data.models[0];
+          renderSidebarModels();
+          selectModel(refreshedModel);
+          closeModelCustomPage();
         }
       } catch (e) {
         btn.disabled = false;
-        btn.textContent = "अनुरोध भेजें (Submit)";
-        statusEl.style.color = "#dc2626";
-        statusEl.textContent = "नेटवर्क त्रुटि: " + e.message;
+        btn.textContent = "✓ मॉडल सेटिंग्स सेव करें (Sync to Sheet)";
       }
-    }
-
-    function handleLogout() {
-      localStorage.removeItem("mysrijan_id_token");
-      location.reload();
-    }
-
-    function renderModelList() {
-      var listEl = document.getElementById("sidebarModelList");
-      listEl.innerHTML = "";
-      userSession.models.forEach(function (m) {
-        var btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "model-card" + (activeModel && activeModel.id === m.id ? " active" : "");
-        btn.innerHTML = '<span class="model-tag">' + m.badge + '</span><span class="model-title">' + m.name + '</span>';
-        btn.onclick = function () {
-          selectModel(m);
-          toggleSidebar(false);
-        };
-        listEl.appendChild(btn);
-      });
     }
 
     async function selectModel(model) {
       activeModel = model;
       document.getElementById("activeModelTitle").textContent = model.name;
-      renderModelList();
+      renderSidebarModels();
 
-      var msgKey = "mysrijan_inbox_" + userSession.user.email + "_" + model.id;
+      var msgKey = "mysrijan_inbox_" + cachedSession.user.email + "_" + model.id;
       var savedMsg = localStorage.getItem(msgKey);
       var ta = document.getElementById("messageInbox");
       ta.value = savedMsg !== null ? savedMsg : model.defaultMessage;
       autoGrow(ta);
 
-      var posterKey = "mysrijan_img_" + userSession.user.email + "_" + model.id;
-      currentBgDataUrl = await getPoster24h(posterKey);
+      var activeKey = "mysrijan_active_img_" + cachedSession.user.email + "_" + model.id;
+      currentBgDataUrl = await getActivePosterLocal(activeKey);
       renderCanvas();
-      setNote(currentBgDataUrl ? "24-घंटे की सेव इमेज लोड हुई" : "डिफ़ॉल्ट दृश्य तैयार है");
     }
 
     function autoGrow(el) {
@@ -1212,30 +1589,25 @@
 
     function handleInboxInput(el) {
       autoGrow(el);
-      if (userSession && activeModel) {
-        var msgKey = "mysrijan_inbox_" + userSession.user.email + "_" + activeModel.id;
+      if (cachedSession && activeModel) {
+        var msgKey = "mysrijan_inbox_" + cachedSession.user.email + "_" + activeModel.id;
         localStorage.setItem(msgKey, el.value);
       }
       renderCanvas();
-      var badge = document.getElementById("savedBadge");
-      badge.classList.add("visible");
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(function () { badge.classList.remove("visible"); }, 1400);
     }
 
-    function switchDay(offset) {
-      dayOffset = offset;
-      document.getElementById("tabToday").classList.toggle("active", offset === 0);
-      document.getElementById("tabTomorrow").classList.toggle("active", offset === 1);
-      renderCanvas();
-    }
-
-    function getTargetDate(offset) {
+    /* ================= GENERATE NEW IMAGE (+ OPTIONAL AI TEXT) ================= */
+    function getTodayDateObj() {
       var d = new Date();
-      d.setDate(d.getDate() + offset);
       var dd = String(d.getDate()).padStart(2, "0");
       var mm = String(d.getMonth() + 1).padStart(2, "0");
       var yyyy = d.getFullYear();
+      var hrs = d.getHours();
+      var mins = String(d.getMinutes()).padStart(2, "0");
+      var ampm = hrs >= 12 ? "PM" : "AM";
+      var h12 = hrs % 12 || 12;
+      document.getElementById("waPreviewTime").textContent = h12 + ":" + mins + " " + ampm + " ✓✓";
+
       return {
         isoKey: yyyy + "-" + mm + "-" + dd,
         formattedDate: d.getDate() + " " + MONTHS_EN[d.getMonth()] + " " + yyyy,
@@ -1243,15 +1615,23 @@
       };
     }
 
-    async function generateNewImageAndText() {
-      if (!userSession || !activeModel) return;
-      if (userSession.user.usedToday >= userSession.user.dailyLimit) {
-        setNote("⚠️ आज की क्रेडिट सीमा (" + userSession.user.dailyLimit + "/" + userSession.user.dailyLimit + ") पूरी हो गई है।");
+    async function generateNewPoster() {
+      if (!cachedSession || !activeModel) return;
+      var u = cachedSession.user;
+
+      if (Number(u.usedToday) >= Number(u.dailyLimit)) {
+        showCenterAlert(
+          "⚡",
+          "आज के क्रेडिट समाप्त हो गए हैं",
+          "आपने आज के सभी " + u.dailyLimit + " / " + u.dailyLimit + " क्रेडिट उपयोग कर लिए हैं। कल नए क्रेडिट अपने आप जुड़ जाएंगे—या आप साइडबार से क्रेडिट बढ़ाने का अनुरोध भेज सकते हैं।",
+          false
+        );
         return;
       }
 
-      var dateInfo = getTargetDate(dayOffset);
+      var dateInfo = getTodayDateObj();
       var currentQuote = document.getElementById("messageInbox").value.trim() || activeModel.defaultMessage;
+      var generateAiText = (userPrefs.textMode || "AI") === "AI";
       var loader = document.getElementById("loader");
       loader.classList.remove("hidden");
 
@@ -1261,10 +1641,11 @@
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({
             action: "generate",
-            idToken: idToken,
+            email: u.email,
             basePrompt: activeModel.prompt,
             captionRule: activeModel.captionRule,
             modelName: activeModel.name,
+            generateAiText: generateAiText,
             dateStr: dateInfo.formattedDate,
             dayStr: dateInfo.dayName,
             quote: currentQuote
@@ -1274,35 +1655,79 @@
         loader.classList.add("hidden");
 
         if (!data.ok) {
-          setNote("⚠️ " + (data.error || "इमेज जनरेट नहीं हो सकी।"));
+          showCenterAlert("⚠️", "जनरेशन रुका", data.error || "इमेज जनरेट नहीं हो सकी।", false);
           return;
         }
 
         currentBgDataUrl = data.dataUrl;
-        userSession.user.usedToday = data.usedToday;
-        userSession.user.remainingCredits = data.remainingCredits;
+        u.usedToday = data.usedToday;
+        u.dailyLimit = data.dailyLimit;
         updateUsageMeter(data.usedToday, data.dailyLimit);
 
-        // Update Inbox with newly generated AI text + emojis
-        if (data.aiCaption) {
+        var finalCaption = currentQuote;
+        if (generateAiText && data.aiCaption) {
+          finalCaption = data.aiCaption;
           var ta = document.getElementById("messageInbox");
-          ta.value = data.aiCaption;
+          ta.value = finalCaption;
           autoGrow(ta);
-          var msgKey = "mysrijan_inbox_" + userSession.user.email + "_" + activeModel.id;
-          localStorage.setItem(msgKey, data.aiCaption);
+          var msgKey = "mysrijan_inbox_" + u.email + "_" + activeModel.id;
+          localStorage.setItem(msgKey, finalCaption);
         }
 
-        var posterKey = "mysrijan_img_" + userSession.user.email + "_" + activeModel.id;
-        await savePoster24h(posterKey, currentBgDataUrl);
+        localStorage.setItem("mysrijan_persistent_session", JSON.stringify(cachedSession));
+
+        // Save persistently as active image until next generation
+        var activeKey = "mysrijan_active_img_" + u.email + "_" + activeModel.id;
+        await setActivePosterLocal(activeKey, currentBgDataUrl);
 
         renderCanvas();
-        setNote("✨ नई इमेज और इमोजी संदेश तैयार हो गया!");
+
+        // Save rendered final poster to 7-day history
+        setTimeout(async function () {
+          var finalPng = document.getElementById("posterCanvas").toDataURL("image/jpeg", 0.85);
+          await addTo7DayHistory(u.email, activeModel.id, finalPng, finalCaption);
+          refreshHistoryUI();
+        }, 300);
       } catch (err) {
         loader.classList.add("hidden");
-        setNote("⚠️ नेटवर्क त्रुटि: " + err.message);
+        showCenterAlert("⚠️", "नेटवर्क त्रुटि", err.message, true);
       }
     }
 
+    async function refreshHistoryUI() {
+      if (!cachedSession) return;
+      var items = await load7DayHistory(cachedSession.user.email);
+      var grid = document.getElementById("historyGrid");
+      document.getElementById("historyCountLabel").textContent = items.length + " saved";
+      grid.innerHTML = "";
+
+      if (items.length === 0) {
+        grid.innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:8px 2px;">पिछले 7 दिनों में जनरेट की गई इमेज यहाँ दिखेंगी।</div>';
+        return;
+      }
+
+      items.forEach(function (item) {
+        var thumb = document.createElement("div");
+        thumb.className = "history-thumb";
+        thumb.innerHTML = '<img src="' + item.dataUrl + '" alt="History" /><span class="history-date-tag">' + item.dateLabel + '</span>';
+        thumb.onclick = function () {
+          currentBgDataUrl = item.dataUrl;
+          if (item.caption) {
+            var ta = document.getElementById("messageInbox");
+            ta.value = item.caption;
+            autoGrow(ta);
+          }
+          var canvas = document.getElementById("posterCanvas");
+          var ctx = canvas.getContext("2d");
+          var img = new Image();
+          img.onload = function () { ctx.drawImage(img, 0, 0, canvas.width, canvas.height); };
+          img.src = item.dataUrl;
+        };
+        grid.appendChild(thumb);
+      });
+    }
+
+    /* ================= CANVAS RENDERING ================= */
     function drawRoundRect(ctx, x, y, w, h, r) {
       ctx.beginPath();
       ctx.moveTo(x + r, y);
@@ -1361,13 +1786,14 @@
     }
 
     function renderCanvas() {
-      if (!activeModel || !userSession) return;
+      if (!activeModel || !cachedSession) return;
       var canvas = document.getElementById("posterCanvas");
       var ctx = canvas.getContext("2d");
       var W = canvas.width;
       var H = canvas.height;
-      var dateInfo = getTargetDate(dayOffset);
+      var dateInfo = getTodayDateObj();
       var quoteText = document.getElementById("messageInbox").value.trim() || activeModel.defaultMessage;
+      var u = cachedSession.user;
 
       var drawOverlays = function () {
         var topGrad = ctx.createLinearGradient(0, 0, 0, 320);
@@ -1383,17 +1809,22 @@
         ctx.fillRect(0, H - 560, W, 560);
 
         ctx.textAlign = "center";
-        ctx.fillStyle = "rgba(15, 23, 42, 0.5)";
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
-        ctx.lineWidth = 2;
-        drawRoundRect(ctx, W / 2 - 275, 46, 550, 56, 28);
-        ctx.fill();
-        ctx.stroke();
 
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "600 28px 'Inter', sans-serif";
-        ctx.fillText(dateInfo.formattedDate + "  •  " + dateInfo.dayName, W / 2, 84);
+        // Optional Date & Day Pill
+        if (userPrefs.showDate !== false) {
+          ctx.fillStyle = "rgba(15, 23, 42, 0.5)";
+          ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
+          ctx.lineWidth = 2;
+          drawRoundRect(ctx, W / 2 - 275, 46, 550, 56, 28);
+          ctx.fill();
+          ctx.stroke();
 
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "600 28px 'Inter', sans-serif";
+          ctx.fillText(dateInfo.formattedDate + "  •  " + dateInfo.dayName, W / 2, 84);
+        }
+
+        // Main Header Title
         var goldGrad = ctx.createLinearGradient(0, 130, 0, 245);
         goldGrad.addColorStop(0, "#fef08a");
         goldGrad.addColorStop(0.5, "#facc15");
@@ -1403,9 +1834,10 @@
         ctx.shadowBlur = 24;
         ctx.fillStyle = goldGrad;
         ctx.font = "800 118px 'Noto Sans Devanagari', sans-serif";
-        ctx.fillText(activeModel.headerTitle, W / 2, 230);
+        ctx.fillText(activeModel.headerTitle, W / 2, userPrefs.showDate !== false ? 230 : 185);
         ctx.shadowBlur = 0;
 
+        // Quote Glass Card
         var boxX = 68, boxY = H - 512, boxW = W - 136, boxH = 338;
         ctx.fillStyle = "rgba(15, 23, 42, 0.66)";
         ctx.strokeStyle = "rgba(255, 255, 255, 0.24)";
@@ -1414,27 +1846,35 @@
         ctx.fill();
         ctx.stroke();
 
-        ctx.fillStyle = "#fde68a";
-        ctx.font = "700 27px 'Noto Sans Devanagari', sans-serif";
-        ctx.fillText("📍 " + userSession.weatherText, W / 2, boxY + 54);
+        // Optional Weather & District Strip
+        if (userPrefs.showWeather !== false) {
+          var weatherLine = (u.district ? u.district + " • " : "") + (cachedSession.weatherShort || "सुहावना मौसम");
+          ctx.fillStyle = "#fde68a";
+          ctx.font = "700 27px 'Noto Sans Devanagari', sans-serif";
+          ctx.fillText("📍 " + weatherLine, W / 2, boxY + 54);
 
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.16)";
-        ctx.beginPath();
-        ctx.moveTo(boxX + 64, boxY + 80);
-        ctx.lineTo(boxX + boxW - 64, boxY + 80);
-        ctx.stroke();
+          ctx.strokeStyle = "rgba(255, 255, 255, 0.16)";
+          ctx.beginPath();
+          ctx.moveTo(boxX + 64, boxY + 80);
+          ctx.lineTo(boxX + boxW - 64, boxY + 80);
+          ctx.stroke();
+        }
 
         ctx.fillStyle = "#ffffff";
         ctx.font = "700 39px 'Noto Sans Devanagari', sans-serif";
-        wrapText(ctx, "“" + quoteText + "”", W / 2, boxY + 206, boxW - 68, 56);
+        var textCenterY = (userPrefs.showWeather !== false) ? (boxY + 206) : (boxY + 172);
+        wrapText(ctx, "“" + quoteText + "”", W / 2, textCenterY, boxW - 68, 56);
 
-        ctx.fillStyle = "#facc15";
-        ctx.font = "800 42px 'Inter', sans-serif";
-        ctx.fillText(userSession.user.brandName || "MySrijan Creator", W / 2, H - 92);
+        // Optional Brand Name & Tagline
+        if (userPrefs.showBrand !== false) {
+          ctx.fillStyle = "#facc15";
+          ctx.font = "800 42px 'Inter', sans-serif";
+          ctx.fillText(u.brandName || "MySrijan", W / 2, H - 92);
 
-        ctx.fillStyle = "#f1f5f9";
-        ctx.font = "600 27px 'Inter', sans-serif";
-        ctx.fillText(userSession.user.taglineRole || "", W / 2, H - 48);
+          ctx.fillStyle = "#f1f5f9";
+          ctx.font = "600 27px 'Inter', sans-serif";
+          ctx.fillText(u.taglineRole || "", W / 2, H - 48);
+        }
       };
 
       if (currentBgDataUrl) {
@@ -1448,19 +1888,72 @@
       }
     }
 
+    /* ================= SUPPORT REQUEST, DOWNLOAD & WHATSAPP ================= */
+    function openSupportModal() {
+      toggleSidebar(false);
+      document.getElementById("supportStatusMsg").textContent = "";
+      document.getElementById("reqDetailsInput").value = "";
+      document.getElementById("supportModal").classList.remove("hidden");
+    }
+
+    function closeSupportModal() {
+      document.getElementById("supportModal").classList.add("hidden");
+    }
+
+    async function submitSupportRequest() {
+      var reqType = document.getElementById("reqTypeSelect").value;
+      var details = document.getElementById("reqDetailsInput").value.trim();
+      var statusEl = document.getElementById("supportStatusMsg");
+      var btn = document.getElementById("submitSupportBtn");
+
+      if (!details) {
+        statusEl.style.color = "#dc2626";
+        statusEl.textContent = "कृपया अपना विवरण लिखें।";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "भेजा जा रहा है...";
+
+      try {
+        var res = await fetch(GAS_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            action: "submit_support",
+            email: cachedSession.user.email,
+            userName: cachedSession.user.googleName || cachedSession.user.brandName,
+            requestType: reqType,
+            details: details
+          })
+        });
+        var data = await res.json();
+        btn.disabled = false;
+        btn.textContent = "अनुरोध भेजें (Submit)";
+
+        if (data.ok) {
+          statusEl.style.color = "#16a34a";
+          statusEl.textContent = "✓ आपका अनुरोध सफलतापूर्वक दर्ज हो गया है!";
+          setTimeout(closeSupportModal, 1200);
+        }
+      } catch (e) {
+        btn.disabled = false;
+        btn.textContent = "अनुरोध भेजें (Submit)";
+      }
+    }
+
     function downloadPoster() {
       var canvas = document.getElementById("posterCanvas");
-      var dateInfo = getTargetDate(dayOffset);
+      var dateInfo = getTodayDateObj();
       var link = document.createElement("a");
       link.download = "MySrijan_" + dateInfo.isoKey + ".png";
       link.href = canvas.toDataURL("image/png");
       link.click();
-      setNote("⬇️ HD पोस्टर सेव हो गया");
     }
 
     function shareWhatsApp() {
       var canvas = document.getElementById("posterCanvas");
-      var dateInfo = getTargetDate(dayOffset);
+      var dateInfo = getTodayDateObj();
       var customMsg = document.getElementById("messageInbox").value.trim();
 
       if (navigator.canShare && navigator.share) {
@@ -1482,10 +1975,6 @@
       setTimeout(function () {
         window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
       }, 400);
-    }
-
-    function setNote(txt) {
-      document.getElementById("statusNote").textContent = txt;
     }
   </script>
 </body>
