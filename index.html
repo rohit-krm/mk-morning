@@ -184,7 +184,7 @@
     .policy-heading { font-size: 14px; font-weight: 800; color: var(--text-main); }
     .policy-body { font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; }
 
-    /* ================= STICKY APP HEADER ================= */
+    /* ================= STICKY APP HEADER (WITH CUSTOMIZE GEAR BUTTON) ================= */
     .app-header {
       position: sticky;
       top: 0;
@@ -208,6 +208,7 @@
     }
 
     .header-left { display: flex; align-items: center; gap: 11px; }
+    .header-right { display: flex; align-items: center; gap: 9px; }
 
     .icon-btn {
       width: 38px;
@@ -222,6 +223,24 @@
       transition: background 0.15s ease, transform 0.1s ease;
     }
     .icon-btn:active { transform: scale(0.95); background: var(--surface-muted); }
+
+    .header-customize-btn {
+      height: 36px;
+      padding: 0 11px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    .header-customize-btn:active { transform: scale(0.95); }
 
     .header-title-group { display: flex; flex-direction: column; }
     .header-title { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
@@ -244,7 +263,7 @@
     }
     .avatar-trigger img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ================= RIGHT PROFILE DROPDOWN (WITH TERMS & USAGE) ================= */
+    /* ================= RIGHT PROFILE DROPDOWN ================= */
     .menu-backdrop {
       position: fixed;
       inset: 0;
@@ -402,7 +421,6 @@
       cursor: pointer;
       flex-shrink: 0;
     }
-    .model-gear-btn:hover { color: var(--accent); border-color: var(--accent); }
 
     .drawer-footer {
       padding-top: 12px;
@@ -428,23 +446,23 @@
       gap: 8px;
     }
 
-    /* ================= MAIN WORKSPACE (SUPER CLEAN TODAY VIEW) ================= */
+    /* ================= MAIN WORKSPACE (WITH BOTTOM NAV SPACE) ================= */
     .workspace {
       width: 100%;
       max-width: 460px;
-      padding: 14px 16px 40px;
+      padding: 14px 16px 88px;
       display: flex;
       flex-direction: column;
       gap: 14px;
-      animation: fadeUp 0.35s ease;
+      animation: fadeUp 0.3s ease;
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Poster Canvas Card + Top-Right Floating Download Button */
+    /* Poster Canvas Card + Top-Right Download & Floating AI Generate Pill */
     .canvas-card {
       position: relative;
       width: 100%;
@@ -473,9 +491,9 @@
       place-items: center;
       cursor: pointer;
       z-index: 8;
-      transition: transform 0.15s ease, background 0.15s ease;
+      transition: transform 0.15s ease;
     }
-    .floating-dl-btn:active { transform: scale(0.92); background: rgba(15, 23, 42, 0.85); }
+    .floating-dl-btn:active { transform: scale(0.92); }
 
     .loader-overlay {
       position: absolute;
@@ -502,29 +520,24 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* Primary Generate + Single Customize Button Row */
-    .control-bar {
-      display: grid;
-      grid-template-columns: 1.75fr 1fr;
-      gap: 10px;
-    }
-
+    /* Full-Width Sleek AI Generate Button Right Under Image */
     .generate-btn {
       position: relative;
       overflow: hidden;
+      width: 100%;
       height: 48px;
       border-radius: 14px;
       border: none;
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #ffffff;
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
+      gap: 8px;
       box-shadow: 0 8px 18px -6px rgba(15, 23, 42, 0.35);
       transition: transform 0.12s ease;
     }
@@ -532,33 +545,15 @@
       content: "";
       position: absolute;
       top: 0; left: -100%;
-      width: 60%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+      width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
       animation: shimmerSweep 3.2s infinite;
     }
     @keyframes shimmerSweep {
       0% { left: -100%; }
       45%, 100% { left: 160%; }
     }
-    .generate-btn:active { transform: scale(0.97); }
-
-    .customize-btn {
-      height: 48px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text-main);
-      font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      box-shadow: var(--shadow-sm);
-    }
-    .customize-btn:active { transform: scale(0.97); background: var(--surface-muted); }
+    .generate-btn:active { transform: scale(0.98); }
 
     /* WhatsApp Preview Message Card */
     .wa-preview-card {
@@ -630,59 +625,206 @@
     }
     .send-wa-btn:active { transform: scale(0.98); }
 
-    /* ================= LAST 7 DAYS LOCAL HISTORY STRIP ================= */
-    .history-section {
-      margin-top: 4px;
+    /* ================= PAST 7 DAYS ACCORDION HISTORY VIEW ================= */
+    .history-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 2px;
+    }
+    .history-header-bar h2 { font-size: 17px; font-weight: 800; }
+    .history-badge {
+      font-size: 11.5px;
+      font-weight: 700;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 13px 14px;
-      box-shadow: var(--shadow-sm);
+      padding: 4px 10px;
+      border-radius: 99px;
+      color: var(--text-secondary);
+    }
+
+    .accordion-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-    .history-header {
+
+    .acc-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .acc-item.expanded {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .acc-summary {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      font-size: 12.5px;
+      gap: 12px;
+      padding: 10px 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .acc-mini-thumb {
+      width: 46px;
+      height: 56px;
+      border-radius: 9px;
+      object-fit: cover;
+      background: var(--surface-muted);
+      flex-shrink: 0;
+    }
+
+    .acc-meta {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .acc-date-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
       font-weight: 800;
       color: var(--text-main);
     }
-    .history-sub { font-size: 11px; font-weight: 600; color: var(--text-muted); }
-
-    .history-grid {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-    .history-thumb {
-      width: 64px;
-      height: 80px;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 2px solid transparent;
-      flex-shrink: 0;
-      cursor: pointer;
-      position: relative;
-      background: var(--surface-muted);
-    }
-    .history-thumb.active { border-color: var(--accent); }
-    .history-thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .history-date-tag {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: rgba(15, 23, 42, 0.72);
-      color: #fff;
-      font-size: 9px;
+    .acc-model-pill {
+      font-size: 10px;
       font-weight: 700;
-      text-align: center;
-      padding: 2px 0;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 1px 7px;
+      border-radius: 99px;
+    }
+    .acc-snippet {
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    /* ================= CUSTOMIZE & MODEL EDITOR MODAL CONTROLS ================= */
+    .acc-chevron {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+    .acc-item.expanded .acc-chevron {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+
+    /* Smooth Accordion Body (Only 1 open at a time) */
+    .acc-body {
+      display: none;
+      padding: 0 14px 14px;
+      border-top: 1px solid var(--surface-muted);
+      flex-direction: column;
+      gap: 12px;
+      animation: fadeUp 0.22s ease;
+    }
+    .acc-item.expanded .acc-body {
+      display: flex;
+    }
+
+    .acc-full-img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-top: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .acc-full-caption {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+
+    .acc-actions {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 8px;
+    }
+    .acc-btn-dl {
+      height: 42px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .acc-btn-wa {
+      height: 42px;
+      border-radius: 11px;
+      border: none;
+      background: var(--whatsapp);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* ================= BOTTOM NAVIGATION BAR (TODAY vs HISTORY) ================= */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 42;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .bottom-nav-inner {
+      max-width: 460px;
+      margin: 0 auto;
+      height: 62px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 6px 16px;
+      gap: 10px;
+    }
+    .nav-tab-btn {
+      border: none;
+      background: transparent;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.18s ease;
+    }
+    .nav-tab-btn.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .nav-tab-icon { font-size: 17px; line-height: 1; }
+
+    /* ================= FORM & CUSTOMIZE CONTROLS ================= */
     .section-block {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -758,21 +900,16 @@
       font-family: inherit;
     }
 
-    /* Dedicated Model Customization Page View */
     .subpage-shell {
       width: 100%;
       max-width: 460px;
-      padding: 16px 16px 40px;
+      padding: 16px 16px 88px;
       display: flex;
       flex-direction: column;
       gap: 14px;
       animation: fadeUp 0.25s ease;
     }
-    .subpage-top {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .subpage-top { display: flex; align-items: center; gap: 10px; }
   </style>
 </head>
 <body>
@@ -799,17 +936,17 @@
     </div>
   </div>
 
-  <!-- 2. Center Popup Modal (No Credits / Pending / Banned Alerts) -->
+  <!-- 2. Center Popup Modal -->
   <div class="modal-backdrop hidden" id="centerAlertModal">
     <div class="modal-card">
       <div class="alert-icon-circle" id="alertIcon">⚡</div>
       <div class="modal-title" id="alertTitle">सूचना</div>
       <div class="modal-desc" id="alertDesc">संदेश</div>
-      <button type="button" class="primary-dark-btn" id="alertActionBtn" onclick="closeCenterAlert()">ठीक है (OK)</button>
+      <button type="button" class="primary-dark-btn" onclick="closeCenterAlert()">ठीक है (OK)</button>
     </div>
   </div>
 
-  <!-- 3. Terms & Expected Usage Policy Modal (Loaded from Google Sheet) -->
+  <!-- 3. Terms & Expected Usage Policy Modal (Loads Live from Google Sheet) -->
   <div class="modal-backdrop hidden" id="termsModal">
     <div class="modal-card">
       <div style="display:flex; align-items:center; justify-content:space-between;">
@@ -821,7 +958,7 @@
     </div>
   </div>
 
-  <!-- 4. Single Unified "Customize" Modal (Branding + AI/Manual Mode + Poster Checkboxes) -->
+  <!-- 4. Unified "Customize" Modal -->
   <div class="modal-backdrop hidden" id="customizeModal">
     <div class="modal-card">
       <div style="display:flex; align-items:center; justify-content:space-between;">
@@ -829,7 +966,6 @@
         <button type="button" class="icon-btn" style="width:30px;height:30px;" onclick="closeCustomizeModal()">✕</button>
       </div>
 
-      <!-- Generation Mode: Image (AI Locked) + Text (AI vs Manual Toggle) -->
       <div class="section-block">
         <span class="block-label">1. जनरेशन मोड (Generation Mode)</span>
         <div class="check-row">
@@ -845,7 +981,6 @@
         </div>
       </div>
 
-      <!-- Poster Visibility Checkboxes -->
       <div class="section-block">
         <span class="block-label">2. पोस्टर पर क्या दिखाना है?</span>
         <label class="check-row">
@@ -862,7 +997,6 @@
         </label>
       </div>
 
-      <!-- Direct Branding & District Inputs (Synced to Google Sheet) -->
       <div class="section-block">
         <span class="block-label">3. आपकी ब्रांडिंग और जिला</span>
         <div class="field-group">
@@ -879,7 +1013,7 @@
         </div>
       </div>
 
-      <button type="button" class="primary-dark-btn" id="saveCustBtn" onclick="saveCustomizeSettings()">✓ सेव और अप्लाई करें</button>
+      <button type="button" class="primary-dark-btn" onclick="saveCustomizeSettings()">✓ सेव और अप्लाई करें</button>
     </div>
   </div>
 
@@ -909,7 +1043,7 @@
 
   <!-- 6. Authenticated Studio Shell -->
   <div id="appShell" class="hidden" style="width: 100%;">
-    <!-- Sticky Clean Header -->
+    <!-- Sticky Header (Customize Button Placed Cleanly Beside Profile Avatar) -->
     <header class="app-header">
       <div class="header-inner">
         <div class="header-left">
@@ -924,11 +1058,16 @@
           </div>
         </div>
 
-        <button type="button" class="avatar-trigger" id="avatarBtn" onclick="toggleProfileMenu()" aria-label="Account">U</button>
+        <div class="header-right">
+          <button type="button" class="header-customize-btn" onclick="openCustomizeModal()">
+            <span>⚙️ Customize</span>
+          </button>
+          <button type="button" class="avatar-trigger" id="avatarBtn" onclick="toggleProfileMenu()" aria-label="Account">U</button>
+        </div>
       </div>
     </header>
 
-    <!-- Right Profile Dropdown (Google Account Name, Email, Credit Usage, Terms, Logout) -->
+    <!-- Right Profile Dropdown -->
     <div class="menu-backdrop hidden" id="menuBackdrop" onclick="closeProfileMenu()"></div>
     <div class="profile-popover hidden" id="profilePopover">
       <div class="user-meta">
@@ -969,8 +1108,8 @@
       </div>
     </aside>
 
-    <!-- VIEW A: Super Clean Today Poster Studio -->
-    <main class="workspace" id="mainStudioView" style="margin: 0 auto;">
+    <!-- TAB 1 VIEW: Today Studio -->
+    <main class="workspace" id="todayTabView" style="margin: 0 auto;">
       <!-- 4:5 Poster Frame with Top-Right Download Icon -->
       <section class="canvas-card">
         <canvas id="posterCanvas" width="1080" height="1350"></canvas>
@@ -986,17 +1125,12 @@
         </div>
       </section>
 
-      <!-- Generate New Image + Single Customize Button -->
-      <div class="control-bar">
-        <button type="button" class="generate-btn" onclick="generateNewPoster()">
-          <span>✨ नई इमेज जनरेट करें</span>
-        </button>
-        <button type="button" class="customize-btn" onclick="openCustomizeModal()">
-          <span>⚙️ Customize</span>
-        </button>
-      </div>
+      <!-- Full-Width Clean AI Generate Button Right Under Image -->
+      <button type="button" class="generate-btn" onclick="generateNewPoster()">
+        <span>✨ नई इमेज जनरेट करें</span>
+      </button>
 
-      <!-- WhatsApp Preview Message Box -->
+      <!-- WhatsApp Message Preview -->
       <section class="wa-preview-card">
         <div class="wa-preview-label">
           <span>WhatsApp Message Preview</span>
@@ -1018,18 +1152,18 @@
       <button type="button" class="send-wa-btn" onclick="shareWhatsApp()">
         <span>📲 Send on WhatsApp</span>
       </button>
-
-      <!-- Last 7 Days Local History Strip -->
-      <section class="history-section" id="historySection">
-        <div class="history-header">
-          <span>🕒 Last 7 Days History</span>
-          <span class="history-sub" id="historyCountLabel">0 saved</span>
-        </div>
-        <div class="history-grid" id="historyGrid"></div>
-      </section>
     </main>
 
-    <!-- VIEW B: Dedicated "Customize Your Model" Page -->
+    <!-- TAB 2 VIEW: Past 7 Days Accordion History -->
+    <section class="workspace hidden" id="historyTabView" style="margin: 0 auto;">
+      <div class="history-header-bar">
+        <h2>🕒 Past 7 Days History</h2>
+        <span class="history-badge" id="historyCountLabel">0 items</span>
+      </div>
+      <div class="accordion-list" id="accordionHistoryList"></div>
+    </section>
+
+    <!-- SUBPAGE VIEW: Dedicated "Customize Your Model" Page -->
     <section class="subpage-shell hidden" id="modelCustomizeView" style="margin: 0 auto;">
       <div class="subpage-top">
         <button type="button" class="icon-btn" onclick="closeModelCustomPage()">←</button>
@@ -1063,6 +1197,20 @@
         <button type="button" class="primary-dark-btn" id="saveModelBtn" onclick="saveModelCustomization()">✓ मॉडल सेटिंग्स सेव करें (Sync to Sheet)</button>
       </div>
     </section>
+
+    <!-- Bottom Navigation Bar (Today vs History) -->
+    <nav class="bottom-nav">
+      <div class="bottom-nav-inner">
+        <button type="button" class="nav-tab-btn active" id="navTodayBtn" onclick="switchBottomTab('today')">
+          <span class="nav-tab-icon">✨</span>
+          <span>Today</span>
+        </button>
+        <button type="button" class="nav-tab-btn" id="navHistoryBtn" onclick="switchBottomTab('history')">
+          <span class="nav-tab-icon">🕒</span>
+          <span>History (7d)</span>
+        </button>
+      </div>
+    </nav>
   </div>
 
   <script>
@@ -1072,7 +1220,7 @@
     var cachedSession = null;
     var activeModel = null;
     var currentBgDataUrl = null;
-    var saveTimer = null;
+    var expandedHistoryId = null;
 
     var userPrefs = {
       showDate: true,
@@ -1080,6 +1228,13 @@
       showBrand: true,
       textMode: "AI"
     };
+
+    var FALLBACK_TERMS = [
+      { badge: "क्या अपेक्षित है (What to Expect)", heading: "दैनिक AI क्रेडिट और वैधता", content: "प्रत्येक यूज़र को प्रतिदिन निर्धारित क्रेडिट (डिफ़ॉल्ट 3/दिन) मिलते हैं जो हर सुबह IST 12:00 बजे रीसेट होते हैं। जनरेट की गई सक्रिय इमेज आपके ब्राउज़र में सुरक्षित रहती है और पिछले 7 दिनों का लोकल इतिहास (History) उपलब्ध रहता है।" },
+      { badge: "क्या अपेक्षित है (What to Expect)", heading: "व्यक्तिगत एवं व्यावसायिक ब्रांडिंग", content: "आप अपने नाम, पद/टैगलाइन और कस्टम मॉडल का उपयोग अपने ग्राहकों, मरीजों या सामाजिक नेटवर्क को WhatsApp पर शुभकामनाएं और संदेश भेजने के लिए कर सकते हैं।" },
+      { badge: "क्या अपेक्षित नहीं है (What NOT to Expect)", heading: "क्रेडिट कैरी-फ़ॉरवर्ड और क्लाउड बैकअप", content: "आज के बचे हुए क्रेडिट अगले दिन नहीं जुड़ेंगे (No Carry-Forward)। साथ ही 7-दिन की इमेज हिस्ट्री आपके फ़ोन/ब्राउज़र के लोकल स्टोरेज में रहती है—ब्राउज़र डेटा साफ़ करने पर पुरानी लोकल हिस्ट्री हट सकती है।" },
+      { badge: "नियम एवं सीमाएं (Fair Usage)", heading: "स्पैम और दुरुपयोग निषेध", content: "अनचाहे बल्क स्पैम, भ्रामक या आपत्तिजनक सामग्री बनाने के लिए इस प्लेटफ़ॉर्म का उपयोग सख्त वर्जित है। उल्लंघन करने पर खाता बिना पूर्व सूचना के प्रतिबंधित (Banned) किया जा सकता है।" }
+    ];
 
     var DAYS_EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -1105,7 +1260,7 @@
       document.head.appendChild(link);
     })();
 
-    // 2. IndexedDB for Active Poster Persistence (Until Replaced) + 7-Day Local History
+    // 2. IndexedDB for Active Poster Persistence + 7-Day Local History
     function openStudioDB() {
       return new Promise(function (resolve, reject) {
         var req = indexedDB.open("MySrijanStudioDB_v2", 1);
@@ -1143,18 +1298,18 @@
       } catch (e) { return null; }
     }
 
-    async function addTo7DayHistory(email, modelId, dataUrl, captionText) {
+    async function addTo7DayHistory(email, modelName, dataUrl, captionText) {
       try {
         var db = await openStudioDB();
         var tx = db.transaction("history_7d", "readwrite");
         var store = tx.objectStore("history_7d");
         var now = Date.now();
         var d = new Date();
-        var dateLabel = d.getDate() + " " + MONTHS_EN[d.getMonth()].slice(0, 3);
+        var dateLabel = d.getDate() + " " + MONTHS_EN[d.getMonth()].slice(0, 3) + " • " + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         store.put({
           id: "H_" + now,
           email: email,
-          modelId: modelId,
+          modelName: modelName,
           dataUrl: dataUrl,
           caption: captionText,
           dateLabel: dateLabel,
@@ -1190,7 +1345,7 @@
       } catch (e) { return []; }
     }
 
-    // 3. Persistent Session Boot (Stays Logged In Until Explicit Logout)
+    // 3. Persistent Session Boot
     window.onload = async function () {
       var savedProfileStr = localStorage.getItem("mysrijan_persistent_session");
       if (savedProfileStr) {
@@ -1198,7 +1353,6 @@
           cachedSession = JSON.parse(savedProfileStr);
           if (cachedSession && cachedSession.user && cachedSession.user.email) {
             enterStudio(cachedSession);
-            // Silently refresh latest credits/models from Google Sheet in background
             silentRefreshSession(cachedSession.user.email);
             initGoogleButtonOnly();
             return;
@@ -1323,7 +1477,6 @@
       if (shouldSelectInitialModel && data.models && data.models.length > 0) {
         selectModel(data.models[0]);
       }
-      refreshHistoryUI();
     }
 
     function updateUsageMeter(used, limit) {
@@ -1332,6 +1485,141 @@
       document.getElementById("pmUsageCount").textContent = safeUsed + " / " + safeLimit;
       var pct = Math.min(100, Math.round((safeUsed / safeLimit) * 100));
       document.getElementById("pmUsageFill").style.width = pct + "%";
+    }
+
+    /* ================= BOTTOM TABS (TODAY vs 7-DAY ACCORDION HISTORY) ================= */
+    function switchBottomTab(tabName) {
+      closeProfileMenu();
+      document.getElementById("modelCustomizeView").classList.add("hidden");
+
+      var isToday = tabName === "today";
+      document.getElementById("todayTabView").classList.toggle("hidden", !isToday);
+      document.getElementById("historyTabView").classList.toggle("hidden", isToday);
+      document.getElementById("navTodayBtn").classList.toggle("active", isToday);
+      document.getElementById("navHistoryBtn").classList.toggle("active", !isToday);
+
+      if (!isToday) {
+        renderAccordionHistory();
+      }
+    }
+
+    async function renderAccordionHistory() {
+      if (!cachedSession) return;
+      var items = await load7DayHistory(cachedSession.user.email);
+      var listEl = document.getElementById("accordionHistoryList");
+      document.getElementById("historyCountLabel").textContent = items.length + " saved";
+      listEl.innerHTML = "";
+
+      if (items.length === 0) {
+        listEl.innerHTML = '<div style="text-align:center;padding:36px 16px;color:var(--text-muted);font-size:13px;background:var(--surface);border-radius:16px;border:1px solid var(--border);">पिछले 7 दिनों में जनरेट की गई इमेज यहाँ सेव रहेंगी।</div>';
+        return;
+      }
+
+      // Default expand the most recent item if none selected yet
+      if (!expandedHistoryId || !items.some(function (x) { return x.id === expandedHistoryId; })) {
+        expandedHistoryId = items[0].id;
+      }
+
+      items.forEach(function (item) {
+        var isExpanded = item.id === expandedHistoryId;
+        var card = document.createElement("div");
+        card.className = "acc-item" + (isExpanded ? " expanded" : "");
+
+        var summary = document.createElement("div");
+        summary.className = "acc-summary";
+        summary.innerHTML =
+          '<img class="acc-mini-thumb" src="' + item.dataUrl + '" alt="Thumb" />' +
+          '<div class="acc-meta">' +
+            '<div class="acc-date-row"><span>' + item.dateLabel + '</span><span class="acc-model-pill">' + (item.modelName || "MySrijan") + '</span></div>' +
+            '<span class="acc-snippet">' + (item.caption || "") + '</span>' +
+          '</div>' +
+          '<span class="acc-chevron">▼</span>';
+
+        summary.onclick = function () {
+          // Single-expand accordion: clicking one expands it and collapses all others
+          expandedHistoryId = (expandedHistoryId === item.id) ? null : item.id;
+          renderAccordionHistory();
+        };
+
+        var body = document.createElement("div");
+        body.className = "acc-body";
+        body.innerHTML =
+          '<img class="acc-full-img" src="' + item.dataUrl + '" alt="Saved Poster" />' +
+          '<div class="acc-full-caption">' + (item.caption || "") + '</div>';
+
+        var actions = document.createElement("div");
+        actions.className = "acc-actions";
+
+        var dlBtn = document.createElement("button");
+        dlBtn.type = "button";
+        dlBtn.className = "acc-btn-dl";
+        dlBtn.textContent = "⬇️ Save";
+        dlBtn.onclick = function (e) {
+          e.stopPropagation();
+          var link = document.createElement("a");
+          link.download = "MySrijan_" + item.id + ".jpg";
+          link.href = item.dataUrl;
+          link.click();
+        };
+
+        var waBtn = document.createElement("button");
+        waBtn.type = "button";
+        waBtn.className = "acc-btn-wa";
+        waBtn.textContent = "📲 Send on WhatsApp";
+        waBtn.onclick = function (e) {
+          e.stopPropagation();
+          shareDataUrlWhatsApp(item.dataUrl, item.caption || "");
+        };
+
+        actions.appendChild(dlBtn);
+        actions.appendChild(waBtn);
+        body.appendChild(actions);
+
+        card.appendChild(summary);
+        card.appendChild(body);
+        listEl.appendChild(card);
+      });
+    }
+
+    /* ================= TERMS & POLICY MODAL (LIVE FETCH + FALLBACK) ================= */
+    async function openTermsModal() {
+      closeProfileMenu();
+      var container = document.getElementById("termsListContainer");
+      var terms = (cachedSession && cachedSession.terms && cachedSession.terms.length > 0)
+        ? cachedSession.terms
+        : FALLBACK_TERMS;
+
+      renderTermsCards(container, terms);
+      document.getElementById("termsModal").classList.remove("hidden");
+
+      // Also fetch fresh rows directly from Terms_Policy tab in background
+      try {
+        var res = await fetch(GAS_API_URL + "?action=terms");
+        var data = await res.json();
+        if (data && data.ok && data.terms && data.terms.length > 0) {
+          cachedSession.terms = data.terms;
+          localStorage.setItem("mysrijan_persistent_session", JSON.stringify(cachedSession));
+          renderTermsCards(container, data.terms);
+        }
+      } catch (e) {}
+    }
+
+    function renderTermsCards(container, list) {
+      container.innerHTML = "";
+      list.forEach(function (t) {
+        var isNot = String(t.badge || "").indexOf("नहीं") !== -1 || String(t.badge || "").indexOf("NOT") !== -1;
+        var div = document.createElement("div");
+        div.className = "policy-item";
+        div.innerHTML =
+          '<span class="policy-badge' + (isNot ? " not-expect" : "") + '">' + t.badge + '</span>' +
+          '<span class="policy-heading">' + t.heading + '</span>' +
+          '<span class="policy-body">' + t.content + '</span>';
+        container.appendChild(div);
+      });
+    }
+
+    function closeTermsModal() {
+      document.getElementById("termsModal").classList.add("hidden");
     }
 
     /* ================= POPUPS, PROFILE MENU & SIDEBAR ================= */
@@ -1383,34 +1671,7 @@
       location.reload();
     }
 
-    /* ================= TERMS & EXPECTED USAGE MODAL ================= */
-    function openTermsModal() {
-      closeProfileMenu();
-      var container = document.getElementById("termsListContainer");
-      container.innerHTML = "";
-      var terms = (cachedSession && cachedSession.terms) || [];
-      if (terms.length === 0) {
-        container.innerHTML = '<div class="policy-item"><span class="policy-heading">नियम लोड हो रहे हैं...</span></div>';
-      } else {
-        terms.forEach(function (t) {
-          var isNot = String(t.badge || "").indexOf("नहीं") !== -1 || String(t.badge || "").indexOf("NOT") !== -1;
-          var div = document.createElement("div");
-          div.className = "policy-item";
-          div.innerHTML =
-            '<span class="policy-badge' + (isNot ? " not-expect" : "") + '">' + t.badge + '</span>' +
-            '<span class="policy-heading">' + t.heading + '</span>' +
-            '<span class="policy-body">' + t.content + '</span>';
-          container.appendChild(div);
-        });
-      }
-      document.getElementById("termsModal").classList.remove("hidden");
-    }
-
-    function closeTermsModal() {
-      document.getElementById("termsModal").classList.add("hidden");
-    }
-
-    /* ================= SINGLE "CUSTOMIZE" MODAL (BRANDING + AI/MANUAL + CHECKBOXES) ================= */
+    /* ================= CUSTOMIZE MODAL ================= */
     function openCustomizeModal() {
       if (!cachedSession) return;
       var u = cachedSession.user;
@@ -1471,7 +1732,7 @@
       } catch (e) {}
     }
 
-    /* ================= SIDEBAR MODELS & DEDICATED "CUSTOMIZE YOUR MODEL" PAGE ================= */
+    /* ================= SIDEBAR MODELS & MODEL CUSTOMIZE PAGE ================= */
     function renderSidebarModels() {
       var listEl = document.getElementById("sidebarModelList");
       listEl.innerHTML = "";
@@ -1484,13 +1745,13 @@
         info.innerHTML = '<span class="model-tag">' + m.badge + '</span><span class="model-title">' + m.name + '</span>';
         info.onclick = function () {
           selectModel(m);
+          switchBottomTab("today");
           toggleSidebar(false);
         };
 
         var gearBtn = document.createElement("button");
         gearBtn.type = "button";
         gearBtn.className = "model-gear-btn";
-        gearBtn.title = "Customize Model";
         gearBtn.innerHTML = "⚙️";
         gearBtn.onclick = function (e) {
           e.stopPropagation();
@@ -1514,13 +1775,14 @@
       document.getElementById("modEditCaptionRule").value = model.captionRule || "";
       document.getElementById("modEditDefaultMsg").value = model.defaultMessage || "";
 
-      document.getElementById("mainStudioView").classList.add("hidden");
+      document.getElementById("todayTabView").classList.add("hidden");
+      document.getElementById("historyTabView").classList.add("hidden");
       document.getElementById("modelCustomizeView").classList.remove("hidden");
     }
 
     function closeModelCustomPage() {
       document.getElementById("modelCustomizeView").classList.add("hidden");
-      document.getElementById("mainStudioView").classList.remove("hidden");
+      switchBottomTab("today");
     }
 
     async function saveModelCustomization() {
@@ -1676,55 +1938,19 @@
 
         localStorage.setItem("mysrijan_persistent_session", JSON.stringify(cachedSession));
 
-        // Save persistently as active image until next generation
         var activeKey = "mysrijan_active_img_" + u.email + "_" + activeModel.id;
         await setActivePosterLocal(activeKey, currentBgDataUrl);
 
         renderCanvas();
 
-        // Save rendered final poster to 7-day history
         setTimeout(async function () {
           var finalPng = document.getElementById("posterCanvas").toDataURL("image/jpeg", 0.85);
-          await addTo7DayHistory(u.email, activeModel.id, finalPng, finalCaption);
-          refreshHistoryUI();
+          await addTo7DayHistory(u.email, activeModel.name, finalPng, finalCaption);
         }, 300);
       } catch (err) {
         loader.classList.add("hidden");
         showCenterAlert("⚠️", "नेटवर्क त्रुटि", err.message, true);
       }
-    }
-
-    async function refreshHistoryUI() {
-      if (!cachedSession) return;
-      var items = await load7DayHistory(cachedSession.user.email);
-      var grid = document.getElementById("historyGrid");
-      document.getElementById("historyCountLabel").textContent = items.length + " saved";
-      grid.innerHTML = "";
-
-      if (items.length === 0) {
-        grid.innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:8px 2px;">पिछले 7 दिनों में जनरेट की गई इमेज यहाँ दिखेंगी।</div>';
-        return;
-      }
-
-      items.forEach(function (item) {
-        var thumb = document.createElement("div");
-        thumb.className = "history-thumb";
-        thumb.innerHTML = '<img src="' + item.dataUrl + '" alt="History" /><span class="history-date-tag">' + item.dateLabel + '</span>';
-        thumb.onclick = function () {
-          currentBgDataUrl = item.dataUrl;
-          if (item.caption) {
-            var ta = document.getElementById("messageInbox");
-            ta.value = item.caption;
-            autoGrow(ta);
-          }
-          var canvas = document.getElementById("posterCanvas");
-          var ctx = canvas.getContext("2d");
-          var img = new Image();
-          img.onload = function () { ctx.drawImage(img, 0, 0, canvas.width, canvas.height); };
-          img.src = item.dataUrl;
-        };
-        grid.appendChild(thumb);
-      });
     }
 
     /* ================= CANVAS RENDERING ================= */
@@ -1810,7 +2036,6 @@
 
         ctx.textAlign = "center";
 
-        // Optional Date & Day Pill
         if (userPrefs.showDate !== false) {
           ctx.fillStyle = "rgba(15, 23, 42, 0.5)";
           ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
@@ -1824,7 +2049,6 @@
           ctx.fillText(dateInfo.formattedDate + "  •  " + dateInfo.dayName, W / 2, 84);
         }
 
-        // Main Header Title
         var goldGrad = ctx.createLinearGradient(0, 130, 0, 245);
         goldGrad.addColorStop(0, "#fef08a");
         goldGrad.addColorStop(0.5, "#facc15");
@@ -1837,7 +2061,6 @@
         ctx.fillText(activeModel.headerTitle, W / 2, userPrefs.showDate !== false ? 230 : 185);
         ctx.shadowBlur = 0;
 
-        // Quote Glass Card
         var boxX = 68, boxY = H - 512, boxW = W - 136, boxH = 338;
         ctx.fillStyle = "rgba(15, 23, 42, 0.66)";
         ctx.strokeStyle = "rgba(255, 255, 255, 0.24)";
@@ -1846,7 +2069,6 @@
         ctx.fill();
         ctx.stroke();
 
-        // Optional Weather & District Strip
         if (userPrefs.showWeather !== false) {
           var weatherLine = (u.district ? u.district + " • " : "") + (cachedSession.weatherShort || "सुहावना मौसम");
           ctx.fillStyle = "#fde68a";
@@ -1865,7 +2087,6 @@
         var textCenterY = (userPrefs.showWeather !== false) ? (boxY + 206) : (boxY + 172);
         wrapText(ctx, "“" + quoteText + "”", W / 2, textCenterY, boxW - 68, 56);
 
-        // Optional Brand Name & Tagline
         if (userPrefs.showBrand !== false) {
           ctx.fillStyle = "#facc15";
           ctx.font = "800 42px 'Inter', sans-serif";
@@ -1968,6 +2189,21 @@
         return;
       }
       fallbackShare(customMsg);
+    }
+
+    async function shareDataUrlWhatsApp(dataUrl, customMsg) {
+      if (navigator.canShare && navigator.share) {
+        try {
+          var res = await fetch(dataUrl);
+          var blob = await res.blob();
+          var file = new File([blob], "MySrijan_History.jpg", { type: "image/jpeg" });
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({ files: [file], text: customMsg });
+            return;
+          }
+        } catch (e) {}
+      }
+      window.open("https://wa.me/?text=" + encodeURIComponent(customMsg), "_blank");
     }
 
     function fallbackShare(msg) {
