@@ -526,7 +526,6 @@
       color: #54656f;
     }
 
-    /* Unified WhatsApp Attachment Bubble (Image + Text Combined + Forward Button) */
     .wa-media-row {
       display: flex;
       align-items: center;
@@ -545,7 +544,6 @@
       position: relative;
     }
 
-    /* Clean Unobstructed 4:5 Poster Canvas (Zero Floating Overlays!) */
     .poster-frame-clean {
       position: relative;
       width: 100%;
@@ -580,7 +578,6 @@
       margin-bottom: 10px;
     }
 
-    /* Caption Attached Directly Below Image Inside Same WhatsApp Bubble */
     .wa-attached-caption {
       padding: 4px 8px 4px;
       display: flex;
@@ -608,7 +605,6 @@
       font-weight: 400;
     }
 
-    /* Authentic Circular WhatsApp Forward Icon Button Beside Bubble */
     .wa-forward-circle {
       width: 40px;
       height: 40px;
@@ -627,7 +623,6 @@
     .wa-forward-circle:active { transform: scale(0.92); }
 
     /* ================= CLEAN ACTION ROW BELOW BUBBLE ================= */
-    /* Side-by-side: Generate New Image + Customize + Save */
     .studio-dock {
       display: grid;
       grid-template-columns: 1.6fr 1fr 0.85fr;
@@ -673,7 +668,6 @@
     }
     .dock-btn-secondary:active { transform: scale(0.97); background: var(--surface-muted); }
 
-    /* Full-Width WhatsApp Forward / Share CTA */
     .send-wa-btn {
       width: 100%;
       height: 48px;
@@ -1381,7 +1375,6 @@
       } catch (e) { return []; }
     }
 
-    // Helper to extract picture URL from saved JWT token if missing in cache
     function getPictureFromJwt(token) {
       try {
         if (!token || token.split(".").length < 2) return "";
@@ -1416,17 +1409,24 @@
       try {
         var cfgRes = await fetch(GAS_API_URL + "?action=public_config");
         var cfg = await cfgRes.json();
-        if (cfg.googleClientId && cfg.googleClientId !== "PASTE_YOUR_GOOGLE_OAUTH_CLIENT_ID_HERE" && window.google) {
-          google.accounts.id.initialize({
-            client_id: cfg.googleClientId,
-            callback: onGoogleSignIn
-          });
-          google.accounts.id.renderButton(document.getElementById("googleBtnContainer"), {
-            theme: "outline",
-            size: "large",
-            shape: "pill",
-            text: "signin_with"
-          });
+        if (cfg.googleClientId && cfg.googleClientId !== "PASTE_YOUR_GOOGLE_OAUTH_CLIENT_ID_HERE") {
+          var renderBtn = function () {
+            if (window.google && google.accounts && google.accounts.id) {
+              google.accounts.id.initialize({
+                client_id: cfg.googleClientId,
+                callback: onGoogleSignIn
+              });
+              google.accounts.id.renderButton(document.getElementById("googleBtnContainer"), {
+                theme: "outline",
+                size: "large",
+                shape: "pill",
+                text: "signin_with"
+              });
+            } else {
+              setTimeout(renderBtn, 250);
+            }
+          };
+          renderBtn();
         } else {
           document.getElementById("loginError").textContent = "कृपया Google Sheet की Config टैब में GOOGLE_CLIENT_ID सेट करें।";
         }
@@ -1493,7 +1493,6 @@
         });
         var data = await res.json();
         if (data.ok) {
-          // Preserve Google DP URL during background refresh!
           if (!data.user.picture && prevPic) {
             data.user.picture = prevPic;
           }
@@ -1519,16 +1518,22 @@
       if (u.settings) {
         userPrefs = Object.assign(userPrefs, u.settings);
       }
-      // Show exact Google Account Name & Email in profile dropdown
       var exactGoogleName = u.googleName || u.brandName || "User";
       document.getElementById("pmGoogleName").textContent = exactGoogleName;
       document.getElementById("pmGoogleEmail").textContent = u.email;
 
-      // Render Google DP with no-referrer so Google CDN never blocks image loading
       var avatarBtn = document.getElementById("avatarBtn");
       var picUrl = u.picture || getPictureFromJwt(idToken);
       if (picUrl) {
-        avatarBtn.innerHTML = '<img src="' + picUrl + '" referrerpolicy="no-referrer" alt="DP" onerror="this.parentElement.textContent='' + exactGoogleName.charAt(0).toUpperCase() + ''" />';
+        avatarBtn.innerHTML = "";
+        var img = document.createElement("img");
+        img.src = picUrl;
+        img.referrerPolicy = "no-referrer";
+        img.alt = "DP";
+        img.onerror = function () {
+          avatarBtn.textContent = exactGoogleName.charAt(0).toUpperCase();
+        };
+        avatarBtn.appendChild(img);
       } else {
         avatarBtn.textContent = exactGoogleName.charAt(0).toUpperCase();
       }
@@ -1736,7 +1741,6 @@
     function openCustomizeModal() {
       if (!cachedSession) return;
       var u = cachedSession.user;
-      // Default to Google Account Name unless customized
       document.getElementById("custBrandName").value = u.brandName || u.googleName || "";
       document.getElementById("custTagline").value = u.taglineRole || "";
       document.getElementById("custDistrict").value = u.district || "जौनपुर";
